@@ -1,1 +1,2 @@
-​
+Create a graph of indegrees for each node and array of outdegrees for each node. Use topological sort with BFS and add all the nodes with outdegree as zero. They can be picked up first as they are not dependent on any other node. Once done processing the node with 0 out degree. Reduce the outdegree of all nodes which were dependent on this node. That is indegrees of this node. And if any node outdegree become zero add it to queue.
+Answer is the order in which nodes were inserted in the queue. In case of cycle return empty array.
