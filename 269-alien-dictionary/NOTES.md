@@ -5,38 +5,29 @@
 * Now we will add all the characters in the queue which have 0 indegree. And will process the char and during processing we reduce the indegree of all the characters who were in the outdegree set of given char. In case indegree of any char becomes 0 we will add it to queue and will continue with the same processing.
 * Answer will be the order of chars poped out of queue.
 * If answer length is not equal to number of unique characters in word list then answer is empty string, else return answer we calculated using queue.
-​
+
 **Complexity Analysis**
-​
-Let N be the total number of strings in the input list.
-​
-Let C be the total length of all the words in the input list, added together.
-​
-Let U be the total number of unique letters in the alien alphabet. While this is limited to 2626 in the question description, we'll still look at how it would impact the complexity if it was not limited (as this could potentially be a follow-up question).
-​
+
 **Time complexity : O(C).**
-​
-There were three parts to the algorithm; identifying all the relations, putting them into an adjacency list, and then converting it into a valid alphabet ordering.
-​
-In the worst case, the first and second parts require checking every letter of every word (if the difference between two words was always in the last letter). This is O(C).
-​
-For the third part, recall that a breadth-first search has a cost of O(V + E), where V is the number of vertices and E is the number of edges. Our algorithm has the same cost as BFS, as it too is visiting each edge and node once (a node is visited once all of its edges are visited, unlike the traditional BFS where it is visited once one edge is visited). Therefore, determining the cost of our algorithm requires determining how many nodes and edges there are in the graph.
-​
-Nodes: We know that there is one vertex for each unique letter, i.e. O(U) vertices.
-​
-Edges: Each edge in the graph was generated from comparing two adjacent words in the input list. There are N - 1 pairs of adjacent words, and only one edge can be generated from each pair. This might initially seem a bit surprising, so let's quickly look at an example. We'll use English words.
-​
-abacus
-algorithm
-The only conclusion we can draw is that b is before l. This is the reason abacus appears before algorithm in an English dictionary. The characters afterward are irrelevant. It is the same for the "alien" alphabets we're working with here. The only rule we can draw is the one based on the first difference between the two words.
-​
-Also, remember that we are only generating rules for adjacent words. We are not adding the "implied" rules to the adjacency list. For example, assume we have the following word list.
-​
-rgh
-xcd
-tny
-bcd
-​
-We are only generating the following 3 edges.
-​
-r -> x
+Let N be the total number of strings in the input list.
+
+Let C be the total length of all the words in the input list, added together.
+
+Let U be the total number of unique letters in the alien alphabet.
+O(C) for 1st and 2nd part of question, O(U + min(U^2, N)) for topological sorting
+O(C) + O(U + min(U^2, N)) = O(C + U + min(U^2, N))
+O(C + U + min(U^2, N)) → O(C + min(U^2, N))
+
+Now, to simplify the rest, consider two cases:
+If U^2 is smaller than N, then min(U^2, N) = U^2. By definition, we've just said that U^2 is smaller than N, which is in turn smaller than C, and so U^2 is definitely less than C. This leaves us with O(C).
+If U^2 is larger than N, then min(U^2, N) = N. Because C > N, we're left with O(C).
+So in all cases, we know that C > min(U^2, N) This gives us a final time complexity of O(C).
+
+**Space complexity : O(1) or O(U + min(U^2, N))**
+
+The adjacency list uses the most auxiliary memory. This list uses O(V + E) memory, where V is the number of unique letters, and E is the number of relations.
+The number of vertices is simply U; the number of unique letters.
+The number of edges in the worst case is min(U^2, N), as explained in the time complexity analysis.
+So in total the adjacency list takes O(U + min(U^2, N)) space.
+**So for the question we're given, where U is a constant fixed at a maximum of 26, the space complexity is simply O(1). This is because U is fixed at 26, and the number of relations is fixed at 26^2, so O(min(26^2, N)) = O(26^2) = O(1).**
+**But when we consider an arbitrarily large number of possible letters, we use the size of the adjacency list; O(U + min(U^2, N)).**
