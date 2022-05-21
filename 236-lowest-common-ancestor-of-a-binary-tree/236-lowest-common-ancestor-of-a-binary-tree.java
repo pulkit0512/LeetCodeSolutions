@@ -9,6 +9,47 @@
  */
 class Solution {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        //return LcaUsingRecursion(root, p, q);
+        return LcaIteratively(root, p, q);
+    }
+    private TreeNode LcaIteratively(TreeNode root, TreeNode p, TreeNode q){
+        int bothDone = 0, leftDone = 1, bothPending = 2;
+        Stack<Pair<TreeNode, Integer>> st = new Stack<>();
+        TreeNode LCA = null, childNode = null;
+        boolean oneNodeFound = false;
+        st.push(new Pair(root, bothPending));
+        while(!st.isEmpty()){
+            Pair<TreeNode, Integer> temp = st.peek();
+            TreeNode parent = temp.getKey();
+            int parentState = temp.getValue();
+            if(parentState!=bothDone){
+                if(parentState==bothPending){
+                    if(parent.val==p.val || parent.val==q.val){
+                        if(oneNodeFound){
+                            return LCA;
+                        }else{
+                            oneNodeFound = true;
+                            LCA = st.peek().getKey();
+                        }
+                    }
+                    childNode = parent.left;
+                }else{
+                    childNode = parent.right;
+                }
+                st.pop();
+                st.push(new Pair(temp.getKey(), temp.getValue()-1));
+                if(childNode !=null){
+                    st.push(new Pair(childNode, bothPending));
+                }
+            } else{
+                if(LCA == st.pop().getKey() && oneNodeFound){
+                    LCA = st.peek().getKey();
+                }
+            }
+        }
+        return null;
+    }
+    private TreeNode LcaUsingRecursion(TreeNode root, TreeNode p, TreeNode q){
         if(root==null){
             return null;
         }
