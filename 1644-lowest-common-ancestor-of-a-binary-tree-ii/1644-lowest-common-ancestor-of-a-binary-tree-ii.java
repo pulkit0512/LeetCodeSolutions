@@ -22,6 +22,7 @@ class Solution {
     TreeNode result;
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         //return LcaIteratively(root, p, q);
+        
         result = null;
         LcaRecursively(root, p, q);
         return result;
