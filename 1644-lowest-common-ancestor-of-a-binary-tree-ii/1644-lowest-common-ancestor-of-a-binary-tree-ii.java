@@ -73,7 +73,7 @@ class Solution {
         if(root.val==p.val || root.val==q.val){
             count++;
         }
-        if(count>=2){
+        if(count==2){
             result = root;
         }
         return (count>0)?1:0;
