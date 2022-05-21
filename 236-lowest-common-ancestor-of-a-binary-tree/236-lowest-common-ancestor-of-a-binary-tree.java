@@ -9,8 +9,8 @@
  */
 class Solution {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        //return LcaUsingRecursion(root, p, q);
-        return LcaIteratively(root, p, q);
+        return LcaUsingRecursion(root, p, q);
+        //return LcaIteratively(root, p, q);
     }
     private TreeNode LcaIteratively(TreeNode root, TreeNode p, TreeNode q){
         int bothDone = 0, leftDone = 1, bothPending = 2;
