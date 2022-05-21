@@ -18,24 +18,19 @@ class Solution {
                 sb.append(s.charAt(i));
             }
         }
-        st = new Stack<>();
+        if(st.isEmpty()){
+            return sb.toString();
+        }
+        StringBuilder ans = new StringBuilder();
+        int open = st.size();
         len = sb.length();
-        StringBuilder sb1 = new StringBuilder();
         for(int i=len-1;i>=0;i--){
-            if(sb.charAt(i)=='('){
-                if(st.isEmpty()){
-                    continue;
-                }else{
-                    st.pop();
-                    sb1.append('(');
-                }
-            }else if(sb.charAt(i)==')'){
-                st.push(')');
-                sb1.append(')');
+            if(sb.charAt(i)=='(' && open>0){
+                open--;
             }else{
-                sb1.append(sb.charAt(i));
+                ans.append(sb.charAt(i));
             }
         }
-        return sb1.reverse().toString();
+        return ans.reverse().toString();
     }
 }
