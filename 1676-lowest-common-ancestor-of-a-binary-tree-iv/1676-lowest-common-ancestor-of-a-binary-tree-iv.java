@@ -47,12 +47,10 @@ class Solution {
         return lca(root, set);
     }
     private TreeNode lca(TreeNode root, Set<Integer> set){
-        if(root==null){
-            return null;
-        }
-        if(set.contains(root.val)){
+        if(root==null || set.contains(root.val)){
             return root;
         }
+        
         TreeNode llca = lca(root.left, set);
         TreeNode rlca = lca(root.right, set);
         
