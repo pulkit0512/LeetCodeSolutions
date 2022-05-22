@@ -9,16 +9,16 @@ class Solution {
         //System.out.println(freqMap);
         StringBuilder sb = new StringBuilder();
         int cnt[] = new int[10];
-        cnt[0] = check(freqMap, 'z', "zero");
-        cnt[2] = check(freqMap, 'w', "two");
-        cnt[4] = check(freqMap, 'u', "four");
-        cnt[1] = check(freqMap, 'o', "one");
-        cnt[5] = check(freqMap, 'f', "five");
-        cnt[6] = check(freqMap, 'x', "six");
-        cnt[7] = check(freqMap, 's', "seven");
-        cnt[8] = check(freqMap, 'g', "eight");
-        cnt[9] = check(freqMap, 'i', "nine");
-        cnt[3] = check(freqMap, 't', "three");
+        cnt[0] = check(freqMap, 'z', "zero", 4);
+        cnt[2] = check(freqMap, 'w', "two", 3);
+        cnt[4] = check(freqMap, 'u', "four", 4);
+        cnt[1] = check(freqMap, 'o', "one", 3);
+        cnt[5] = check(freqMap, 'f', "five", 4);
+        cnt[6] = check(freqMap, 'x', "six", 3);
+        cnt[7] = check(freqMap, 's', "seven", 5);
+        cnt[8] = check(freqMap, 'g', "eight", 5);
+        cnt[9] = check(freqMap, 'i', "nine", 4);
+        cnt[3] = check(freqMap, 't', "three", 5);
         
         for(int i=0;i<=9;i++){
             for(int j=0;j<cnt[i];j++){
@@ -28,12 +28,11 @@ class Solution {
         return sb.toString();
     }
     
-    private int check(Map<Character, Integer> freqMap, char ch, String s){
+    private int check(Map<Character, Integer> freqMap, char ch, String s, int len){
         if(freqMap.isEmpty() || !freqMap.containsKey(ch)){
             return 0;
         }
         int val = freqMap.get(ch);
-        int len = s.length();
         for(int i=0;i<len;i++){
             char temp = s.charAt(i);
             int k = freqMap.get(temp);
