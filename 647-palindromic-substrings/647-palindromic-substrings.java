@@ -8,11 +8,8 @@ class Solution {
                 if(gap==0){
                     dp[i][j] = true;
                     ans++;
-                }else if(s.charAt(i)==s.charAt(j)){
-                    if(gap==1){
-                        dp[i][j] = true;
-                        ans++;
-                    }else if(dp[i+1][j-1]){
+                }else{
+                    if(s.charAt(i)==s.charAt(j) && ((i+1)==j || dp[i+1][j-1])){
                         dp[i][j] = true;
                         ans++;
                     }
