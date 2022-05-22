@@ -7,7 +7,6 @@ class Solution {
             char ch = s.charAt(i);
             arr[ch-'a']++;
         }
-        //System.out.println(freqMap);
         StringBuilder sb = new StringBuilder();
         int cnt[] = new int[10];
         cnt[0] = arr['z'-'a'];
