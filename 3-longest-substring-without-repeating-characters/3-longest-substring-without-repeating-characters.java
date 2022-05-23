@@ -1,5 +1,25 @@
 class Solution {
     public int lengthOfLongestSubstring(String s) {
+        // time complexity O(2N).
+        //return lengthOfLongestSubstringUsingSet(s);
+        
+        // time complexity O(N)
+        return lengthOfLongestSubstringUsingMap(s);
+    }
+    private int lengthOfLongestSubstringUsingMap(String s) {
+        Map<Character, Integer> map = new HashMap<>();
+        int len = s.length();
+        int ans = 0;
+        for(int i=0, st = 0; i<len;i++){
+            if(map.containsKey(s.charAt(i))){
+                st = Math.max(map.get(s.charAt(i)), st);
+            }
+            ans = Math.max(ans, i-st+1);
+            map.put(s.charAt(i), i+1);
+        }
+        return ans;
+    }
+    private int lengthOfLongestSubstringUsingSet(String s) {
         Set<Character> set = new HashSet<>();
         int len = s.length();
         int st = 0, ans = 0;
