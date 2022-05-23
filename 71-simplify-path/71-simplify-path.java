@@ -6,13 +6,9 @@ class Solution {
         for(int i=0;i<len;i++){
             char ch = path.charAt(i);
             if(ch=='.'){
-                if(sb.length()==0){
-                    continue;
-                }else{
-                    sb.append(ch);
-                    if(chars==0){
-                        dot++;
-                    }
+                sb.append(ch);
+                if(chars==0){
+                    dot++;
                 }
             }else if(ch=='/'){
                 if(sb.length()==0){
