@@ -28,8 +28,8 @@
  */
 class Solution {
     public int depthSum(List<NestedInteger> nestedList) {
-        //return recursiveHelper(nestedList, 1);
-        return BFSHelper(nestedList);
+        return recursiveHelper(nestedList, 1);
+        //return BFSHelper(nestedList);
     }
     private int BFSHelper(List<NestedInteger> nestedList) {
         Queue<NestedInteger> que = new LinkedList<>();
