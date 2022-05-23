@@ -1,8 +1,8 @@
 class Solution {
     public String simplifyPath(String path) {
-        //return simplifyPathUsingStringBuilder(path);
+        return simplifyPathUsingStringBuilder(path);
         
-        return simplifyPathUsingStack(path);
+        //return simplifyPathUsingStack(path);
     }
     private String simplifyPathUsingStack(String path) {
         Stack<String> st = new Stack<>();
