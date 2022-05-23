@@ -28,7 +28,29 @@
  */
 class Solution {
     public int depthSum(List<NestedInteger> nestedList) {
-        return recursiveHelper(nestedList, 1);
+        //return recursiveHelper(nestedList, 1);
+        return BFSHelper(nestedList);
+    }
+    private int BFSHelper(List<NestedInteger> nestedList) {
+        Queue<NestedInteger> que = new LinkedList<>();
+        que.addAll(nestedList);
+        int depth = 1, sum = 0;
+        while(!que.isEmpty()){
+            int size = que.size();
+            for(int i=0;i<size;i++){
+                NestedInteger ni = que.poll();
+                Integer val = ni.getInteger();
+                if(val!=null){
+                    sum += val*depth;
+                }
+                List<NestedInteger> list = ni.getList();
+                if(list!=null){
+                    que.addAll(list);
+                }
+            }
+            depth++;
+        }
+        return sum;
     }
     
     private int recursiveHelper(List<NestedInteger> nestedList, int depth) {
