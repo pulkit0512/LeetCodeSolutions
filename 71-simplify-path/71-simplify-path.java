@@ -19,19 +19,9 @@ class Solution {
                     sb.append(ch);
                 }else if(sb.charAt(sb.length()-1)=='/'){
                     continue;
-                }else if(dot==1){
-                    sb.deleteCharAt(sb.length()-1);
+                }else if(dot==1 || dot==2){
+                    handleDots(sb, dot);
                     dot = 0;
-                }else if(dot==2){
-                    sb.deleteCharAt(sb.length()-1);
-                    sb.deleteCharAt(sb.length()-1);
-                    dot = 0;
-                    if(sb.length()>1){
-                        sb.deleteCharAt(sb.length()-1);
-                        while(sb.charAt(sb.length()-1)!='/'){
-                            sb.deleteCharAt(sb.length()-1);
-                        }
-                    }
                 }else{
                     dot = 0;
                     chars = 0;
@@ -43,13 +33,22 @@ class Solution {
                 dot = 0;
             }
         }
+        if(dot==1 || dot==2){
+            handleDots(sb, dot);
+            dot = 0;
+        }
+        if(sb.length()>1 && sb.charAt(sb.length()-1)=='/'){
+            sb.deleteCharAt(sb.length()-1);
+        }
+        return sb.toString();
+    }
+    
+    private void handleDots(StringBuilder sb, int dot){
         if(dot==1){
             sb.deleteCharAt(sb.length()-1);
-            dot = 0;
         }else if(dot==2){
             sb.deleteCharAt(sb.length()-1);
             sb.deleteCharAt(sb.length()-1);
-            dot = 0;
             if(sb.length()>1){
                 sb.deleteCharAt(sb.length()-1);
                 while(sb.charAt(sb.length()-1)!='/'){
@@ -57,9 +56,5 @@ class Solution {
                 }
             }
         }
-        if(sb.length()>1 && sb.charAt(sb.length()-1)=='/'){
-            sb.deleteCharAt(sb.length()-1);
-        }
-        return sb.toString();
     }
 }
