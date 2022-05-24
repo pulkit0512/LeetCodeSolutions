@@ -28,7 +28,7 @@ class Solution {
         if(mem[i][m][n]!=0){
             return mem[i][m][n];
         }
-        int taken = -1;
+        int taken = 0;
         if(m-binary[i][0]>=0 && n-binary[i][1]>=0){
             taken = memoDp(binary, i+1, m-binary[i][0], n-binary[i][1], mem) + 1;
         }
