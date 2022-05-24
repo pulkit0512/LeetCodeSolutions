@@ -14,8 +14,21 @@ class Solution {
                 }
             }
         }
-        return findMaxFormUsingMemoization(binary, m, n);
+        //return findMaxFormUsingMemoization(binary, m, n);
+        return findMaxFormUsingDP(binary, m, n);
     }
+    private int findMaxFormUsingDP(int[][] binary, int m, int n){
+        int[][] dp = new int[m+1][n+1];
+        for(int i=0;i<binary.length;i++){
+            for(int j=m;j>=binary[i][0];j--){
+                for(int k=n;k>=binary[i][1];k--){
+                    dp[j][k] = Math.max(dp[j][k], dp[j-binary[i][0]][k-binary[i][1]] + 1);
+                }
+            }
+        }
+        return dp[m][n];
+    }
+    
     private int findMaxFormUsingMemoization(int[][] binary, int m , int n){
         int[][][] mem = new int[binary.length][m+1][n+1];
         return memoDp(binary, 0, m , n, mem);
