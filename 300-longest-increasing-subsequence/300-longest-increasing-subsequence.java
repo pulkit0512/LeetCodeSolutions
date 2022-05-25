@@ -1,7 +1,7 @@
 class Solution {
     public int lengthOfLIS(int[] nums) {
-        return lengthOfLisN2(nums);
-        //return lengthOfLisNLogN(nums);
+        //return lengthOfLisN2(nums);
+        return lengthOfLisNLogN(nums);
     }
     
     private int lengthOfLisN2(int[] nums) {
