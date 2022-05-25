@@ -1,4 +1,4 @@
-<h2><a href="https://leetcode.com/problems/russian-doll-envelopes/">354. Russian Doll Envelopes</a></h2><h3>Hard</h3><hr><div><p>You are given a 2D array of integers <code>envelopes</code> where <code>envelopes[i] = [w<sub>i</sub>, h<sub>i</sub>]</code> represents the width and the height of an envelope.</p>
+<h2><a href="https://leetcode.com/problems/russian-doll-envelopes/">354. Russian Doll Envelopes (Variation of LIS)</a></h2><h3>Hard</h3><hr><div><p>You are given a 2D array of integers <code>envelopes</code> where <code>envelopes[i] = [w<sub>i</sub>, h<sub>i</sub>]</code> represents the width and the height of an envelope.</p>
 
 <p>One envelope can fit into another if and only if both the width and height of one envelope are greater than the other envelope's width and height.</p>
 
