@@ -13,37 +13,30 @@ class Solution {
             }else if(Character.isDigit(ch)){
                 val = val*10 + (ch-'0');
             }else if(ch==')'){
-                if(opr.peek()=='-'){
-                    val = -val;
-                }else if(opr.peek()=='*'){
-                    val = values.pop()*val;
-                    opr.pop();
-                }else if(opr.peek()=='/'){
-                    val = values.pop()/val;
-                    opr.pop();
-                }
+                val = performOperation(values, opr, val);
                 while(opr.peek()!='('){
                     val += values.pop();
                     opr.pop();
                 }
                 opr.pop();
             }else{
-                if(opr.peek()=='+' || opr.peek()=='('){
-                    values.push(val);
-                }else if(opr.peek()=='-'){
-                    values.push(-val);
-                }else if(opr.peek()=='*'){
-                    val = values.pop()*val;
-                    opr.pop();
-                    values.push(val);
-                }else{
-                    val = values.pop()/val;
-                    opr.pop();
-                    values.push(val);
-                }
+                val = performOperation(values, opr, val);
+                values.push(val);
                 val = 0;
                 opr.push(ch);
             }
+        }
+        return val;
+    }
+    private int performOperation(Stack<Integer> values, Stack<Character> opr, int val) {
+        if(opr.peek()=='-'){
+            val = -val;
+        }else if(opr.peek()=='*'){
+            val = values.pop()*val;
+            opr.pop();
+        }else if(opr.peek()=='/'){
+            val = values.pop()/val;
+            opr.pop();
         }
         return val;
     }
