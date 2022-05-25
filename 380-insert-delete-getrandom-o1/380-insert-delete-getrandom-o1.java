@@ -1,4 +1,35 @@
 class RandomizedSet {
+    
+    /* Fails some test cases.
+    Map<Integer, Boolean> randomizedSet;
+    public RandomizedSet() {
+        randomizedSet = new LinkedHashMap<>();
+    }
+    
+    public boolean insert(int val) {
+        if(randomizedSet.containsKey(val)){
+            return false;
+        }else{
+            randomizedSet.put(val, true);
+            return true;
+        }
+    }
+    
+    public boolean remove(int val) {
+        if(randomizedSet.containsKey(val)){
+            randomizedSet.remove(val);
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    public int getRandom() {
+        int firstKey = randomizedSet.entrySet().iterator().next().getKey();
+        randomizedSet.remove(firstKey);
+        randomizedSet.put(firstKey, true);
+        return firstKey;
+    }*/
 
     Map<Integer, Integer> map;
     List<Integer> list;
