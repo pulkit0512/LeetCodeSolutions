@@ -12,12 +12,11 @@ class Solution {
             if(Character.isDigit(ch)){
                 int val = 0;
                 while(i<len && Character.isDigit(s.charAt(i))){
-                    val = val*10 + (int)(s.charAt(i)-'0');
+                    val = val*10 + s.charAt(i)-'0';
                     i++;
                 }
                 values.push(val);
             }else{
-                //System.out.println(values);
                 if(ch=='*' || ch=='/'){
                     int val1 = values.pop();
                     i++;
@@ -26,7 +25,7 @@ class Solution {
                     }
                     int val2 = 0;
                     while(i<len && Character.isDigit(s.charAt(i))){
-                        val2 = val2*10 + (int)(s.charAt(i)-'0');
+                        val2 = val2*10 + s.charAt(i)-'0';
                         i++;
                     }
                     if(ch=='*'){
@@ -35,7 +34,6 @@ class Solution {
                         values.push(val1/val2);
                     }
                 }else if(ch=='+' || ch=='-'){
-                    //System.out.println(i+" "+ch);
                     if(opr==' '){
                         opr = ch;
                     }else{
@@ -52,8 +50,6 @@ class Solution {
                 }
             }
         }
-        //System.out.println(opr);
-        //System.out.println(values);
         if(opr!=' '){
             int val2 = values.pop();
             int val1 = values.pop();
