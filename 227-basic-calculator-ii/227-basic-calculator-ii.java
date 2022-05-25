@@ -2,7 +2,7 @@ class Solution {
     public int calculate(String s) {
         int len = s.length();
         Stack<Integer> values = new Stack<>();
-        Stack<Character> opr = new Stack<>();
+        char opr = ' ';
         for(int i=0;i<len;){
             char ch = s.charAt(i);
             if(ch==' '){
@@ -36,18 +36,17 @@ class Solution {
                     }
                 }else if(ch=='+' || ch=='-'){
                     //System.out.println(i+" "+ch);
-                    if(opr.isEmpty()){
-                        opr.push(ch);
+                    if(opr==' '){
+                        opr = ch;
                     }else{
                         int val2 = values.pop();
                         int val1 = values.pop();
-                        char curOpr = opr.pop();
-                        if(curOpr=='+'){
+                        if(opr=='+'){
                             values.push(val1+val2);
                         }else{
                             values.push(val1-val2);
                         }
-                        opr.push(ch);
+                        opr = ch;
                     }
                     i++;
                 }
@@ -55,11 +54,10 @@ class Solution {
         }
         //System.out.println(opr);
         //System.out.println(values);
-        while(!opr.isEmpty()){
-            char ch = opr.pop();
+        if(opr!=' '){
             int val2 = values.pop();
             int val1 = values.pop();
-            if(ch=='+'){
+            if(opr=='+'){
                 values.push(val1+val2);
             }else{
                 values.push(val1-val2);
