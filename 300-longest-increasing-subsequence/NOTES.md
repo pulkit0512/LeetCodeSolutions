@@ -15,11 +15,11 @@
 ​
 * **Approach2: NLogN solution**
 ​
-* Initialize an array sub which contains the first element of nums.
+* Initialize an array lis which contains the first element of nums.
 * Iterate through the input, starting from the second element. For each element num:
-* If num is greater than any element in sub, then add num to sub.
-* Otherwise, perform a binary search in sub to find the smallest element that is greater than or equal to num. Replace that element with num.
-* Return the length of sub.
+* If num is greater than last element in lis, then add num to lis. Increment length of lis
+* Otherwise, perform a binary search in lis to find the smallest element that is greater than or equal to num. Replace that element with num.
+* Return the length of lis.
 ​
 * **Complexity Analysis**
 ​
