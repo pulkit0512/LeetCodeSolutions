@@ -3,30 +3,24 @@ class Solution {
         if(n==0){
             return 1.0;
         }
-        if(n==1){
+        if(n==1 || x==1){
             return x;
         }
-        if(n==Integer.MIN_VALUE) {
-            if(x==1.0 || x==-1.0){
-                return 1.0;
-            }else{
-                return 0.0;
-            }
-        }
+        long val = n;
         int sign = 1;
-        if(n<0) {
-            n = -n;
+        if(val<0) {
+            val = -val;
             sign = -1;
         }
         
-        double power = calPow(x, n);
+        double power = calPow(x, val);
         if(sign==-1){
             return 1/power;
         }
         return power;
     }
     
-    private double calPow(double x, int n) {
+    private double calPow(double x, long n) {
         double pow = 1.0;
         while(n>0){
             if(n%2==1){
