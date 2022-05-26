@@ -1,1 +1,1 @@
-​
+Approach: In this question, I have used a single stack of objects to store the interger values as well as string formed. So if we encounter a digit we will append it into the value and if before getting a digit we have some string. So we push that string to stack and setting the string to be pushed next to empty. If we encounter
