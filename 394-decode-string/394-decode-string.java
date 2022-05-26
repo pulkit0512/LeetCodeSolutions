@@ -2,7 +2,7 @@ class Solution {
     public String decodeString(String s) {
         s = s+"]";
         Stack<Object> st = new Stack<>();
-        String open = "[";
+        char open = '[';
         st.push(1);
         st.push(open);
         int len = s.length();
@@ -26,7 +26,7 @@ class Solution {
                 if(!sb.isEmpty()){
                     sb = new StringBuilder();
                 }
-                if(!st.peek().equals(open)){
+                if(!(st.peek() instanceof Character)){
                     temp = st.pop() + temp;
                 }
                 st.pop();
@@ -35,7 +35,7 @@ class Solution {
                     sb.append(temp);
                 }
                 temp = sb.toString();
-                while(!st.isEmpty() && !st.peek().equals(open)){
+                while(!st.isEmpty() && !(st.peek() instanceof Character)){
                     temp = st.pop()+temp;
                 }
                 st.push(temp);
