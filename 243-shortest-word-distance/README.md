@@ -1,4 +1,4 @@
-<h2><a href="https://leetcode.com/problems/shortest-word-distance/">243. Shortest Word Distance</a></h2><h3>Easy</h3><hr><div><p>Given an array of strings <code>wordsDict</code> and two different strings that already exist in the array <code>word1</code> and <code>word2</code>, return <em>the shortest distance between these two words in the list</em>.</p>
+<h2><a href="https://leetcode.com/problems/shortest-word-distance/">243. Shortest Word Distance (Two Pointers)</a></h2><h3>Easy</h3><hr><div><p>Given an array of strings <code>wordsDict</code> and two different strings that already exist in the array <code>word1</code> and <code>word2</code>, return <em>the shortest distance between these two words in the list</em>.</p>
 
 <p>&nbsp;</p>
 <p><strong>Example 1:</strong></p>
