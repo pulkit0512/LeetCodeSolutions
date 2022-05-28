@@ -3,5 +3,5 @@ In this I have used sumLen, start and cnt variable which stores sum length of wo
 For last line it should be left justified, so compute it by adding words with a space and all remaining places left will be filled with space.
 ​
 ### Complexity Analysis
-**Time Complexity: O(N*L), where N = number of words and L = length of word**
-**Space Complexity: O(1) no extra space**
+* **Time Complexity: O(N*L), where N = number of words and L = length of word**
+* **Space Complexity: O(1) no extra space**
