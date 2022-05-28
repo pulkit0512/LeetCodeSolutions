@@ -5,26 +5,21 @@ public class Solution extends Relation {
     public int findCelebrity(int n) {
         Set<Integer> notCeleb = new HashSet<>();
         for(int i=0;i<n;i++){
-            for(int j=0;j<n;j++){
-                if(i==j){
-                    continue;
-                }
-                if(knows(i,j)){
-                    notCeleb.add(i);
-                }else{
-                    notCeleb.add(j);
-                }
+            if(isCeleb(i, n)){
+                return i;
             }
         }
-        int ans = -1;
-        for(int i=0;i<n;i++){
-            if(!notCeleb.contains(i)){
-                if(ans!=-1){
-                    return -1;
-                }
-                ans = i;
+        return -1;
+    }
+    private boolean isCeleb(int i, int n){
+        for(int j=0;j<n;j++){
+            if(j==i){
+                continue;
+            }
+            if(knows(i,j) || !knows(j,i)){
+                return false;
             }
         }
-        return ans;
+        return true;
     }
 }
