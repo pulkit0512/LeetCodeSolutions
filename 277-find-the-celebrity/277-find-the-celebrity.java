@@ -2,6 +2,18 @@
       boolean knows(int a, int b); */
 
 public class Solution extends Relation {
+    
+    // Overide the knows method to support in memory cache, it will help if this knows call is a DB call.
+    private Map<Pair<Integer, Integer>, Boolean> cache = new HashMap<>(); 
+    
+    @Override
+    public boolean knows(int a, int b) {
+        if (!cache.containsKey(new Pair(a, b))) {
+            cache.put(new Pair(a, b), super.knows(a, b));
+        }
+        return cache.get(new Pair(a, b));
+    }
+    
     public int findCelebrity(int n) {
         //return findCelebrityN2(n);
         
