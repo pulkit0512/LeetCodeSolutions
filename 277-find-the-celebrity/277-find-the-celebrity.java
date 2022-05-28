@@ -3,7 +3,6 @@
 
 public class Solution extends Relation {
     public int findCelebrity(int n) {
-        Set<Integer> notCeleb = new HashSet<>();
         for(int i=0;i<n;i++){
             if(isCeleb(i, n)){
                 return i;
