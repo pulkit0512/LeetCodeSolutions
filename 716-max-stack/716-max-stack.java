@@ -62,8 +62,9 @@ class MaxStack {
     
     public int pop() {
         int val = dll.pop();
-        map.get(val).remove(map.get(val).size()-1);
-        if(map.get(val).isEmpty()){
+        List<Node> list = map.get(val);
+        list.remove(list.size()-1);
+        if(list.isEmpty()){
             map.remove(val);
         }
         return val;
@@ -79,9 +80,10 @@ class MaxStack {
     
     public int popMax() {
         int val = peekMax();
-        Node node = map.get(val).remove(map.get(val).size() - 1);
+        List<Node> list = map.get(val);
+        Node node = list.remove(list.size() - 1);
         dll.delete(node);
-        if(map.get(val).isEmpty()){
+        if(list.isEmpty()){
             map.remove(val);
         }
         return val;
