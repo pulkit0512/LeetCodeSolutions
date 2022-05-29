@@ -1,7 +1,7 @@
 class FreqStack {
 
     Map<Integer, Integer> freq;
-    Map<Integer, Stack<Integer>> freqSt;
+    Map<Integer, List<Integer>> freqSt;
     int maxFreq;
     public FreqStack() {
         freq = new HashMap<>();
@@ -16,22 +16,23 @@ class FreqStack {
         int k = freq.get(val);
         freq.put(val, k+1);
         if(!freqSt.containsKey(k+1)){
-            freqSt.put(k+1, new Stack<>());
+            freqSt.put(k+1, new ArrayList<>());
             maxFreq = k+1;
         }
-        freqSt.get(k+1).push(val);
+        freqSt.get(k+1).add(val);
     }
     
     public int pop() {
         //System.out.println(freq+" "+freqSt);
-        int val = freqSt.get(maxFreq).pop();
+        List<Integer> list = freqSt.get(maxFreq);
+        int val = list.remove(list.size()-1);
         int k = freq.get(val);
         if(k==1){
             freq.remove(val);
         }else{
             freq.put(val, k-1);
         }
-        if(freqSt.get(maxFreq).isEmpty()){
+        if(list.isEmpty()){
             freqSt.remove(maxFreq);
             maxFreq--;
         }
