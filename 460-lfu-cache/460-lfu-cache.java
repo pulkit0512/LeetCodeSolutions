@@ -1,12 +1,18 @@
 class LFUCache {
+    class Pair {
+        int val, keyCount;
+        public Pair(int val, int keyCount) {
+            this.val = val;
+            this.keyCount = keyCount;
+        }
+    }
 
-    Map<Integer, Integer> cache, keyCount;
+    Map<Integer, Pair> cache;
     Map<Integer, Set<Integer>> freqMap;
     int min, cap;
     public LFUCache(int capacity) {
         this.cap = capacity;
         cache = new HashMap<>();
-        keyCount = new HashMap<>();
         freqMap = new HashMap<>();
         min = 0;
     }
@@ -15,8 +21,8 @@ class LFUCache {
         if(!cache.containsKey(key)){
             return -1;
         }
-        int count = keyCount.get(key);
-        keyCount.put(key, count+1);
+        int count = cache.get(key).keyCount;
+        cache.get(key).keyCount++;
         freqMap.get(count).remove(key);
         if(count==min && freqMap.get(count).isEmpty()){
             min++;
@@ -26,7 +32,7 @@ class LFUCache {
             freqMap.put(count+1, new LinkedHashSet<>());
         }
         freqMap.get(count+1).add(key);
-        return cache.get(key);
+        return cache.get(key).val;
     }
     
     public void put(int key, int value) {
@@ -34,7 +40,7 @@ class LFUCache {
             return;
         }
         if(cache.containsKey(key)){
-            cache.put(key, value);
+            cache.get(key).val = value;
             get(key);
             return;
         }
@@ -42,13 +48,11 @@ class LFUCache {
             int evict = freqMap.get(min).iterator().next();
             freqMap.get(min).remove(evict);
             cache.remove(evict);
-            keyCount.remove(evict);
             if(freqMap.get(min).isEmpty()){
                 freqMap.remove(min);
             }
         }
-        cache.put(key, value);
-        keyCount.put(key, 1);
+        cache.put(key, new Pair(value, 1));
         min = 1;
         if(!freqMap.containsKey(min)){
             freqMap.put(min, new LinkedHashSet<>());
