@@ -5,7 +5,7 @@ In this approach, I have used recursion post traversal made recursive calls till
 * **Space Complexity: O(N)**
 ​
 ## Approach2: O(N) Time, O(Sqrt(N)) Space
-In this approach, first I have computed the number of nodes in the list. Then we have divided the list into chunks of size Math.ceil(Math.sqrt(count)). Then created array which will have first node for each chunk. They iterated over all chunks in reverse and reversed all the chunks in O(N) time using O(sqrt(N)) space.
+In this approach, first I have computed the number of nodes in the list in O(N) time. Then we have divided the list into chunks of size Math.ceil(Math.sqrt(count)). Then created array which will have first node for each chunk in O(N) time. Then iterated over all chunks in reverse and reversed each chunk total in O(N) time using O(sqrt(N)) space.
 ​
-* **Time Complexity: O(N)**
+* **Time Complexity: O(3N) = O(N)**
 * **Space Complexity: O(sqrt(N))**
