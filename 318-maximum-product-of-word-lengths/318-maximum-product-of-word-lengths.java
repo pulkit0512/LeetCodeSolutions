@@ -1,5 +1,35 @@
 class Solution {
     public int maxProduct(String[] words) {
+        //return maxProductUsingListOfSet(words);
+        return maxProductUsingBitmaskAndMap(words);
+    }
+    
+    private int maxProductUsingBitmaskAndMap(String[] words) {
+        Map<Integer, Integer> preCompute = new HashMap<>();
+        for(String word:words) {
+            int len = word.length();
+            int bitMask = 0;
+            for(int i=0;i<len;i++){
+                bitMask = bitMask | (1<<(word.charAt(i)-'a'));
+            }
+            if(!preCompute.containsKey(bitMask)){
+                preCompute.put(bitMask, len);
+            }else{
+                preCompute.put(bitMask, Math.max(preCompute.get(bitMask), len));
+            }
+        }
+        int ans = 0;
+        for(int word1:preCompute.keySet()){
+            for(int word2:preCompute.keySet()){
+                if((word1&word2) == 0){
+                    ans = Math.max(ans, preCompute.get(word1)*preCompute.get(word2));
+                }
+            }
+        }
+        return ans;
+    }
+    
+    private int maxProductUsingListOfSet(String[] words) {
         int n = words.length;
         List<HashSet<Character>> charset = new ArrayList<>();
         int len[] = new int[n];
