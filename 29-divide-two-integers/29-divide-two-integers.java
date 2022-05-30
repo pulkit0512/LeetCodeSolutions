@@ -1,7 +1,7 @@
 class Solution {
     public int divide(int dividend, int divisor) {
-        return divideWhenLongNotAllowed(dividend, divisor);
-        //return divideWhenLongAllowed(dividend, divisor);
+        //return divideWhenLongNotAllowed(dividend, divisor);
+        return divideWhenLongAllowed(dividend, divisor);
     }
     private int divideWhenLongNotAllowed(int dividend, int divisor) {
         // Special cases: overflow.
