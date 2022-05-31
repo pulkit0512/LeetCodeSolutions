@@ -1,7 +1,10 @@
 class Solution {
     public boolean hasAllCodes(String s, int k) {
-        HashSet<String> set = new HashSet<>();
         int len = s.length();
+        if(len<2*k){
+            return false;
+        }
+        HashSet<String> set = new HashSet<>();
         for(int i=0;i<=len-k;i++){
             set.add(s.substring(i, i+k));
         }
