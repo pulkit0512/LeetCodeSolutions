@@ -43,12 +43,12 @@ class Solution {
     
     private int binarySearch(int[] nums, int right, int target) {
         int left = 0;
-        while (left + 1 < right) {
+        while (left < right) {
             int mid = left + (right - left) / 2;
             if (target <= nums[mid]) {
                 right = mid;
             } else {
-                left = mid;
+                left = mid+1;
             }
         }
         if (nums[left] >= target) return left;
