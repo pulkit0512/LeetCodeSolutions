@@ -1,41 +1,30 @@
 public class Codec {
 
+    //Approach1: Using Non Ascii Value
     // Encodes a list of strings to a single string.
     public String encode(List<String> strs) {
-        StringBuilder encode = new StringBuilder();
-        for(String str:strs) {
-            int len = str.length();
-            for(int i=0;i<len;i++){
-                encode.append((int)str.charAt(i)).append('_');
-            }
-            if(len>0){
-                encode.deleteCharAt(encode.length()-1);
-            }else{
-                encode.append('0');
-            }
-            encode.append(' ');
+        String ch258 = String.valueOf((char)258);
+        if(strs.isEmpty()){
+            return ch258;
         }
-        //System.out.println(encode);
+        String ch257 = String.valueOf((char)257);
+        StringBuilder encode = new StringBuilder();
+        for(String str:strs){
+            encode.append(str);
+            encode.append(ch257);
+        }
+        encode.deleteCharAt(encode.length()-1);
         return encode.toString();
     }
 
     // Decodes a single string to a list of strings.
     public List<String> decode(String s) {
-        String[] strs = s.split(" ");
-        List<String> decode = new ArrayList<>();
-        for(String str:strs) {
-            String[] chars = str.split("_");
-            char[] val = new char[chars.length];
-            if(chars[0].equals("0")){
-                decode.add("");
-                continue;
-            }
-            for(int i=0;i<chars.length;i++){
-                val[i] = (char)(int)Integer.valueOf(chars[i]);
-            }
-            decode.add(String.valueOf(val));
+        String ch258 = String.valueOf((char)258);
+        if(s.equals(ch258)){
+            return new ArrayList<>();
         }
-        return decode;
+        String ch257 = String.valueOf((char)257);
+        return Arrays.asList(s.split(ch257, -1));
     }
 }
 
