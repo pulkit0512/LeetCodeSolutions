@@ -25,9 +25,10 @@ class Solution {
             ans.add(s);
             return;
         }
-        int len = map[digits.charAt(idx)-'0'].length();
+        String val = map[digits.charAt(idx)-'0'];
+        int len = val.length();
         for(int i=0;i<len;i++){
-            helper(ans, digits, idx+1, s+map[digits.charAt(idx)-'0'].charAt(i), n);
+            helper(ans, digits, idx+1, s+val.charAt(i), n);
         }
     }
 }
