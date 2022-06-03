@@ -1,15 +1,15 @@
 class Solution {
     public int numPairsDivisibleBy60(int[] time) {
-        Map<Integer, Integer> map = new HashMap<>();
+        int map[] = new int[60];
         int ans = 0;
         for(int t:time){
             int val = t%60;
-            if(val==0 && map.containsKey(val)){
-                ans += map.get(val);
-            }else if(map.containsKey(60-val)) {
-                ans += map.get(60-val);
+            if(val==0){
+                ans += map[val];
+            }else {
+                ans += map[60-val];
             }
-            map.put(val, map.getOrDefault(val, 0) + 1);
+            map[val]++;
         }
         return ans;
     }
