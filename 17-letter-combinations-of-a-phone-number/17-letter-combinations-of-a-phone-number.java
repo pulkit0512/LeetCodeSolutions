@@ -17,18 +17,19 @@ class Solution {
             map[8] = "tuv";
             map[9] = "wxyz";
         }
-        helper(ans, digits, 0, "", n);
+        helper(ans, digits, 0, new StringBuilder(), n);
         return ans;
     }
-    public void helper(List<String> ans, String digits, int idx, String s, int n) {
+    public void helper(List<String> ans, String digits, int idx, StringBuilder s, int n) {
         if(idx==n){
-            ans.add(s);
+            ans.add(s.toString());
             return;
         }
         String val = map[digits.charAt(idx)-'0'];
         int len = val.length();
         for(int i=0;i<len;i++){
-            helper(ans, digits, idx+1, s+val.charAt(i), n);
+            helper(ans, digits, idx+1, s.append(val.charAt(i)), n);
+            s.deleteCharAt(s.length()-1);
         }
     }
 }
