@@ -1,7 +1,41 @@
 class Solution {
     public void wiggleSort(int[] nums) {
         //wiggleSortUsingQuickSelect(nums);
-        wiggleSortUsingPriorityQueue(nums);
+        //wiggleSortUsingPriorityQueue(nums);
+        wiggleSortUsingCountSort(nums);
+    }
+    
+    private void wiggleSortUsingCountSort(int nums[]) {
+        int cnt[] = new int[5001];
+        int next[] = new int[5001];
+        for(int num:nums){
+            cnt[num]++;
+        }
+        int last = 0;
+        for(int i=5000;i>=0;i--){
+            if(cnt[i]>0){
+                next[i] = last;
+                last = i;
+            }
+        }
+        int n = nums.length;
+        // Start populating even indices first from the right.
+        // Since we are moving from small to large in next and count array.
+        // And even indices will have smaller values.
+        for(int i=1-n%2;i<n;i+=2){
+            if(cnt[last]==0){
+                last = next[last];
+            }
+            nums[n-1-i] = last;
+            cnt[last]--;
+        }
+        for(int i=n%2;i<n;i+=2){
+            if(cnt[last]==0){
+                last = next[last];
+            }
+            nums[n-1-i] = last;
+            cnt[last]--;
+        }
     }
     
     private void wiggleSortUsingPriorityQueue(int[] nums) {
