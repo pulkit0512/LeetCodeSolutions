@@ -1,59 +1,30 @@
 class Solution {
-    int ans;
+    int ans, n;
     public int totalNQueens(int n) {
-        ans = 0;
-        char board[][] = new char[n][n];
-        for(int i=0;i<n;i++){
-            for(int j=0;j<n;j++){
-                board[i][j] = '.';
-            }
-        }
-        getBoard(board, 0);
+        this.ans = 0;
+        this.n = n;
+        getBoard(new HashSet<>(), new HashSet<>(), new HashSet<>(), 0);
         return ans;
     }
     
-    private void getBoard(char[][] board, int row) {
-        if(row==board.length){
+    private void getBoard(Set<Integer> col, Set<Integer> dia, Set<Integer> antiDia, int row) {
+        if(row==this.n){
             ans++;
             return;
         }
-        for(int i=0;i<board[0].length;i++){
-            if(board[row][i]=='.' && isValid(board, row, i)){
-                board[row][i] = 'Q';
-                getBoard(board, row+1);
-                board[row][i] = '.';
+        for(int i=0;i<this.n;i++){
+            int curDia = row-i;
+            int curAntiDia = row+i;
+            if(col.contains(i) || dia.contains(curDia) || antiDia.contains(curAntiDia)){
+                continue;
             }
+            col.add(i);
+            dia.add(curDia);
+            antiDia.add(curAntiDia);
+            getBoard(col, dia, antiDia, row+1);
+            col.remove(i);
+            dia.remove(curDia);
+            antiDia.remove(curAntiDia);
         }
-    }
-    private boolean isValid(char[][] board, int row, int col){
-        for(int i=0;i<board.length;i++){
-            if(board[row][i]=='Q'){
-                return false;
-            }
-            if(board[i][col]=='Q'){
-                return false;
-            }
-        }
-        for(int i=row-1, j=col-1;i>=0 && j>=0;i--,j--){
-            if(board[i][j]=='Q'){
-                return false;
-            }
-        }
-        for(int i=row-1, j=col+1;i>=0 && j<board.length;i--,j++){
-            if(board[i][j]=='Q'){
-                return false;
-            }
-        }
-        for(int i=row+1, j=col-1;i<board.length && j>=0;i++,j--){
-            if(board[i][j]=='Q'){
-                return false;
-            }
-        }
-        for(int i=row+1, j=col+1;i<board.length && j<board.length;i++,j++){
-            if(board[i][j]=='Q'){
-                return false;
-            }
-        }
-        return true;
     }
 }
