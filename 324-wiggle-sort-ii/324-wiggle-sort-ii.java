@@ -1,5 +1,23 @@
 class Solution {
     public void wiggleSort(int[] nums) {
+        //wiggleSortUsingQuickSelect(nums);
+        wiggleSortUsingPriorityQueue(nums);
+    }
+    
+    private void wiggleSortUsingPriorityQueue(int[] nums) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+        for(int x:nums){
+            pq.add(x);
+        }
+        for(int i=1;i<nums.length;i+=2){
+            nums[i] = pq.poll();
+        }
+        for(int i=0;i<nums.length;i+=2){
+            nums[i] = pq.poll();
+        }
+    }
+    
+    private void wiggleSortUsingQuickSelect(int[] nums) {
         int n = nums.length;
         if(n<=1){
             return;
