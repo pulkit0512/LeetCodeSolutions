@@ -10,4 +10,4 @@
 * While it costs O(N^2) to build each valid solution, the amount of valid solutions S(N) does not grow nearly as fast as N!, so O(N! + S(N) * N^2) =O(N!)
 ​
 * **Space complexity: O(N^2)**
-* Extra memory used includes the 3 sets used to store board state, as well as the recursion call stack. All of this scales linearly with the number of queens. However, to keep the board state costs O(N^2), since the board is of size N * N. Space used for the output does not count towards space complexity.
+* To keep the board state costs O(N^2), since the board is of size N * N. Space used for the output does not count towards space complexity.
