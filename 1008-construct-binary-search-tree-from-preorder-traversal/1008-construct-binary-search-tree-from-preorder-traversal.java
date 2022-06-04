@@ -19,7 +19,31 @@ class Solution {
     int pre[];
     public TreeNode bstFromPreorder(int[] preorder) {
         //return bstFromPreorderUsingLastPointerAndMaxLimit(preorder);
-        return bstFromPreorderUsingValidateBSTTechnique(preorder);
+        //return bstFromPreorderUsingValidateBSTTechnique(preorder);
+        return bstFromPreorderIteratively(preorder);
+    }
+    
+    private TreeNode bstFromPreorderIteratively(int[] pre) {
+        if(pre.length==0){
+            return null;
+        }
+        TreeNode root = new TreeNode(pre[0]);
+        Deque<TreeNode> dq = new LinkedList<>();
+        dq.push(root);
+        for(int i=1;i<pre.length;i++){
+            TreeNode parent = dq.peek();
+            TreeNode child = new TreeNode(pre[i]);
+            while(!dq.isEmpty() && dq.peek().val<child.val){
+                parent = dq.removeFirst();
+            }
+            if(parent.val<child.val){
+                parent.right=child;
+            }else{
+                parent.left=child;
+            }
+            dq.addFirst(child);
+        }
+        return root;
     }
     
     private TreeNode bstFromPreorderUsingValidateBSTTechnique(int[] pre) {
