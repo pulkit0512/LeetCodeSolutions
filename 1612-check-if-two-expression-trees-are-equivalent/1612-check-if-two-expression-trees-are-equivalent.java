@@ -18,7 +18,7 @@ class Solution {
     public boolean checkEquivalence(Node root1, Node root2) {
         map = new HashMap<>();
         createMap(root1, 1);
-        return isEquivalent(root2, 1);
+        return isEquivalent(root2, 1) && map.isEmpty();
     }
     
     private void createMap(Node root, int sign) {
