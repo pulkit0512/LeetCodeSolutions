@@ -14,43 +14,59 @@
  * }
  */
 class Solution {
-    int[] map;
+    Map<Integer, Integer> map;
     public boolean checkEquivalence(Node root1, Node root2) {
-        map = new int[5000];
-        createMap(root1);
-        return isEquivalent(root2);
+        map = new HashMap<>();
+        createMap(root1, 1);
+        return isEquivalent(root2, 1);
     }
     
-    private void createMap(Node root) {
+    private void createMap(Node root, int sign) {
         if(root==null){
             return;
         }
         if(root.val=='+'){
-            map[0]++;
+            createMap(root.left, sign);
+            createMap(root.right, sign);
+        }else if(root.val=='-'){
+            createMap(root.left, sign);
+            createMap(root.right, -sign);
         }else{
-            map[root.val-'a']++;
+            int key = root.val-'a' + 1;
+            key *= sign;
+            map.put(key, map.getOrDefault(key, 0) + 1);
         }
-        createMap(root.left);
-        createMap(root.right);
     }
     
-    private boolean isEquivalent(Node root) {
+    private boolean isEquivalent(Node root, int sign) {
         if(root==null){
             return true;
         }
-        if((root.val=='+' && map[0]==0) || (root.val!='+' && map[root.val-'a']==0)){
-            return false;
-        }
         if(root.val=='+'){
-            map[0]--;
+            boolean left = isEquivalent(root.left, sign);
+            if(!left){
+                return false;
+            }
+            return isEquivalent(root.right, sign);
+        }else if(root.val=='-'){
+            boolean left = isEquivalent(root.left, sign);
+            if(!left){
+                return false;
+            }
+            return isEquivalent(root.right, -sign);
         }else{
-            map[root.val-'a']--;
+            int key = root.val-'a' + 1;
+            key *= sign;
+            if(!map.containsKey(key)){
+                return false;
+            }
+            int k = map.get(key);
+            if(k==1){
+                map.remove(key);
+            }else{
+                map.put(key, k-1);
+            }
+            return true;
         }
-        boolean left = isEquivalent(root.left);
-        if(!left){
-            return false;
-        }
-        boolean right = isEquivalent(root.right);
-        return right;
     }
 }
