@@ -22,13 +22,12 @@ class Solution {
                 if(nums[i]>nums[i+1]){
                     swap(nums, i, i+1);
                 }
-                dir = 1;
             }else {
                 if(nums[i]<nums[i+1]){
                     swap(nums, i, i+1);
                 }
-                dir = 0;
             }
+            dir = 1-dir;
         }
         return nums;
     }
