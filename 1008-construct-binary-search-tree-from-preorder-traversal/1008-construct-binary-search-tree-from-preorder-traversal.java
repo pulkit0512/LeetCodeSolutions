@@ -15,7 +15,7 @@
  */
 class Solution {
     TreeNode root;
-    static int last;
+    int last;
     public TreeNode bstFromPreorder(int[] preorder) {
         last = 0;
         getBst(preorder, 0, Integer.MAX_VALUE);
