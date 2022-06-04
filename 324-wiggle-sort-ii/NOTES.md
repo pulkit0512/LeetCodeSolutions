@@ -10,3 +10,16 @@
 ​
 ### Time Complexity: O(N) average, worst O(N^2)
 ### Space Complexity: O(LogN) recursion stack
+​
+## Approach2: Using Priority Queue as Max Heap
+In this approach, insert all elements in PQ in reverse order as max heap then start populating odd indices from left to right first by polling out elements from queue. Then populate the even indices from left to right by polling out remaining elements.
+​
+### Time Complexity: O(NLogN)
+### Space Complexity: O(1)
+​
+## Approach3: Using Count Sort
+In this approach, using count sort I have stored the frequency of all numbers in count array and then calculated the next greater element for each element if it's count greater then 0 and stored it in next array.
+Now started rearranging nums array from right to left first with even indices and then with odd indices. This is done because we are moving from small to large in count and next array and even indices will have smaller values first and then the odd indices.
+​
+### Time Complexity: O(N)
+### Space Complexity: O(1), since constant space of 5000 is used.
