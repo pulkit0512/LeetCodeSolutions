@@ -14,7 +14,7 @@
  * }
  */
 class Solution {
-    Map<Integer, Integer> map;
+    Map<Character, Integer> map;
     public boolean checkEquivalence(Node root1, Node root2) {
         map = new HashMap<>();
         createMap(root1, 1);
@@ -32,8 +32,10 @@ class Solution {
             createMap(root.left, sign);
             createMap(root.right, -sign);
         }else{
-            int key = root.val-'a' + 1;
-            key *= sign;
+            char key = root.val;
+            if(sign==-1){
+                key = (char)(key - 'a' + 'A');
+            }
             map.put(key, map.getOrDefault(key, 0) + 1);
         }
     }
@@ -55,8 +57,10 @@ class Solution {
             }
             return isEquivalent(root.right, -sign);
         }else{
-            int key = root.val-'a' + 1;
-            key *= sign;
+            char key = root.val;
+            if(sign==-1){
+                key = (char)(key - 'a' + 'A');
+            }
             if(!map.containsKey(key)){
                 return false;
             }
