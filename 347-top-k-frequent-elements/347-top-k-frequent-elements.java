@@ -9,7 +9,7 @@ class Solution {
         for(int num:nums){
             freqMap.put(num, freqMap.getOrDefault(num, 0) + 1);
         }
-        PriorityQueue<Map.Entry<Integer, Integer>> pq = new PriorityQueue<>(new sort());
+        PriorityQueue<Map.Entry<Integer, Integer>> pq = new PriorityQueue<>((a,b) -> ((int)a.getValue() - (int)b.getValue()));
         for(Map.Entry<Integer, Integer> entry:freqMap.entrySet()){
             pq.add(entry);
             if(pq.size()>k){
