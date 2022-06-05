@@ -1,7 +1,7 @@
 class Solution {
     public boolean find132pattern(int[] nums) {
-        return find132patternUsingStack(nums);
-        //return find132patternUsingArrayAsStack(nums);
+        //return find132patternUsingStack(nums);
+        return find132patternUsingArrayAsStack(nums);
     }
     
     private boolean find132patternUsingStack(int[] nums) {
