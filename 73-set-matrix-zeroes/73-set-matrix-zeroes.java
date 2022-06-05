@@ -13,19 +13,10 @@ class Solution {
             }
         }
         for(int i=0;i<n;i++){
-            if(row[i]==0){
-                continue;
-            }
             for(int j=0;j<m;j++){
-                matrix[i][j] = 0;
-            }
-        }
-        for(int j=0;j<m;j++){
-            if(col[j]==0){
-                continue;
-            }
-            for(int i=0;i<n;i++){
-                matrix[i][j] = 0;
+                if(row[i]==1 || col[j]==1){
+                    matrix[i][j] = 0;
+                }
             }
         }
     }
