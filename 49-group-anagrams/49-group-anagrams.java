@@ -1,16 +1,21 @@
 class Solution {
     public List<List<String>> groupAnagrams(String[] strs) {
-        HashMap<Map<Character, Integer>, List<String>> groups = new HashMap<>();
+        Map<String, List<String>> groups = new HashMap<>();
         for(String str:strs){
-            Map<Character, Integer> freqMap = new HashMap<>();
+            int[] freqMap = new int[26];
             int len = str.length();
             for(int i=0;i<len;i++){
-                freqMap.put(str.charAt(i), freqMap.getOrDefault(str.charAt(i), 0) + 1);
+                freqMap[str.charAt(i)-'a']++;
             }
-            if(!groups.containsKey(freqMap)){
-                groups.put(freqMap, new ArrayList<>());
+            StringBuilder sb = new StringBuilder();
+            for(int i=0;i<26;i++){
+                sb.append(freqMap[i]).append('#');
             }
-            groups.get(freqMap).add(str);
+            String key = sb.toString();
+            if(!groups.containsKey(key)){
+                groups.put(key, new ArrayList<>());
+            }
+            groups.get(key).add(str);
         }
         return new ArrayList<>(groups.values());
     }
