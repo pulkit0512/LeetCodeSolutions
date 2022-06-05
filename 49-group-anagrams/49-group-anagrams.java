@@ -7,7 +7,7 @@ class Solution {
             for(int i=0;i<len;i++){
                 freqMap[str.charAt(i)-'a']++;
             }
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder(52);
             for(int i=0;i<26;i++){
                 sb.append(freqMap[i]).append('#');
             }
