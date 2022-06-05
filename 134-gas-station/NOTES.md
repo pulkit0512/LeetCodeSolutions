@@ -1,0 +1,2 @@
+## Approach:
+In this approach, with atmost 2 iterations of circular route we can get the start station from where we can complete the journey else answer is -1. We have a start and end index and extra gas amount at start index. While the end index is not equal to start
