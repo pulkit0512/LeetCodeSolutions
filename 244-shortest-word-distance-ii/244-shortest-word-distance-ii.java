@@ -21,10 +21,7 @@ class WordDistance {
             ans = Math.min(ans, Math.abs(val1-val2));
             if(val1<val2){
                 idx1++;
-            }else if(val1>val2){
-                idx2++;
-            }else{
-                idx1++;
+            }else {
                 idx2++;
             }
         }
