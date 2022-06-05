@@ -9,21 +9,17 @@ class Solution {
                 prevCount++;
             }else{
                 chars[idx++] = prevChar;
-                //sb.append(prevChar);
-                if(prevCount>1){
-                    int st = idx;
-                    while(prevCount>0){
-                        chars[idx++] = (char)((prevCount%10)+'0');
-                        prevCount /= 10;
-                    }
-                    int ed = idx-1;
-                    reverse(chars, st, ed);
-                }
+                idx = setCount(prevCount, idx, chars);
                 prevChar = chars[i];
                 prevCount = 1;
             }
         }
         chars[idx++] = prevChar;
+        idx = setCount(prevCount, idx, chars);
+        return idx;
+    }
+    
+    private int setCount(int prevCount, int idx, char[] chars) {
         if(prevCount>1){
             int st = idx;
             while(prevCount>0){
