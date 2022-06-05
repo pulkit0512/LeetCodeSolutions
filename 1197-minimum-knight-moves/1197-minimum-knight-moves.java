@@ -10,9 +10,9 @@ class Solution {
     }
     public int minKnightMoves(int x, int y) {
         Queue<MoveData> que = new LinkedList<>();
-        boolean[][] visited = new boolean[610][610];
+        boolean[][] visited = new boolean[601][601];
         que.add(new MoveData(0,0,0));
-        visited[305][305] = true;
+        visited[300][300] = true;
         while(!que.isEmpty()){
             MoveData prev = que.poll();
             if(prev.x==x && prev.y==y){
@@ -22,8 +22,8 @@ class Solution {
                 int newRow = dir[i][0] + prev.x;
                 int newCol = dir[i][1] + prev.y;
                 if(Math.abs(newRow)<=300 && Math.abs(newCol)<=300) {
-                    if(!visited[newRow+305][newCol+305]) {
-                        visited[newRow+305][newCol+305] = true;
+                    if(!visited[newRow+300][newCol+300]) {
+                        visited[newRow+300][newCol+300] = true;
                         que.add(new MoveData(newRow, newCol, prev.moves+1));
                     }
                 }
