@@ -10,10 +10,9 @@ class Solution {
     }
     public int minKnightMoves(int x, int y) {
         Queue<MoveData> que = new LinkedList<>();
-        Map<Integer, Set<Integer>> visited = new HashMap<>();
+        boolean[][] visited = new boolean[610][610];
         que.add(new MoveData(0,0,0));
-        visited.put(0, new HashSet<>());
-        visited.get(0).add(0);
+        visited[305][305] = true;
         while(!que.isEmpty()){
             MoveData prev = que.poll();
             if(prev.x==x && prev.y==y){
@@ -23,13 +22,9 @@ class Solution {
                 int newRow = dir[i][0] + prev.x;
                 int newCol = dir[i][1] + prev.y;
                 if(Math.abs(newRow)<=300 && Math.abs(newCol)<=300) {
-                    if((visited.containsKey(newRow) && !visited.get(newRow).contains(newCol)) 
-                       || !visited.containsKey(newRow)){
+                    if(!visited[newRow+305][newCol+305]) {
+                        visited[newRow+305][newCol+305] = true;
                         que.add(new MoveData(newRow, newCol, prev.moves+1));
-                        if(!visited.containsKey(newRow)){
-                            visited.put(newRow, new HashSet<>());
-                        }
-                        visited.get(newRow).add(newCol);
                     }
                 }
             }
