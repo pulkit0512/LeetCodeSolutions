@@ -7,6 +7,9 @@ class Solution {
             sum = (sum + nums[i]%k)%k;
             if(map.containsKey(sum)){
                 len = Math.max(len, i-map.get(sum));
+                if(len>=2){
+                    return true;
+                }
             }
             if(!map.containsKey(sum)){
                 map.put(sum, i);
