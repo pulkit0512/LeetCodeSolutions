@@ -8,7 +8,7 @@ class Solution {
             if(map.containsKey(sum)){
                 len = Math.max(len, i-map.get(sum));
                 if(len>=2){
-                    return true;
+                    break;
                 }
             }
             if(!map.containsKey(sum)){
