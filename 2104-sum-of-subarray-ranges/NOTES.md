@@ -1,3 +1,17 @@
+## Approach1: Using Deque to get min and max of all subarrays of size K.
+In this Approach, for subarrays of size K used Deque to find min and max of all sub arrays of size k and added difference of max and min to the sum. This is the same approach to min/max of all subarrays of size k. 
+### Algorithm:
+* Create a deque to store k elements.
+* Run a loop and insert first k elements in the deque. Before inserting the element, check if the element at the back of the queue is smaller than the current element, if it is so remove the element from the back of the deque, until all elements left in the deque are greater than the current element. Then insert the current element, at the back of the deque.
+* Now, run a loop from k to end of the array.
+* Print the front element of the deque.
+* Remove the element from the front of the queue if they are out of the current window.
+* Insert the next element in the deque. Before inserting the element, check if the element at the back of the queue is smaller than the current element, if it is so remove the element from the back of the deque, until all elements left in the deque are greater than the current element. Then insert the current element, at the back of the deque.
+* Print the maximum element of the last window.
+
+### Time Complexity: O(N^2) above operation is done N times and complexity of this operation in O(N)
+### Space Complexity: O(N) each deque of size at most N.
+
 ## Approach2: Using Monotonic Stacks.
 ```
 Let's say the array is [3,1,2,4].
