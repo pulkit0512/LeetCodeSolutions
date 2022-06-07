@@ -1,7 +1,7 @@
 class Solution {
     public double champagneTower(int poured, int query_row, int query_glass) {
-        return champagneTowerN2Space(poured, query_row, query_glass);
-        //return champagneTowerNSpace(poured, query_row, query_glass);
+        //return champagneTowerN2Space(poured, query_row, query_glass);
+        return champagneTowerNSpace(poured, query_row, query_glass);
     }
     
     private double champagneTowerN2Space(int poured, int query_row, int query_glass) {
