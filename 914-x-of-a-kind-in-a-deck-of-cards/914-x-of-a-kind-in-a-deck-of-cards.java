@@ -1,6 +1,10 @@
 class Solution {
     public boolean hasGroupsSizeX(int[] deck) {
-        int[] fMap = new int[10000];
+        int max = 0;
+        for(int d:deck){
+            max = Math.max(max, d);
+        }
+        int[] fMap = new int[max+1];
         for(int d:deck) {
             fMap[d]++;
         }
