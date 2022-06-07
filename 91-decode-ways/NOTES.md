@@ -4,3 +4,4 @@ If current val and previous val number is less then 26 and previous val is not 0
 ​
 ### Time Complexity: O(N)
 ### Space Complexity: O(N), DP array.
+#### We can change space complexity to O(1) since for each index we only depend on prev to indexes. So we can use two pointers to calculate this.
