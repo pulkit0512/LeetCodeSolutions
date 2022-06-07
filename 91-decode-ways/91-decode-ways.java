@@ -1,7 +1,7 @@
 class Solution {
     public int numDecodings(String s) {
-        //return numDecodingsNSpace(s);
-        return numDecodingsConstantSpace(s);
+        return numDecodingsNSpace(s);
+        //return numDecodingsConstantSpace(s);
     }
     
     private int numDecodingsConstantSpace(String s) {
