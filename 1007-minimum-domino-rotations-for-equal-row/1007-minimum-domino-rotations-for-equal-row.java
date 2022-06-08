@@ -2,31 +2,25 @@ class Solution {
     public int minDominoRotations(int[] tops, int[] bottoms) {
         int[] topFreq = new int[7];
         int[] bottomFreq = new int[7];
-        int[] topMap = new int[7];
-        int[] bottomMap = new int[7];
-        for(int i=0;i<tops.length;i++){
+        int[] commonMap = new int[7];
+        int n = tops.length;
+        for(int i=0;i<n;i++){
             topFreq[tops[i]]++;
             bottomFreq[bottoms[i]]++;
-            if(tops[i]!=bottoms[i]){
-                topMap[tops[i]]++;
-            }
-            if(tops[i]!=bottoms[i]){
-                bottomMap[bottoms[i]]++;
+            if(tops[i]==bottoms[i]){
+                commonMap[tops[i]]++;
             }
         }
-        int topSwaps = tops.length+1;
+        int topSwaps = n+1;
         for(int i=1;i<=6;i++){
-            if(topFreq[i]==tops.length){
+            if(topFreq[i]==n || bottomFreq[i]==n){
                 return 0;
             }
-            if(topFreq[i]+bottomMap[i]==tops.length){
-                topSwaps = Math.min(topSwaps, bottomMap[i]);
-            }
-            if(bottomFreq[i]+topMap[i]==tops.length){
-                topSwaps = Math.min(topSwaps, topMap[i]);
+            if(topFreq[i] + bottomFreq[i] - commonMap[i]==tops.length){
+                topSwaps = Math.min(topSwaps, Math.min(topFreq[i], bottomFreq[i]) - commonMap[i]);
             }
         }
-        if(topSwaps == tops.length+1){
+        if(topSwaps == n+1){
             return -1;
         }
         return topSwaps;
