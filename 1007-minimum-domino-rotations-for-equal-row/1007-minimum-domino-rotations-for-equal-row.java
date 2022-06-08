@@ -22,11 +22,6 @@ class Solution {
             if(topFreq[i]+bottomMap[i]==tops.length){
                 topSwaps = Math.min(topSwaps, bottomMap[i]);
             }
-        }
-        for(int i=1;i<=6;i++){
-            if(bottomFreq[i]==tops.length){
-                return 0;
-            }
             if(bottomFreq[i]+topMap[i]==tops.length){
                 topSwaps = Math.min(topSwaps, topMap[i]);
             }
