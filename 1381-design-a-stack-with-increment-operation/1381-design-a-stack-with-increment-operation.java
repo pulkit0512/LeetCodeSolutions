@@ -1,11 +1,9 @@
 class CustomStack {
 
-    Deque<Integer> main;
-    Stack<Integer> stack;
+    List<Integer> main;
     int size;
     public CustomStack(int maxSize) {
-        main = new LinkedList<>();
-        stack = new Stack<>();
+        main = new ArrayList<>();
         size = maxSize;
     }
     
@@ -13,22 +11,19 @@ class CustomStack {
         if(size==main.size()){
             return;
         }
-        main.addLast(x);
+        main.add(x);
     }
     
     public int pop() {
         if(main.isEmpty()){
             return -1;
         }
-        return (int)main.pollLast();
+        return (int)main.remove(main.size()-1);
     }
     
     public void increment(int k, int val) {
-        for(int i=0;i<k && !main.isEmpty();i++){
-            stack.push(main.pollFirst() + val);
-        }
-        for(int i=0;i<k && !stack.isEmpty();i++){
-            main.addFirst(stack.pop());
+        for(int i=0;i<Math.min(k, main.size());i++){
+            main.set(i, main.get(i)+val);
         }
     }
 }
