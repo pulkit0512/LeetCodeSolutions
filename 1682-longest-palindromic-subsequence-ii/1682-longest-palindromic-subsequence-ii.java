@@ -7,21 +7,13 @@ class Solution {
         int dp[][] = new int[len][len];
         char last[][] = new char[len][len];
         int ans = 0;
-        for(int gap=0;gap<len;gap++){
+        for(int gap=1;gap<len;gap++){
             for(int i=0,j=gap;j<len;i++,j++){
-                if(gap==0){
-                    dp[i][j] = 1;
+                if(s.charAt(i)==s.charAt(j) && s.charAt(i)!=last[i+1][j-1]){
+                    dp[i][j] = dp[i+1][j-1] + 2;
                     last[i][j] = s.charAt(i);
-                }else if(s.charAt(i)==s.charAt(j)){
-                    if(s.charAt(i)!=last[i+1][j-1]){
-                        dp[i][j] = dp[i+1][j-1] + 2;
-                        last[i][j] = s.charAt(i);
-                    }else{
-                        dp[i][j] = dp[i+1][j-1];
-                        last[i][j] = last[i+1][j-1];
-                    }
                 }else{
-                    if(dp[i][j-1]>dp[i+1][j]){
+                    if(dp[i][j-1]>=dp[i+1][j]){
                         dp[i][j] = dp[i][j-1];
                         last[i][j] = last[i][j-1];
                     }else{
@@ -29,9 +21,11 @@ class Solution {
                         last[i][j] = last[i+1][j];
                     }
                 }
-                ans = Math.max(ans, dp[i][j]);
+                if(dp[i][j]%2==0){
+                    ans = Math.max(ans, dp[i][j]);
+                }
             }
         }
-        return (ans%2==0)?ans:(ans-1);
+        return ans;
     }
 }
