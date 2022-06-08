@@ -11,7 +11,7 @@ class Solution {
     
     public int pickIndex() {
         double target = prefix[prefix.length-1] * Math.random();
-        int idx = Arrays.binarySearch(prefix, 0, prefix.length-1, (int)Math.ceil(target));
+        int idx = Arrays.binarySearch(prefix, 0, prefix.length, (int)Math.ceil(target));
         if(idx<0){
             idx = -(idx+1);
         }
