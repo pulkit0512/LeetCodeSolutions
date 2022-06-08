@@ -1,5 +1,32 @@
 class Solution {
     public int minDominoRotations(int[] tops, int[] bottoms) {
+        //return minRotationsUsingFreq(tops, bottoms);
+        return minRotationsGreedy(tops, bottoms);
+    }
+    private int minRotationsGreedy(int[] tops, int[] bottoms) {
+        int n = tops.length;
+        int rotations = getRotations(tops[0], tops, bottoms, n);
+        if(rotations!=-1 || tops[0]==bottoms[0]){
+            return rotations;
+        }
+        return getRotations(bottoms[0], tops, bottoms, n);
+    }
+    
+    private int getRotations(int x, int[] tops, int[] bottoms, int n) {
+        int rotA = 0, rotB = 0;
+        for(int i=0;i<n;i++){
+            if(tops[i]!=x && bottoms[i]!=x){
+                return -1;
+            }else if(tops[i]!=x){
+                rotA++;
+            }else if(bottoms[i]!=x){
+                rotB++;
+            }
+        }
+        return Math.min(rotA, rotB);
+    }
+    
+    private int minRotationsUsingFreq(int[] tops, int[] bottoms) {
         int[] topFreq = new int[7];
         int[] bottomFreq = new int[7];
         int[] commonMap = new int[7];
