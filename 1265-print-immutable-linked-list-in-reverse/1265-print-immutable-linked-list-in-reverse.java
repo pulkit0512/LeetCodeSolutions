@@ -9,8 +9,8 @@
 
 class Solution {
     public void printLinkedListInReverse(ImmutableListNode head) {
-        //printNSpace(head);
-        printSqrtNSpace(head);
+        printNSpace(head);
+        //printSqrtNSpace(head);
     }
     
     // O(N) Time, O(N) Space
@@ -18,7 +18,7 @@ class Solution {
         if(head==null){
             return;
         }
-        printLinkedListInReverse(head.getNext());
+        printNSpace(head.getNext());
         head.printValue();
     }
     
