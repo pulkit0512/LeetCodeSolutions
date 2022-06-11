@@ -4,9 +4,10 @@ class Solution {
         int n = nums.length;
         int[][] dp = new int[m+1][m+1];
         for(int i=m-1;i>=0;i--){
-            for(int j=0;j<=i;j++){
-                int ed = n - 1 - (i-j);
-                dp[i][j] = Math.max(multipliers[i]*nums[j] + dp[i+1][j+1], multipliers[i]*nums[ed] + dp[i+1][j]);
+            for(int left=0;left<=i;left++){
+                int right = n - 1 - (i-left);
+                dp[i][left] = Math.max(multipliers[i]*nums[left] + dp[i+1][left+1], 
+                                       multipliers[i]*nums[right] + dp[i+1][left]);
             }
         }
         return dp[0][0];
