@@ -1,5 +1,6 @@
 class Solution {
     public int maximumUniqueSubarray(int[] nums) {
+        // Apart from set we can use boolean array of 10000 size to keep track of current subarray state
         Set<Integer> set = new HashSet<>();
         int st = 0;
         int score = 0, maxScore = 0;
