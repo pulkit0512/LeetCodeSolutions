@@ -5,9 +5,7 @@ class Solution {
     public int minDifficulty(int[] jobDifficulty, int d) {
         dp = new int[300][11];
         for(int i=0;i<300;i++){
-            for(int j=0;j<=10;j++){
-                dp[i][j] = -1;
-            }
+            Arrays.fill(dp[i], -1);
         }
         this.jobDifficulty = jobDifficulty;
         this.len = jobDifficulty.length;
@@ -32,7 +30,6 @@ class Solution {
         for(int i=idx;i<len-(d-day);i++){
             curr = Math.max(curr, jobDifficulty[i]);
             val = Math.min(val, curr + minDifficultyUtil(i+1, day+1, d));
-            //System.out.println(val+" "+i+" "+day+" "+curr);
         }
         dp[idx][day] = val;
         return val;
