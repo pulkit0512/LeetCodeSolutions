@@ -1,6 +1,7 @@
 class Solution {
     int dp[][];
     int[] jobDifficulty;
+    int[] hardest;
     int len;
     public int minDifficulty(int[] jobDifficulty, int d) {
         dp = new int[300][11];
@@ -12,6 +13,11 @@ class Solution {
         if(d>this.len){
             return -1;
         }
+        this.hardest = new int[len];
+        hardest[len-1] = jobDifficulty[len-1];
+        for(int i=len-2;i>=0;i--){
+            hardest[i] = Math.max(hardest[i+1], jobDifficulty[i]);
+        }
         return minDifficultyUtil(0, 1, d);
     }
     
@@ -20,11 +26,7 @@ class Solution {
             return dp[idx][day];
         }
         if(day==d){
-            int val = 0;
-            for(int i=idx;i<len;i++){
-                val = Math.max(val, jobDifficulty[i]);
-            }
-            return val;
+            return hardest[idx];
         }
         int val = Integer.MAX_VALUE, curr = 0;
         for(int i=idx;i<len-(d-day);i++){
