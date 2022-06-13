@@ -1,5 +1,7 @@
 class Solution {
     public int uniquePaths(int m, int n) {
+        // Since swapping m and n doesn't make any difference we can swap it so that space becomes
+        // min(m, n)
         if(m<n){
             int temp = m;
             m = n;
