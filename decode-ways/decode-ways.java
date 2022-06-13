@@ -4,24 +4,25 @@ class Solution {
             return 0;
         }
         int len = s.length();
-        int dp[] = new int[len+1];
-        dp[0] = 1;
-        dp[1] = 1;
+        int one_back = 1, two_back = 1;
         for(int i=1;i<len;i++){
+            int curr = 0;
             if(s.charAt(i)=='0'){
                 if(s.charAt(i-1)=='0'){
                     return 0;
                 }
                 if(s.charAt(i-1)<='2'){
-                    dp[i+1] += dp[i-1];
+                    curr += two_back;
                 }
             }else{
-                dp[i+1] += dp[i];
+                curr += one_back;
                 if(s.charAt(i-1)=='1' || (s.charAt(i-1)=='2' && s.charAt(i)<='6')){
-                    dp[i+1] += dp[i-1];
+                    curr += two_back;
                 }
             }
+            two_back = one_back;
+            one_back = curr;
         }
-        return dp[len];
+        return one_back;
     }
 }
