@@ -25,9 +25,7 @@ class Solution {
             }
             for(int j=1;j<=tLen;j++){
                 prev[j] = curr[j];
-                //System.out.print(prev[j]+" ");
             }
-            //System.out.println();
         }
         return prev[tLen];
     }
