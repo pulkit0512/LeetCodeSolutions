@@ -1,23 +1,31 @@
 class Solution {
+    class Pair{
+        String word;
+        int len;
+        public Pair(String a, int b){
+            word = a;
+            len = b;
+        }
+    }
     public int longestStrChain(String[] words) {
         int n = words.length;
-        Pair<String, Integer>[] wordsPair = new Pair[n];
+        Pair[] wordsPair = new Pair[n];
         int dp[] = new int[n];
         int max = 1;
         for(int i=0;i<n;i++){
-            wordsPair[i] = new Pair<>(words[i], words[i].length());
+            wordsPair[i] = new Pair(words[i], words[i].length());
             dp[i] = 1;
         }
-        Arrays.sort(wordsPair, (a,b) -> (a.getValue()-b.getValue()));
+        Arrays.sort(wordsPair, (a,b) -> (a.len-b.len));
         for(int i=1;i<n;i++){
-            int lenS = wordsPair[i].getValue();
+            int lenS = wordsPair[i].len;
             for(int j=i-1;j>=0;j--){
-                int lenT = wordsPair[j].getValue();
+                int lenT = wordsPair[j].len;
                 if(lenS>lenT+1){
                     break;
                 }
                 if(lenS==lenT+1){
-                    if(isChain(wordsPair[i].getKey(), wordsPair[j].getKey(), lenS)){
+                    if(isChain(wordsPair[i].word, wordsPair[j].word, lenS)){
                         dp[i] = Math.max(dp[i], dp[j]+1);
                     }
                 }
