@@ -8,16 +8,16 @@ class Solution {
         if(n<=2){
             return n;
         }
-        int fPrev = 1, fCurr = 2;
-        int pCurr = 1;
+        int two_back = 1, one_back = 2;
+        int one_back_partial = 1;
         int mod = 1000000007;
         for(int i=3;i<=n;i++){
-            int val = fCurr;
-            fCurr = ((fCurr + fPrev)%mod + (2*pCurr)%mod)%mod;
-            pCurr = (pCurr + fPrev)%mod;
-            fPrev = val;
+            int val = ((one_back + two_back)%mod + (2*one_back_partial)%mod)%mod;
+            one_back_partial = (one_back_partial + two_back)%mod;
+            two_back = one_back;
+            one_back = val;
         }
-        return fCurr;
+        return one_back;
     }
     
     private int numTilingsTransitionSeries(int n) {
