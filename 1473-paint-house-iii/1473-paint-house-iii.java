@@ -10,8 +10,8 @@ class Solution {
         this.target = target;
         this.houses = houses;
         this.cost = cost;
-        return memoizationDP();
-        //return tabulationDP();
+        //return memoizationDP();
+        return tabulationDP();
     }
     
     private int tabulationDP(){
