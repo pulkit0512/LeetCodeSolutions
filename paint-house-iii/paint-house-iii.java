@@ -10,7 +10,7 @@ class Solution {
         this.target = target;
         this.houses = houses;
         this.cost = cost;
-        this.dp = new Integer[m+1][target+1][n+1];
+        this.dp = new Integer[m][target+1][n+1];
         int ans = minCostMemo(0, 0, 0);
         return ans==INT_MAX?-1:ans;
     }
