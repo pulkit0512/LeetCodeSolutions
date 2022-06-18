@@ -1,9 +1,9 @@
 class WordFilter {
     class TrieNode{
-        Map<Character, TrieNode> children;
+        TrieNode[] children;
         Set<Integer> wordSet;
         public TrieNode() {
-            children = new HashMap<>();
+            children = new TrieNode[26];
             wordSet = new LinkedHashSet<>();
         }
     }
@@ -19,19 +19,19 @@ class WordFilter {
             int len = words[i].length();
             TrieNode node = preTrie;
             for(int j=0;j<len;j++){
-                if(!node.children.containsKey(words[i].charAt(j))){
-                    node.children.put(words[i].charAt(j), new TrieNode());
+                if(node.children[words[i].charAt(j)-'a']==null){
+                    node.children[words[i].charAt(j)-'a'] = new TrieNode();
                 }
-                TrieNode preNode = node.children.get(words[i].charAt(j));
+                TrieNode preNode = node.children[words[i].charAt(j)-'a'];
                 preNode.wordSet.add(i);
                 node = preNode;
             }
             node = sufTrie;
             for(int j=len-1;j>=0;j--){
-                if(!node.children.containsKey(words[i].charAt(j))){
-                    node.children.put(words[i].charAt(j), new TrieNode());
+                if(node.children[words[i].charAt(j)-'a']==null){
+                    node.children[words[i].charAt(j)-'a'] = new TrieNode();
                 }
-                TrieNode sufNode = node.children.get(words[i].charAt(j));
+                TrieNode sufNode = node.children[words[i].charAt(j)-'a'];
                 sufNode.wordSet.add(i);
                 node = sufNode;
             }
@@ -47,19 +47,19 @@ class WordFilter {
         TrieNode preNode = preTrie, sufNode = sufTrie;
         int i = 0;
         for(;i<preLen;i++){
-            if(!preNode.children.containsKey(prefix.charAt(i))){
+            if(preNode.children[prefix.charAt(i)-'a']==null){
                 return -1;
             }
-            preNode = preNode.children.get(prefix.charAt(i));
+            preNode = preNode.children[prefix.charAt(i)-'a'];
         }
         i = sufLen-1;
         for(;i>=0;i--){
-            if(!sufNode.children.containsKey(suffix.charAt(i))){
+            if(sufNode.children[suffix.charAt(i)-'a']==null){
                 return -1;
             }
-            sufNode = sufNode.children.get(suffix.charAt(i));
+            sufNode = sufNode.children[suffix.charAt(i)-'a'];
         }
-        int ans = -1, maxLen = 0;
+        int ans = -1;
         for(int x:preNode.wordSet){
             if(sufNode.wordSet.contains(x)){
                 ans = x;
