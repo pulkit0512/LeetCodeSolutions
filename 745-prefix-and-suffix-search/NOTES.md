@@ -1,5 +1,5 @@
 ## Approach:
-* In this approach, created prefix and suffix tries and at each node I am having a linked hashset which will store indexes of words at this node.
+* In this approach, created prefix and suffix tries and at each node I am having a hashset which will store indexes of words at this node.
 * In prefix trie for a word at each node i am adding it's index indicating upto this node current word has prefix.
 * Similarly created a suffix trie.
 * Once done with in the constructed, in the query part I am creating a cache if same query is made again return answer from cache.
