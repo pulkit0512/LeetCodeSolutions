@@ -4,7 +4,7 @@ class WordFilter {
         Set<Integer> wordSet;
         public TrieNode() {
             children = new TrieNode[26];
-            wordSet = new LinkedHashSet<>();
+            wordSet = new HashSet<>();
         }
     }
     TrieNode preTrie, sufTrie;
@@ -62,7 +62,7 @@ class WordFilter {
         int ans = -1;
         for(int x:preNode.wordSet){
             if(sufNode.wordSet.contains(x)){
-                ans = x;
+                ans = Math.max(ans, x);
             }
         }
         cache.put(key, ans);
