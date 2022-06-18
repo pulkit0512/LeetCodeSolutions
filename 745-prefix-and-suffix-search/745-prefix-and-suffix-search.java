@@ -17,30 +17,30 @@ class WordFilter {
         sufTrie = new TrieNode();
         for(int i=0;i<words.length;i++){
             int len = words[i].length();
-            TrieNode node = preTrie;
+            TrieNode node1 = preTrie;
+            TrieNode node2 = sufTrie;
             for(int j=0;j<len;j++){
-                if(node.children[words[i].charAt(j)-'a']==null){
-                    node.children[words[i].charAt(j)-'a'] = new TrieNode();
+                if(node1.children[words[i].charAt(j)-'a']==null){
+                    node1.children[words[i].charAt(j)-'a'] = new TrieNode();
                 }
-                TrieNode preNode = node.children[words[i].charAt(j)-'a'];
+                TrieNode preNode = node1.children[words[i].charAt(j)-'a'];
                 preNode.wordSet.add(i);
-                node = preNode;
-            }
-            node = sufTrie;
-            for(int j=len-1;j>=0;j--){
-                if(node.children[words[i].charAt(j)-'a']==null){
-                    node.children[words[i].charAt(j)-'a'] = new TrieNode();
+                node1 = preNode;
+                
+                if(node2.children[words[i].charAt(len-1-j)-'a']==null){
+                    node2.children[words[i].charAt(len-1-j)-'a'] = new TrieNode();
                 }
-                TrieNode sufNode = node.children[words[i].charAt(j)-'a'];
+                TrieNode sufNode = node2.children[words[i].charAt(len-1-j)-'a'];
                 sufNode.wordSet.add(i);
-                node = sufNode;
+                node2 = sufNode;
             }
         }
     }
     
     public int f(String prefix, String suffix) {
-        if(cache.containsKey(prefix+"_"+suffix)){
-            return cache.get(prefix+"_"+suffix);
+        String key = prefix+"_"+suffix;
+        if(cache.containsKey(key)){
+            return cache.get(key);
         }
         int preLen = prefix.length();
         int sufLen = suffix.length();
@@ -65,7 +65,7 @@ class WordFilter {
                 ans = x;
             }
         }
-        cache.put(prefix+"_"+suffix, ans);
+        cache.put(key, ans);
         return ans;
     }
 }
