@@ -10,8 +10,7 @@ class Solution {
         this.target = target;
         this.houses = houses;
         this.cost = cost;
-        this.dp = new Integer[100][21][100];
-        
+        this.dp = new Integer[m][target+1][n+1];
         int ans = minCostMemo(0, 0, 0);
         return ans==INT_MAX?-1:ans;
     }
@@ -24,11 +23,11 @@ class Solution {
                 return INT_MAX;
             }
         }
-        if(idx>m){
+        if(idx>m || num>target){
             return INT_MAX;
         }
-        if(dp[idx][prev][num]!=null){
-            return dp[idx][prev][num];
+        if(dp[idx][num][prev]!=null){
+            return dp[idx][num][prev];
         }
             
         if(houses[idx]!=0){
@@ -40,10 +39,10 @@ class Solution {
         }else{
             int ans = INT_MAX;
             for(int i=1;i<=n;i++){
-                int newNum = (prev!=i)?(num+1):num;
+                int newNum = (prev!=i)?num+1:num;
                 ans = Math.min(ans, cost[idx][i-1] + minCostMemo(idx+1, i, newNum));
             }
-            return dp[idx][prev][num] = ans;
+            return dp[idx][num][prev] = ans;
         }
     }
 }
