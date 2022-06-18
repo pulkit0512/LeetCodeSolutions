@@ -40,11 +40,8 @@ class Solution {
         }else{
             int ans = INT_MAX;
             for(int i=1;i<=n;i++){
-                if(prev!=i){
-                    ans = Math.min(ans, cost[idx][i-1] + minCostMemo(idx+1, i, num+1));
-                }else{
-                    ans = Math.min(ans, cost[idx][i-1] + minCostMemo(idx+1, i, num));
-                }
+                int newNum = (prev!=i)?(num+1):num;
+                ans = Math.min(ans, cost[idx][i-1] + minCostMemo(idx+1, i, newNum));
             }
             return dp[idx][prev][num] = ans;
         }
