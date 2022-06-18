@@ -10,7 +10,13 @@ class Solution {
         }
         long ans = 0;
         for(int i=0;i<26;i++){
+            if(preWord[i].isEmpty()){
+                continue;
+            }
             for(int j=i+1;j<26;j++){
+                if(preWord[j].isEmpty()){
+                    continue;
+                }
                 Set<String> set = new HashSet<>();
                 set.addAll(preWord[i]);
                 set.addAll(preWord[j]);
