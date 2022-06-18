@@ -21,7 +21,7 @@ class Solution {
                 set.addAll(preWord[i]);
                 set.addAll(preWord[j]);
                 
-                ans += (set.size()-preWord[i].size())*(set.size()-preWord[j].size());
+                ans += (preWord[i].size()-set.size())*(preWord[j].size()-set.size());
             }
         }
         return 2*ans;
