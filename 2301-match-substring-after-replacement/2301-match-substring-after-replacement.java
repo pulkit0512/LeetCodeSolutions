@@ -18,12 +18,10 @@ class Solution {
                 index.add(i);
             }
         }
-        //System.out.println(index);
         for(int i=0;i<index.size();i++){
             int j = 0;
             int k = index.get(i);
             for(;j<subLen && k<sLen;j++,k++){
-                //System.out.println(j+" "+k);
                 if(sub.charAt(j)==s.charAt(k)){
                     continue;
                 }else if(map.containsKey(sub.charAt(j)) && map.get(sub.charAt(j)).contains(s.charAt(k))){
