@@ -23,19 +23,19 @@ class Solution {
             for(int x:group){
                 TrieNode cur = root;
                 int len = words.get(x).length();
-                for(int i=1;i<len;i++){
+                for(int i=0;i<len;i++){
                     if(cur.children[words.get(x).charAt(i)-'a']==null){
                         cur.children[words.get(x).charAt(i)-'a'] = new TrieNode();
                     }
-                    cur.count++;
                     cur = cur.children[words.get(x).charAt(i)-'a'];
+                    cur.count++;
                 }
             }
             
             for(int x:group){
                 TrieNode cur = root;
                 int len = words.get(x).length();
-                int i = 1;
+                int i = 0;
                 for(;i<len;i++){
                     if(cur.count==1){
                         break;
