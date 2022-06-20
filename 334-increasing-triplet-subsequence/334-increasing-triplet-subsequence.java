@@ -12,7 +12,8 @@ class Solution {
                 ans[len] = nums[i];
                 len++;
             }else{
-                /*int idx;
+                //Since for this question this step can have length of atmost 2 so we can do it in O(1).
+                int idx;
                 if(len==1){
                     idx = 0;
                 }else{
@@ -21,11 +22,14 @@ class Solution {
                     }else{
                         idx = 1;
                     }
-                }*/
-                int idx = Arrays.binarySearch(ans, 0, len, nums[i]);
+                }
+                
+                // This works faster for larger subsequences since it's in log n. LIS in NLogN in our case NLog2
+                /*int idx = Arrays.binarySearch(ans, 0, len, nums[i]);
                 if(idx<0){
                     idx = -(idx+1);
-                }
+                }*/
+                
                 ans[idx] = nums[i];
             }
             if(len==3){
