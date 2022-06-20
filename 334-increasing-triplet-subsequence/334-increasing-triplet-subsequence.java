@@ -24,7 +24,7 @@ class Solution {
                 }
                 ans[idx] = nums[i];
             }
-            System.out.println(ans[0]+" "+ans[1]+" "+ans[2]);
+            //System.out.println(ans[0]+" "+ans[1]+" "+ans[2]);
             if(len==3){
                 return true;
             }
