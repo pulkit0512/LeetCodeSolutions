@@ -1,5 +1,50 @@
 class Solution {
+    class TrieNode {
+        TrieNode[] children;
+        int count;
+        
+        public TrieNode(){
+            children = new TrieNode[26];
+            count = 0;
+        }
+    }
     public int minimumLengthEncoding(String[] words) {
+        //return minimumLengthEncodingUsingSuffixMap(words);
+        return minimumLengthEncodingUsingTrie(words);
+    }
+    
+    private int minimumLengthEncodingUsingTrie(String[] words) {
+        TrieNode root = new TrieNode();
+        for(String word:words){
+            int len = word.length();
+            TrieNode node = root;
+            for(int i=len-1;i>=0;i--){
+                char ch = word.charAt(i);
+                if(node.children[ch-'a']==null){
+                    node.children[ch-'a'] = new TrieNode();
+                }
+                node = node.children[ch-'a'];
+                node.count++;
+            }
+        }
+        int ans = 0;
+        for(String word:words){
+            int len = word.length();
+            TrieNode node = root;
+            for(int i=len-1;i>=0;i--){
+                char ch = word.charAt(i);
+                node = node.children[ch-'a'];
+            }
+            if(node.count==1){
+                ans += len+1;
+            }else{
+                node.count--;
+            }
+        }
+        return ans;
+    }
+    
+    private int minimumLengthEncodingUsingSuffixMap(String[] words) {
         Map<String, Integer> suffixMap = new HashMap<>();
         for(int idx=0;idx<words.length;idx++){
             int len = words[idx].length();
