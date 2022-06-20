@@ -12,7 +12,7 @@ class Solution {
                 ans[len] = nums[i];
                 len++;
             }else{
-                int idx;
+                /*int idx;
                 if(len==1){
                     idx = 0;
                 }else{
@@ -21,10 +21,13 @@ class Solution {
                     }else{
                         idx = 1;
                     }
+                }*/
+                int idx = Arrays.binarySearch(ans, 0, len, nums[i]);
+                if(idx<0){
+                    idx = -(idx+1);
                 }
                 ans[idx] = nums[i];
             }
-            //System.out.println(ans[0]+" "+ans[1]+" "+ans[2]);
             if(len==3){
                 return true;
             }
