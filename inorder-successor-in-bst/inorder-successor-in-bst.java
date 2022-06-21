@@ -9,9 +9,9 @@
  */
 class Solution {
     public TreeNode inorderSuccessor(TreeNode root, TreeNode p) {
-        return inorderSuccessorUsingInOrderBT(root, p);
+        //return inorderSuccessorUsingInOrderBT(root, p);
         
-        //return inorderSuccessorUsingBSTProperties(root, p);
+        return inorderSuccessorUsingBSTProperties(root, p);
     }
     
     private TreeNode inorderSuccessorUsingBSTProperties(TreeNode root, TreeNode p) {
