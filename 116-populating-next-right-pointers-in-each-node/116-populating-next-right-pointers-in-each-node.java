@@ -24,24 +24,26 @@ class Node {
 class Solution {
     public Node connect(Node root) {
         //return connectBFS(root);
-        return connectDFS(root);
+        return connectUsingNext(root);
     }
-    private Node connectDFS(Node root) {
+    private Node connectUsingNext(Node root) {
         if(root==null){
-            return null;
+            return root;
         }
-        if(root.left!=null){
-            root.left.next = root.right;
-        }
-        if(root.right!=null){
-            if(root.next==null){
-                root.right.next=null;
-            }else{
-                root.right.next=root.next.left;
+        Node leftMost = root;
+        while(leftMost!=null){
+            Node head = leftMost;
+            while(head!=null){
+                if(head.left!=null){
+                    head.left.next = head.right;
+                }
+                if(head.right!=null && head.next!=null){
+                    head.right.next = head.next.left;
+                }
+                head = head.next;
             }
+            leftMost = leftMost.left;
         }
-        connectDFS(root.left);
-        connectDFS(root.right);
         return root;
     }
     
