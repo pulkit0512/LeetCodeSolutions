@@ -1,7 +1,7 @@
 class Solution {
     public int furthestBuilding(int[] heights, int bricks, int ladders) {
-        //return furthestBuildingUsingMaxHeap(heights, bricks, ladders);
-        return furthestBuildingUsingBinarySearch(heights, bricks, ladders);
+        return furthestBuildingUsingMaxHeap(heights, bricks, ladders);
+        //return furthestBuildingUsingBinarySearch(heights, bricks, ladders);
     }
     
     private int furthestBuildingUsingBinarySearch(int[] heights, int bricks, int ladders) {
