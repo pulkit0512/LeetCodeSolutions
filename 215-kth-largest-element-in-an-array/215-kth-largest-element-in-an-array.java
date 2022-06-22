@@ -23,39 +23,39 @@ class Solution {
         // using QuickSelect to find Kth largest element i.e. (N-K)th index element
         return quickSelect(nums, 0, nums.length-1, nums.length-k);
     }
-    private int quickSelect(int nums[], int left, int right, int kSmall) {
-        if(left==right){
-            return nums[left];
+    
+    private int quickSelect(int[] nums, int st, int ed, int kSmall) {
+        if(st==ed){
+            return nums[st];
         }
         Random rand = new Random();
-        int pivot = left + rand.nextInt(right-left);
-        pivot = partition(nums, left, right, pivot);
-        if(pivot==kSmall){
+        int pivot = st + rand.nextInt(ed-st);
+        pivot = partition(nums, pivot, st, ed);
+        if(pivot == kSmall){
             return nums[pivot];
         }else if(pivot>kSmall){
-            return quickSelect(nums, left, pivot-1, kSmall);
+            return quickSelect(nums, st, pivot-1, kSmall);
         }else{
-            return quickSelect(nums, pivot+1, right, kSmall);
+            return quickSelect(nums, pivot+1, ed, kSmall);
         }
     }
     
-    private int partition(int nums[], int left, int right, int pivot) {
+    private int partition(int[] nums, int pivot, int left, int right) {
         int idx = left;
-        int val = nums[pivot];
         swap(nums, pivot, right);
-        for(int i=left;i<=right; i++){
-            if(nums[i]<val){
+        for(int i=left;i<right;i++){
+            if(nums[i]<nums[right]){
                 swap(nums, i, idx);
                 idx++;
             }
         }
-        swap(nums, right, idx);
+        swap(nums, idx, right);
         return idx;
     }
     
-    private void swap(int nums[], int x, int y){
-        int temp = nums[x];
-        nums[x] = nums[y];
-        nums[y] = temp;
+    private void swap(int[] nums, int i, int j){
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
     }
 }
