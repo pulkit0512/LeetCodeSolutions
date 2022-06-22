@@ -1,5 +1,8 @@
 class Solution {
     public int tilingRectangle(int n, int m) {
+        if(n==m){
+            return 1;
+        }
         if((n==11 && m==13) || (n==13 && m==11)){
             return 6;
         }
