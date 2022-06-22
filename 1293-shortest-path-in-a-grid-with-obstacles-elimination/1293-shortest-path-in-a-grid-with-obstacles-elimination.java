@@ -38,6 +38,9 @@ class Solution {
         Set<StepState> set = new HashSet<>();
         int m = grid.length;
         int n = grid[0].length;
+        if(k>=m+n-2){
+            return m+n-2;
+        }
         StepState start = new StepState(0,0,0,0);
         pq.add(start);
         set.add(start);
