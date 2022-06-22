@@ -21,12 +21,12 @@ class Solution {
         }
         long ans = p[i][j];
         // Make horizontal cuts for current i, j
-        for(int idx = 1;idx<i;idx++){
+        for(int idx = 1;idx<=i/2;idx++){
             ans = Math.max(ans, dp(idx, j, p, memo) + dp(i-idx, j, p, memo));
         }
         
         // Make vertical cuts for current i, j
-        for(int idx = 1;idx<j;idx++){
+        for(int idx = 1;idx<=j/2;idx++){
             ans = Math.max(ans, dp(i, idx, p, memo) + dp(i, j-idx, p, memo));
         }
         
