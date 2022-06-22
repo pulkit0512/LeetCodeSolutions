@@ -6,10 +6,10 @@ class Solution {
     
     private long sellingWoodBottomUp(int m, int n, int[][] prices) {
         int p[][] = new int[m+1][n+1];
+        long dp[][] = new long[m+1][n+1];
         for(int price[]:prices){
             p[price[0]][price[1]] = price[2];
         }
-        long dp[][] = new long[m+1][n+1];
         for(int h=1;h<=m;h++){
             for(int w=1;w<=n;w++){
                 dp[h][w] = p[h][w];
