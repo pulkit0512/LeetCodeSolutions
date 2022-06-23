@@ -7,3 +7,14 @@
 ​
 ### Time Complexity: O(NLogN)
 ### Space Complexity: O(N)
+​
+## Approach2:
+* Sort the courses on end time.
+* I am using two variables sum and cnt to keep track of total duration of selected courses till now and number of courses selected till now.
+* if we can select current course, i.e. current course duration + total duration <= current course end time. Update the total duration and set course[cnt] = course[i] and update cnt.
+* If we can't select the current course due to end time duration constraint we will find a course in selected courses whose duration is maximum of all courses duration and greater then current course duration.
+* If exist remove that course and add current course and removed course index.
+* return cnt as answer.
+​
+### Time Complexity: O(N*Count)
+### Space Complexity: O(1)
