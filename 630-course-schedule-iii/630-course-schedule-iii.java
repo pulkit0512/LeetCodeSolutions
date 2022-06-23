@@ -25,7 +25,7 @@ class Solution {
                 sum += courses[i][0];
                 pq.add(courses[i][0]);
                 cnt++;
-                while(!pq.isEmpty() && sum>courses[i][1]){
+                if(!pq.isEmpty() && sum>courses[i][1]){
                     sum -= pq.poll();
                     cnt--;
                 }
