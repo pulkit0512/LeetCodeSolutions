@@ -1,7 +1,7 @@
 class Solution {
     public int scheduleCourse(int[][] courses) {
-        //return scheduleCourseNLogN(courses);
-        return scheduleCourseNCount(courses);
+        return scheduleCourseNLogN(courses);
+        //return scheduleCourseNCount(courses);
     }
     private int scheduleCourseNLogN(int[][] courses){
         Arrays.sort(courses, (a,b)->(a[1]-b[1]));
