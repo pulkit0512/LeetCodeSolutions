@@ -1,7 +1,8 @@
 ## Approach: Stack and Prefix Sum
 ```
 Most tricky part before involving math:
-For each strength[i], we could find a non-empty index range (left, right) where strength[i] is the min value. So for all subarrays in this range including strength[i], the total strength is strength[i] * the sum of those subarray sums.
+For each strength[i], we could find a non-empty index range (left, right) where strength[i] is the min value.
+So for all subarrays in this range including strength[i], the total strength is strength[i] * the sum of those subarray sums.
 
 left is the first index on the left side i where strength[left] < strength[i]
 right is the first index on the right side of i where strength[right] <= strength[i]
