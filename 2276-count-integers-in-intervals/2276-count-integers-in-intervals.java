@@ -9,11 +9,12 @@ class CountIntervals {
     
     public void add(int left, int right) {
         while(true){
-            Integer floorKey = map.floorKey(right);
-            int floorVal = floorKey==null?0:map.get(floorKey);
-            if(floorKey==null || floorVal<left){
+            Map.Entry<Integer, Integer> floorEntry = map.floorEntry(right);
+            int floorVal = floorEntry==null?0:floorEntry.getValue();
+            if(floorEntry==null || floorVal<left){
                 break;
             }
+            int floorKey = floorEntry.getKey();
             left = Math.min(floorKey, left);
             right = Math.max(floorVal, right);
             map.remove(floorKey);
