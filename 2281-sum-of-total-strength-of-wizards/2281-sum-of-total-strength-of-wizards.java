@@ -1,41 +1,36 @@
 class Solution {
+    int mod = 1000000007;
     public int totalStrength(int[] strength) {
         int n = strength.length;
-        int MOD = 1_000_000_007;
-        
-        long[] preSum = new long[n + 1];
-        long[] preMul = new long[n + 2];
-        for (int i = 0; i < n; i++) {
-            preSum[i + 1] = (preSum[i] + strength[i]) % MOD;
+        long[] preSum = new long[n+1];
+        long[] prePreSum = new long[n+2];
+        int left[] = new int[n];
+        int right[] = new int[n];
+        Stack<Integer> leftSt = new Stack<>();
+        Stack<Integer> rightSt = new Stack<>();
+        for(int i=0;i<n;i++){
+            preSum[i+1] = (preSum[i] + strength[i])%mod;
         }
-        for (int i = 0; i <= n; i++) {
-            preMul[i + 1] = (preMul[i] + preSum[i]) % MOD;
+        for(int i=0;i<=n;i++){
+            prePreSum[i+1] = (prePreSum[i] + preSum[i])%mod;
         }
-        
-        int[] left = new int[n];
-        Deque<Integer> stack = new ArrayDeque<>();
-        for (int i = 0; i < strength.length; i++) {
-            while (!stack.isEmpty() && strength[i] <= strength[stack.peek()]) {
-                stack.pop();
+        for(int i=0;i<n;i++){
+            while(!leftSt.isEmpty() && strength[leftSt.peek()]>=strength[i]){
+                leftSt.pop();
             }
-            left[i] = stack.isEmpty() ? -1 : stack.peek();
-            stack.push(i);
-        }
-        
-        int[] right = new int[n];
-        stack = new ArrayDeque<>();
-        for (int i = strength.length - 1; i >= 0 ; i--) {
-            while (!stack.isEmpty() && strength[i] < strength[stack.peek()]) {
-                stack.pop();
+            left[i] = leftSt.isEmpty()?-1:leftSt.peek();
+            leftSt.push(i);
+            while(!rightSt.isEmpty() && strength[rightSt.peek()]>strength[n-1-i]){
+                rightSt.pop();
             }
-            right[i] = stack.isEmpty() ? n : stack.peek();
-            stack.push(i);
+            right[n-1-i] = rightSt.isEmpty()?n:rightSt.peek();
+            rightSt.push(n-1-i);
         }
-        
         long ans = 0;
-        for (int i = 0; i < n; i++) {
-            ans += (((preMul[right[i] + 1] - preMul[i + 1]) * (i - left[i]) % MOD + MOD - (preMul[i + 1] - preMul[left[i] + 1]) * (right[i] - i) % MOD) * strength[i])%MOD;
-            ans %= MOD;
+        for(int i=0;i<n;i++){
+            long positivePart = prePreSum[right[i]+1] - prePreSum[i+1];
+            long negativePart = prePreSum[i+1] - prePreSum[left[i]+1];
+            ans = (ans + ((((positivePart*(i-left[i]))%mod - (negativePart*(right[i]-i))%mod + mod)%mod) * strength[i])%mod)%mod;
         }
         return (int)ans;
     }
