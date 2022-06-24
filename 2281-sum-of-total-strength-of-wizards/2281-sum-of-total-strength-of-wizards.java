@@ -10,10 +10,9 @@ class Solution {
         Stack<Integer> rightSt = new Stack<>();
         for(int i=0;i<n;i++){
             preSum[i+1] = (preSum[i] + strength[i])%mod;
-        }
-        for(int i=0;i<=n;i++){
             prePreSum[i+1] = (prePreSum[i] + preSum[i])%mod;
         }
+        prePreSum[n+1] = (prePreSum[n] + preSum[n])%mod;
         for(int i=0;i<n;i++){
             while(!leftSt.isEmpty() && strength[leftSt.peek()]>=strength[i]){
                 leftSt.pop();
