@@ -5,4 +5,3 @@
 *  Once we reach a point where we can't merge any more intervals break out and add update current interval to map and update count by adding number of intergers in current interval.
 *  For count call, return count.
 ​
-###
