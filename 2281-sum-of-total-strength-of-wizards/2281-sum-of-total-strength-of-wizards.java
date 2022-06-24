@@ -8,11 +8,19 @@ class Solution {
         int right[] = new int[n];
         Stack<Integer> leftSt = new Stack<>();
         Stack<Integer> rightSt = new Stack<>();
+        
+        // Get Prefix sum and prePrefixSum
+        // At index i store prefix sum upto i-1 index.
+        // At index i store prePrefixSum upto i-1 index.
         for(int i=0;i<n;i++){
             preSum[i+1] = (preSum[i] + strength[i])%mod;
             prePreSum[i+1] = (prePreSum[i] + preSum[i])%mod;
         }
         prePreSum[n+1] = (prePreSum[n] + preSum[n])%mod;
+        
+        // Get next smaller to left
+        // Get next smaller to right
+        // To get the subarray range where strength[i] is minimum
         for(int i=0;i<n;i++){
             while(!leftSt.isEmpty() && strength[leftSt.peek()]>=strength[i]){
                 leftSt.pop();
@@ -25,6 +33,8 @@ class Solution {
             right[n-1-i] = rightSt.isEmpty()?n:rightSt.peek();
             rightSt.push(n-1-i);
         }
+        
+        // Get Strength for each i, see notes for this.
         long ans = 0;
         for(int i=0;i<n;i++){
             long positivePart = prePreSum[right[i]+1] - prePreSum[i+1];
