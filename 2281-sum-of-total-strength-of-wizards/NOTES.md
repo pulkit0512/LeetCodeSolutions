@@ -1,5 +1,5 @@
 ## Approach: Stack and Prefix Sum
-
+```
 Most tricky part before involving math:
 For each strength[i], we could find a non-empty index range (left, right) where strength[i] is the min value. So for all subarrays in this range including strength[i], the total strength is strength[i] * the sum of those subarray sums.
 
@@ -42,7 +42,7 @@ positive parts:
 negative parts:
 (prefix[left + 1] + prefix[left + 2] + ... + prefix[i]) * (right - i)
 The range sum of prefix can be optimized by pre-compute prefix-sum of prefix.
-
+```
 
 ### Time Complexity: O(N), 3 passes of length N
 ### Space Complexity: O(N), two prefix arrays, two boundary arrays and two stacks.
