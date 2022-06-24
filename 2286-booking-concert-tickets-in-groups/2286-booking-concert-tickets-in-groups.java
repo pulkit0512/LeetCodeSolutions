@@ -6,8 +6,8 @@ class BookMyShow {
         public SegmentTree(int n, int m){
             this.n = n;
             this.m = m;
-            maxSegTree = new long[4*n + 1];
-            sumSegTree = new long[4*n + 1];
+            maxSegTree = new long[4*n + 1]; // will help in answering gather queries. Since it stores maximum seats available
+            sumSegTree = new long[4*n + 1]; // will help in answering scatter queries. Since it store sum of seats available
             build(0, 0, n-1, m);
         }
         
@@ -45,10 +45,10 @@ class BookMyShow {
         }
         
         private long scatterQuery(int idx, int l, int r, int ql, int qr){
-            if(l>qr || r<ql){
+            if(l>qr || r<ql){ // query not in range.
                 return 0;
             }
-            if(ql<=l && qr>=r){
+            if(ql<=l && qr>=r){ // query in range.
                 return sumSegTree[idx];
             }
             int mid = (l+r)/2;
@@ -67,9 +67,9 @@ class BookMyShow {
                 return l;
             }
             int mid = (l+r)/2;
-            int row = gatherQuery(2*idx+1, l, mid, k, maxRow);
+            int row = gatherQuery(2*idx+1, l, mid, k, maxRow); //First try to find in left subtree since we need lowest row
             if(row==-1){
-                row = gatherQuery(2*idx+2, mid+1, r, k, maxRow);
+                row = gatherQuery(2*idx+2, mid+1, r, k, maxRow);//if not found in left subtree then only find in right
             }
             return row;
         }
@@ -91,6 +91,9 @@ class BookMyShow {
     }
     
     public int[] gather(int k, int maxRow) {
+        // In cache we will have those queries which we can't accomodate in gather or scatter.
+        // If we can't accomodate a scatter query we won't be able to accomodate gather query.
+        // Check if already present in cache return false.
         if(cache.containsKey(k) && cache.get(k).contains(maxRow)){
             return new int[0];
         }
@@ -111,9 +114,6 @@ class BookMyShow {
     }
     
     public boolean scatter(int k, int maxRow) {
-        if(cache.containsKey(k) && cache.get(k).contains(maxRow)){
-            return false;
-        }
         long sum = segTree.scatterQuery(0, maxRow);
         if(sum<k){
             if(!cache.containsKey(k)){
