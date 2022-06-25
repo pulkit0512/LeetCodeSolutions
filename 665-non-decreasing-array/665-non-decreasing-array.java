@@ -6,7 +6,7 @@ class Solution {
                 if((i+1<nums.length && nums[i+1]>=nums[i-1]) || (i+1>=nums.length) || (i-2>=0 && nums[i]>=nums[i-2]) || (i-2<0)){
                     modified++;
                 }else{
-                    modified +=2;
+                    return false;
                 }
             }
         }
