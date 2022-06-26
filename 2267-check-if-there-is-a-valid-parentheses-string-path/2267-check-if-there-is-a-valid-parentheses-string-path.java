@@ -27,7 +27,7 @@ class Solution {
         if(open<close){
             return false;
         }
-        // if reached last cell return true
+        // if reached last cell and open-close == 0 return true else false.
         if(i==n-1 && j==m-1){
             if(open-close==0){
                 return true;
