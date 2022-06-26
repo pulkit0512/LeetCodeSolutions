@@ -1,4 +1,5 @@
 class Solution {
+    // Great Explaination: https://leetcode.com/problems/minimum-score-after-removals-on-a-tree/discuss/2198665/Python-3-Explanation-with-pictures-BFS
     public int minimumScore(int[] nums, int[][] edges) {
         int n = nums.length;
         List<List<Integer>> graph = new ArrayList<>(n);
