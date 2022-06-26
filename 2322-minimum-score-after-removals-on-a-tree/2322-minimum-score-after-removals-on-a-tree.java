@@ -10,6 +10,7 @@ class Solution {
             graph.add(new ArrayList<>());
             children.add(new HashSet<>());
         }
+        // Creating undirected graph from edges
         for(int[] edge:edges){
             graph.get(edge[0]).add(edge[1]);
             graph.get(edge[1]).add(edge[0]);
@@ -18,12 +19,16 @@ class Solution {
         }
         Queue<Integer> que = new LinkedList<>();
         int xor = 0;
+        // finding xor of all elements and if only one edge for a node then it's a child node add it in queue.
         for(int i=0;i<n;i++){
             xor = xor^nums[i];
             if(deg[i]==1){
                 que.add(i);
             }
         }
+        // BFS traversal similar to topological sort to process leaf nodes first and then reducing there degree
+        // from parent nodes and if we got any leaf node not yet visited add it in queue.
+        // This is done to get xor of a subtree rooted a node and all the children in that subtree including self.
         while(!que.isEmpty()){
             int cur = que.poll();
             vis[cur] = true;
@@ -39,6 +44,14 @@ class Solution {
                 }
             }
         }
+        // Three cases for each pair edge. Let u1 and u2 be lower break points
+        // 1) u2 is child of u1
+        // 2) u1 is child of u2
+        // 3) both are independent trees
+        // for case1 three xors will be totalXor^u1Xor, u1Xor^u2Xor, u2Xor
+        // for case2 three xors will be totalXor^u2Xor, u2Xor^u1Xor, u1Xor
+        // for case3 three xors will be totalXor^u1Xor^u2Xor, u1Xor, u2Xor
+        // return maxXor-minXor for each case.
         int ans = Integer.MAX_VALUE;
         for(int i=0;i<edges.length;i++){
             int u1 = edges[i][0];
