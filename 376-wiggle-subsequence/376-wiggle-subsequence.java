@@ -1,7 +1,7 @@
 class Solution {
     public int wiggleMaxLength(int[] nums) {
-        //return wiggleMaxLengthN(nums);
-        return wiggleMaxLengthN2(nums);
+        return wiggleMaxLengthN(nums);
+        //return wiggleMaxLengthN2(nums);
     }
     
     private int wiggleMaxLengthN(int[] nums) {
