@@ -29,17 +29,14 @@ class Solution {
             }
         }
         for(int i=1;i<=len1;i++){
-            if(s1.charAt(i-1)==s3.charAt(i-1)){
-                currDp[0] = prevDp[0];
-            }
-            for(int j=1;j<=len2;j++){
+            for(int j=0;j<=len2;j++){
                 if(s1.charAt(i-1)==s3.charAt(i+j-1)){
                     currDp[j] = prevDp[j];
                     if(currDp[j]){
                         continue;
                     }
                 }
-                if(s2.charAt(j-1)==s3.charAt(i+j-1)){
+                if(j!=0 && s2.charAt(j-1)==s3.charAt(i+j-1)){
                     currDp[j] = currDp[j-1];
                 }
             }
