@@ -13,10 +13,45 @@ class Solution {
         }
         
         //return isInterleaveMemoization(0, 0, new Boolean[len1+1][len2+1]);
-        return isInterleaveTabulation();
+        //return isInterleave2DTabulation();
+        return isInterleave1DTabulation();
     }
     
-    private boolean isInterleaveTabulation() {
+    private boolean isInterleave1DTabulation() {
+        boolean prevDp[] = new boolean[len2+1];
+        boolean currDp[] = new boolean[len2+1];
+        prevDp[0] = true;
+        for(int j=1;j<=len2;j++){
+            if(s2.charAt(j-1)==s3.charAt(j-1)){
+                prevDp[j] = true;
+            }else{
+                break;
+            }
+        }
+        for(int i=1;i<=len1;i++){
+            if(s1.charAt(i-1)==s3.charAt(i-1)){
+                currDp[0] = prevDp[0];
+            }
+            for(int j=1;j<=len2;j++){
+                if(s1.charAt(i-1)==s3.charAt(i+j-1)){
+                    currDp[j] = prevDp[j];
+                    if(currDp[j]){
+                        continue;
+                    }
+                }
+                if(s2.charAt(j-1)==s3.charAt(i+j-1)){
+                    currDp[j] = currDp[j-1];
+                }
+            }
+            for(int j=0;j<=len2;j++){
+                prevDp[j] = currDp[j];
+                currDp[j] = false;
+            }
+        }
+        return prevDp[len2];
+    }
+    
+    private boolean isInterleave2DTabulation() {
         boolean dp[][] = new boolean[len1+1][len2+1];
         dp[0][0] = true;
         for(int i=1;i<=len1;i++){
