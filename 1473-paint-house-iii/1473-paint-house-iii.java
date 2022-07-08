@@ -10,8 +10,8 @@ class Solution {
         this.target = target;
         this.houses = houses;
         this.cost = cost;
-        //return memoizationDP();
-        return tabulationDP();
+        return memoizationDP();
+        //return tabulationDP();
     }
     
     private int tabulationDP(){
@@ -61,8 +61,8 @@ class Solution {
         return ans==INT_MAX?-1:ans;
     }
     
-    private int minCostMemo(int idx, int prev, int num) {
-        if(idx==m) {
+    private int minCostMemo(int idx, int num, int prev) {
+        if(idx==m){
             if(num==target){
                 return 0;
             }else{
@@ -75,15 +75,14 @@ class Solution {
         if(dp[idx][num][prev]!=null){
             return dp[idx][num][prev];
         }
-            
         if(houses[idx]!=0){
-            int newNum = (prev==houses[idx])?num:num+1;
-            return minCostMemo(idx+1, houses[idx], newNum);
+            int newNum = prev==houses[idx]?num:num+1;
+            return dp[idx][num][prev] = minCostMemo(idx+1, newNum, houses[idx]);
         }else{
             int ans = INT_MAX;
             for(int i=1;i<=n;i++){
-                int newNum = (prev!=i)?num+1:num;
-                ans = Math.min(ans, cost[idx][i-1] + minCostMemo(idx+1, i, newNum));
+                int newNum = prev==i?num:num+1;
+                ans = Math.min(ans, cost[idx][i-1] + minCostMemo(idx+1, newNum, i));
             }
             return dp[idx][num][prev] = ans;
         }
