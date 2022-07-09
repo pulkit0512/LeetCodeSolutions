@@ -12,7 +12,6 @@ class Solution {
         while(k>0 && map.size()>1){
             Map.Entry<Integer, Integer> entry1 = map.pollFirstEntry();
             Map.Entry<Integer, Integer> entry2 = map.firstEntry();
-            //System.out.println(entry1+" "+entry2);
             int val = entry1.getKey() - entry2.getKey();
             if(val*entry1.getValue()<=k){
                 k = k-val*entry1.getValue();
@@ -21,6 +20,9 @@ class Solution {
                 int eqDist = k/entry1.getValue();
                 int left = k-eqDist*entry1.getValue();
                 int newKey = entry1.getKey()-eqDist;
+                if(newKey==0){
+                    break;
+                }
                 map.put(newKey, map.getOrDefault(newKey,0) + (entry1.getValue()-left));
                 map.put(newKey-1, map.getOrDefault(newKey-1,0) + left);
                 k = 0;
