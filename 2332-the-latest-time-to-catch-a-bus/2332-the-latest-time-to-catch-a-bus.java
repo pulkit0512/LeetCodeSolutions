@@ -22,7 +22,6 @@ class Solution {
                 }
             }
         }
-        //Set<Integer> set = new HashSet<>(list);
         //System.out.println(map);
         //System.out.println(list);
         int ans = 1;
