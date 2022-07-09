@@ -24,8 +24,8 @@ class Solution {
                 }
             }
         }
-        System.out.println(map);
-        System.out.println(list);
+        //System.out.println(map);
+        //System.out.println(list);
         int ans = 1;
         for(int i=list.size()-1;i>=0;i--){
             int upper = list.get(i);
