@@ -2,7 +2,6 @@ class Solution {
     public int latestTimeCatchTheBus(int[] buses, int[] passengers, int capacity) {
         Map<Integer, Integer> map = new HashMap<>();
         List<Integer> list = new ArrayList<>();
-        Set<Integer> set = new HashSet<>();
         Arrays.sort(buses);
         Arrays.sort(passengers);
         int idx = 0;
@@ -16,7 +15,6 @@ class Solution {
             }
             map.put(buses[idx], map.getOrDefault(buses[idx], 0) + 1);
             list.add(time);
-            set.add(time);
             if(map.get(buses[idx])==capacity){
                 idx++;
                 if(idx==buses.length){
@@ -24,6 +22,7 @@ class Solution {
                 }
             }
         }
+        Set<Integer> set = new HashSet<>(list);
         //System.out.println(map);
         //System.out.println(list);
         int ans = 1;
