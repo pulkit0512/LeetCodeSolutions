@@ -22,7 +22,7 @@ class Solution {
                 }
             }
         }
-        Set<Integer> set = new HashSet<>(list);
+        //Set<Integer> set = new HashSet<>(list);
         //System.out.println(map);
         //System.out.println(list);
         int ans = 1;
@@ -34,8 +34,15 @@ class Solution {
                 break;
             }
         }
+        idx = list.size()-1;
         for(int i=buses.length-1;i>=0;i--){
-            if((map.containsKey(buses[i]) && map.get(buses[i])==capacity) || set.contains(buses[i])){
+            if(map.containsKey(buses[i]) && map.get(buses[i])==capacity){
+                continue;
+            }
+            while(idx>=0 && list.get(idx)>buses[i]){
+                idx--;
+            }
+            if(idx>=0 && list.get(idx)==buses[i]){
                 continue;
             }
             if(buses[i]>ans){
