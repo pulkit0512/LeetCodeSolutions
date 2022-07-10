@@ -10,4 +10,4 @@
 * If set size greater then k remove (i-k)th element from set.
 ​
 ### Time Complexity: O(N)
-### Space Complexity: O(N)
+### Space Complexity: O(K)
