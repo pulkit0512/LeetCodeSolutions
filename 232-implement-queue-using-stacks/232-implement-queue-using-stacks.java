@@ -1,6 +1,6 @@
 class MyQueue {
 
-    // pop O(1) push Amortized O(1)
+    // push O(1), pop Amortized O(1)
     Stack<Integer> st1, st2;
     int front;
     public MyQueue() {
@@ -37,6 +37,36 @@ class MyQueue {
     public boolean empty() {
         return st1.isEmpty() && st2.isEmpty();
     }
+    
+    
+    //Push: O(N), Pop: O(1)
+    /*Stack<Integer> st1, st2;
+    public MyQueue() {
+        st1 = new Stack<>();
+        st2 = new Stack<>();
+    }
+    
+    public void push(int x) {
+        while(!st1.isEmpty()){
+            st2.push(st1.pop());
+        }
+        st1.push(x);
+        while(!st2.isEmpty()){
+            st1.push(st2.pop());
+        }
+    }
+    
+    public int pop() {
+        return st1.pop();
+    }
+    
+    public int peek() {
+        return st1.peek();
+    }
+    
+    public boolean empty() {
+        return st1.isEmpty();
+    }*/
 }
 
 /**
