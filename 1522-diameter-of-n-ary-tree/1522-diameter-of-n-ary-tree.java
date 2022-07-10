@@ -29,6 +29,7 @@ class Solution {
         return diameter;
     }
     
+    // Calculates height of each child of a node
     private int diameterUtil(Node root) {
         if(root==null){
             return 0;
