@@ -21,9 +21,7 @@ class Solution {
         }
     }
     public int diameterOfBinaryTree(TreeNode root) {
-        if(root==null){
-            return 0;
-        }
+        
         return diameterHelper(root, new height());
     }
     
