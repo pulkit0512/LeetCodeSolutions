@@ -5,34 +5,40 @@ class Solution {
     final String div = "/";
     public int evalRPN(String[] tokens) {
         int n = tokens.length;
-        Stack<String> st = new Stack<>();
-        for(int i=n-1;i>=0;i--){
-            if(st.isEmpty() || isOperation(tokens[i])){
-                st.push(tokens[i]);
-            }else if(isOperation(st.peek())){
-                st.push(tokens[i]);
+        Stack<Integer> st = new Stack<>();
+        for(int i=0;i<n;i++){
+            int tokenType = getTokenType(tokens[i]);
+            if(tokenType==0){
+                st.push(Integer.valueOf(tokens[i]));
             }else{
-                int a = Integer.valueOf(tokens[i]);
-                while(!st.isEmpty() && !isOperation(st.peek())){
-                    int b = Integer.valueOf(st.pop());
-                    String opr = st.pop();
-                    if(opr.equals(plus)){
-                        a += b;
-                    }else if(opr.equals(minus)){
-                        a -= b;
-                    }else if(opr.equals(mul)){
-                        a *= b;
-                    }else{
-                        a /= b;
-                    }
+                int b = st.pop();
+                int a = st.pop();
+                if(tokenType==1){
+                    a += b;
+                }else if(tokenType==2){
+                    a -= b;
+                }else if(tokenType==3){
+                    a *= b;
+                }else{
+                    a /= b;
                 }
-                st.push(String.valueOf(a));
+                st.push(a);
             }
         }
-        return Integer.valueOf(st.pop());
+        return st.pop();
     }
     
-    private boolean isOperation(String s){
-        return s.equals(plus) || s.equals(minus) || s.equals(mul) || s.equals(div);
+    private int getTokenType(String s){
+        if(s.equals(plus)){
+            return 1;
+        }else if(s.equals(minus)){
+            return 2;
+        }else if(s.equals(mul)){
+            return 3;
+        }else if(s.equals(div)){
+            return 4;
+        }else{
+            return 0;
+        }
     }
 }
