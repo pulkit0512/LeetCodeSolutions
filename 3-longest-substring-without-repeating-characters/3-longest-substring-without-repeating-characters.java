@@ -14,11 +14,12 @@ class Solution {
         for(int i=0;i<len;i++){
             char ch = s.charAt(i);
             if(map.containsKey(ch)){
-                st = Math.max(map.get(ch), st);
+                ans = Math.max(ans, i-st);
+                st = Math.max(st, map.get(ch));
             }
-            ans = Math.max(ans, i-st+1);
             map.put(ch, i+1);
         }
+        ans = Math.max(ans, len-st);
         return ans;
     }
     private int lengthOfLongestSubstringUsingSet(String s) {
