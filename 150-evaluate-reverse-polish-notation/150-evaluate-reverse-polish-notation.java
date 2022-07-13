@@ -1,8 +1,8 @@
 class Solution {
-    String plus = "+";
-    String minus = "-";
-    String mul = "*";
-    String div = "/";
+    final String plus = "+";
+    final String minus = "-";
+    final String mul = "*";
+    final String div = "/";
     public int evalRPN(String[] tokens) {
         int n = tokens.length;
         Stack<String> st = new Stack<>();
