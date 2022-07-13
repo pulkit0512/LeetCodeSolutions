@@ -10,12 +10,14 @@ class Solution {
         Map<Character, Integer> map = new HashMap<>();
         int len = s.length();
         int ans = 0;
-        for(int i=0, st = 0; i<len;i++){
-            if(map.containsKey(s.charAt(i))){
-                st = Math.max(map.get(s.charAt(i)), st);
+        int st = 0;
+        for(int i=0;i<len;i++){
+            char ch = s.charAt(i);
+            if(map.containsKey(ch)){
+                st = Math.max(map.get(ch), st);
             }
             ans = Math.max(ans, i-st+1);
-            map.put(s.charAt(i), i+1);
+            map.put(ch, i+1);
         }
         return ans;
     }
