@@ -22,10 +22,10 @@ class Solution {
                 }else{
                     j++;
                 }
-                while(j!=i+1 && j<n && nums[j]==nums[j-1]){
+                while(j!=i+1 && j<k && nums[j]==nums[j-1]){
                     j++;
                 }
-                while(k!=n-1 && k>=0 && nums[k]==nums[k+1]){
+                while(k!=n-1 && k>j && nums[k]==nums[k+1]){
                     k--;
                 }
             }
