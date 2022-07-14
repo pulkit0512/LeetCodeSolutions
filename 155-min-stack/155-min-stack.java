@@ -1,5 +1,4 @@
 class MinStack {
-    
     /*
     val<min
     2*val<2*min
@@ -17,8 +16,8 @@ class MinStack {
     Stack<Long> st;
     long min;
     public MinStack() {
+        min = Integer.MAX_VALUE;
         st = new Stack<>();
-        min = Long.MAX_VALUE;
     }
     
     public void push(int val) {
@@ -46,9 +45,8 @@ class MinStack {
         long val = st.peek();
         if(val>=min){
             return (int)val;
-        }else{
-            return (int)min;
         }
+        return (int)min;
     }
     
     public int getMin() {
