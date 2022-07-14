@@ -45,30 +45,32 @@ class Solution {
     }
     private int[] findOrderBFS(int numCourses, int[][] prerequisites){
         int ans[] = new int[numCourses];
-        int out[] = new int[numCourses];
-        List<List<Integer>> inDegree = new ArrayList<>();
-        for(int i=0;i<numCourses;i++){
-            inDegree.add(new ArrayList<>());
+        List<Integer>[] inDegree = new ArrayList[numCourses];
+        int[] outDegree = new int[numCourses];
+        for(int[] pre:prerequisites){
+            if(inDegree[pre[1]]==null){
+                inDegree[pre[1]] = new ArrayList<>();
+            }
+            inDegree[pre[1]].add(pre[0]);
+            outDegree[pre[0]]++;
         }
-        for(int[] pre : prerequisites){
-            inDegree.get(pre[1]).add(pre[0]);
-            out[pre[0]]++;
-        }
-        System.out.println(inDegree);
         Queue<Integer> que = new LinkedList<>();
         for(int i=0;i<numCourses;i++){
-            if(out[i]==0){
+            if(outDegree[i]==0){
                 que.add(i);
             }
         }
         int idx = 0;
         while(!que.isEmpty()){
-            int temp = que.poll();
-            ans[idx++] = temp;
-            for(int val:inDegree.get(temp)){
-                out[val]--;
-                if(out[val]==0){
-                    que.add(val);
+            int course = que.poll();
+            ans[idx++] = course;
+            if(inDegree[course]==null){
+                continue;
+            }
+            for(int x:inDegree[course]){
+                outDegree[x]--;
+                if(outDegree[x]==0){
+                    que.add(x);
                 }
             }
         }
