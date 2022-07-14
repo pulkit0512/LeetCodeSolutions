@@ -2,10 +2,10 @@ class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         List<Integer>[] inDegree = new ArrayList[numCourses];
         int[] outDegree = new int[numCourses];
-        for(int i=0;i<numCourses;i++){
-            inDegree[i] = new ArrayList<>();
-        }
         for(int[] pre:prerequisites){
+            if(inDegree[pre[1]]==null){
+                inDegree[pre[1]] = new ArrayList<>();
+            }
             inDegree[pre[1]].add(pre[0]);
             outDegree[pre[0]]++;
         }
@@ -17,6 +17,9 @@ class Solution {
         }
         while(!que.isEmpty()){
             int course = que.poll();
+            if(inDegree[course]==null){
+                continue;
+            }
             for(int x:inDegree[course]){
                 outDegree[x]--;
                 if(outDegree[x]==0){
