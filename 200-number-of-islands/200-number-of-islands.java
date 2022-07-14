@@ -15,19 +15,17 @@ class Solution {
     }
     private void bfs(int row, int col, char[][] grid){
         Queue<Integer> que = new LinkedList<>();
-        int nr = grid.length;
-        int nc = grid[0].length;
-        que.add(row*nc + col);
+        que.add(row*grid[0].length + col);
         grid[row][col] = '0';
         while(!que.isEmpty()){
             int val = que.poll();
-            int r = val/nc;
-            int c = val%nc;
+            int r = val/grid[0].length;
+            int c = val%grid[0].length;
             for(int i=0;i<4;i++){
-                int newRow = r + dir[i][0];
-                int newCol = c + dir[i][1];
+                int newRow = r+dir[i][0];
+                int newCol = c+dir[i][1];
                 if(isValid(newRow, newCol, grid)){
-                    que.add(newRow*nc + newCol);
+                    que.add(newRow*grid[0].length + newCol);
                     grid[newRow][newCol] = '0';
                 }
             }
