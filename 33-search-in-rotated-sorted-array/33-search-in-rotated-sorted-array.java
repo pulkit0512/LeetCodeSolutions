@@ -5,12 +5,13 @@ class Solution {
         if(nums[pivot]==target){
             return pivot;
         }
-        int right = Arrays.binarySearch(nums, pivot+1, nums.length, target);
-        if(right>=0){
-            return right;
+        if(target>=nums[0] && target<nums[pivot]){
+            int left = Arrays.binarySearch(nums, 0, pivot, target);
+            return left>=0?left:-1;
+        }else{
+            int right = Arrays.binarySearch(nums, pivot+1, nums.length, target);
+            return right>=0?right:-1;
         }
-        int left = Arrays.binarySearch(nums, 0, pivot, target);
-        return left>=0?left:-1;
     }
     
     private int findPivot(int[] nums) {
