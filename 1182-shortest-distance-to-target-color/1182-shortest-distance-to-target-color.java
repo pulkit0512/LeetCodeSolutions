@@ -2,18 +2,19 @@ class Solution {
     public List<Integer> shortestDistanceColor(int[] colors, int[][] queries) {
         List<Integer> result = new ArrayList<>();
         TreeSet<Integer>[] colorSort= new TreeSet[3];
-        colorSort[0] = new TreeSet<>();
-        colorSort[1] = new TreeSet<>();
-        colorSort[2] = new TreeSet<>();
         for(int i=0;i<colors.length;i++){
+            if(colorSort[colors[i]-1]==null){
+                colorSort[colors[i]-1] = new TreeSet<>();
+            }
             colorSort[colors[i]-1].add(i);
         }
-        //System.out.println(colorSort[0]);
-        //System.out.println(colorSort[1]);
-        //System.out.println(colorSort[2]);
         for(int[] query:queries){
             if(colors[query[0]]==query[1]){
                 result.add(0);
+                continue;
+            }
+            if(colorSort[query[1]-1]==null){
+                result.add(-1);
                 continue;
             }
             
