@@ -7,10 +7,8 @@ class Solution {
         return result;
     }
     private void backtrack(int k, int n, List<Integer> list, int prev) {
-        //System.out.println(k + " " + n + " " + list);
         if(k==0){
             if(n==0){
-                //System.out.println(k + " -- " + n + " -- " + list);
                 result.add(new ArrayList<>(list));
             }
             return;
