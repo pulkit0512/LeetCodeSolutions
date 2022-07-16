@@ -5,7 +5,6 @@ class Solution {
             dp[i] = new ArrayList<>();
         }
         dp[0].add(new ArrayList<>());
-        //Arrays.sort(candidates);
         for(int i=0;i<candidates.length;i++){
             for(int j=candidates[i];j<=target;j++){
                 for(List<Integer> list:dp[j-candidates[i]]){
