@@ -10,13 +10,13 @@ class Solution {
     }
     
     private int findPathsUtil(int m, int n, int maxMove, int row, int col){
-        //System.out.println(row + " " + col);
         if(row>=m || col>=n || row<0 || col<0){
             return 1;
         }
         if(maxMove==0){
             return 0;
         }
+        //System.out.println(row + " " + col + " " + maxMove);
         if(dp[row][col][maxMove]!=null){
             return dp[row][col][maxMove];
         }
@@ -26,7 +26,6 @@ class Solution {
             int newCol = col + dir[i][1];
             paths = (paths + findPathsUtil(m, n, maxMove-1, newRow, newCol))%mod;
         }
-        //System.out.println(row + " " + col + " " + paths);
         return dp[row][col][maxMove] = paths;
     }
 }
