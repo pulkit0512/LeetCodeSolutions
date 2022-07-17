@@ -9,8 +9,8 @@
  */
 class Solution {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        //return LcaUsingRecursion(root, p, q);
-        return LcaIteratively(root, p, q);
+        return LcaUsingRecursion(root, p, q);
+        //return LcaIteratively(root, p, q);
     }
     private TreeNode LcaIteratively(TreeNode root, TreeNode p, TreeNode q){
         int bothDone = 0, leftDone = 1, bothPending = 2;
@@ -53,15 +53,16 @@ class Solution {
         if(root==null){
             return null;
         }
-        if(root.val==p.val || root.val==q.val){
+        if(root==p || root==q){
             return root;
         }
-        TreeNode llca = lowestCommonAncestor(root.left, p, q);
-        TreeNode rlca = lowestCommonAncestor(root.right, p, q);
+        
+        TreeNode llca = LcaUsingRecursion(root.left, p, q);
+        TreeNode rlca = LcaUsingRecursion(root.right, p, q);
         
         if(llca!=null && rlca!=null){
             return root;
         }
-        return llca!=null?llca:rlca;
+        return llca==null?rlca:llca;
     }
 }
