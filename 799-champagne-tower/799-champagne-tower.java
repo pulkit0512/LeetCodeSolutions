@@ -20,8 +20,8 @@ class Solution {
     }
     
     private double champagneTowerNSpace(int poured, int query_row, int query_glass) {
-        double dpPrev[] = new double[query_row+1];
-        double dpCurr[] = new double[query_row+1];
+        double[] dpPrev = new double[query_row+1];
+        double[] dpCurr = new double[query_row+1];
         dpPrev[0] = (double)poured;
         for(int i=0;i<query_row;i++){
             for(int j=0;j<=i;j++){
