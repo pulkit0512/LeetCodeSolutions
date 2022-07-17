@@ -7,17 +7,17 @@ class Solution {
         Arrays.sort(courses, (a,b)->(a[1]-b[1]));
         PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
         int sum = 0;
-        for(int i=0;i<courses.length;i++){
-            if(courses[i][0]>courses[i][1]){
+        for(int[] course:courses){
+            if(course[0]>course[1]){
                 continue;
             }
-            if(sum+courses[i][0]<=courses[i][1]){
-                sum += courses[i][0];
-                pq.add(courses[i][0]);
+            if(sum+course[0]<=course[1]){
+                sum += course[0];
+                pq.add(course[0]);
             }else{
-                if(!pq.isEmpty() && pq.peek()>courses[i][0]){
-                    sum += courses[i][0] - pq.poll();
-                    pq.add(courses[i][0]);
+                if(!pq.isEmpty() && pq.peek()>course[0]){
+                    sum += course[0] - pq.poll();
+                    pq.add(course[0]);
                 }
             }
         }
