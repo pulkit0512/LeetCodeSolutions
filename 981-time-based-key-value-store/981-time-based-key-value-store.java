@@ -23,6 +23,9 @@ class TimeMap {
             int mid = (st+ed)/2;
             if((int)values.get(mid).getKey()<=timestamp){
                 pair = values.get(mid);
+                if((int)values.get(mid).getKey()==timestamp){
+                    break;
+                }
                 st = mid + 1;
             }else{
                 ed = mid - 1;
