@@ -2,12 +2,13 @@ class Solution {
     public int latestTimeCatchTheBus(int[] buses, int[] passengers, int capacity) {
         Map<Integer, Integer> map = new HashMap<>();
         List<Integer> list = new ArrayList<>();
+        Set<Integer> set = new HashSet<>();
         Arrays.sort(buses);
         Arrays.sort(passengers);
         int idx = 0;
         for(int i=0;i<passengers.length;i++){
             int time = passengers[i];
-            while(idx!=buses.length && time>buses[idx]){
+            while(idx<buses.length && time>buses[idx]){
                 idx++;
             }
             if(idx==buses.length){
@@ -15,11 +16,9 @@ class Solution {
             }
             map.put(buses[idx], map.getOrDefault(buses[idx], 0) + 1);
             list.add(time);
+            set.add(time);
             if(map.get(buses[idx])==capacity){
                 idx++;
-                if(idx==buses.length){
-                    break;
-                }
             }
         }
         //System.out.println(map);
@@ -33,15 +32,8 @@ class Solution {
                 break;
             }
         }
-        idx = list.size()-1;
         for(int i=buses.length-1;i>=0;i--){
-            if(map.containsKey(buses[i]) && map.get(buses[i])==capacity){
-                continue;
-            }
-            while(idx>=0 && list.get(idx)>buses[i]){
-                idx--;
-            }
-            if(idx>=0 && list.get(idx)==buses[i]){
+            if((map.containsKey(buses[i]) && map.get(buses[i])==capacity) || set.contains(buses[i])){
                 continue;
             }
             if(buses[i]>ans){
