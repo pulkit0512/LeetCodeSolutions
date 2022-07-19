@@ -13,11 +13,9 @@ class Solution {
             boolean dpCurr[] = new boolean[sum/2 + 1];
             for(int j=0;j<=sum/2;j++){
                 if(j<nums[i]){
-                    if(dpPrev[j]){
-                        dpCurr[j] = true;
-                    }
-                }else if(dpPrev[j-nums[i]] || dpPrev[j]){
-                    dpCurr[j] = true;
+                    dpCurr[j] = dpPrev[j];
+                }else{
+                    dpCurr[j] = dpPrev[j-nums[i]] || dpPrev[j];
                 }
             }
             if(dpCurr[sum/2]){
