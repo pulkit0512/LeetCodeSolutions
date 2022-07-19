@@ -2,16 +2,16 @@ class Solution {
     public int myAtoi(String s) {
         s = s.trim();
         int found = 0, sign = 0;
-        long ans = 0;
+        int ans = 0;
         int len = s.length();
         for(int i=0;i<len;i++){
             char ch = s.charAt(i);
             if(Character.isDigit(ch)){
                 found = 1;
-                ans = ans*10 + (ch-'0');
-                if(ans>Integer.MAX_VALUE){
-                    break;
+                if(ans>Integer.MAX_VALUE/10 || (ans==Integer.MAX_VALUE/10 && (ch-'0')>(Integer.MAX_VALUE%10))){
+                    return (sign==-1)?Integer.MIN_VALUE:Integer.MAX_VALUE;
                 }
+                ans = ans*10 + (ch-'0');
             }else if(found==1){
                 break;
             }else{
@@ -27,9 +27,9 @@ class Solution {
             }
         }
         if(sign!=-1){
-            return (int)Math.min(Integer.MAX_VALUE, ans);
+            return ans;
         }else{
-            return (int)Math.max(Integer.MIN_VALUE, -ans);
+            return -ans;
         }
     }
 }
