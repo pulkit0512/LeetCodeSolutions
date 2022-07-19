@@ -9,12 +9,13 @@ class Solution {
             }
         }
         int count = 0, currSum;
+        Map<Integer, Integer> map = new HashMap();
         // reduce 2D problem to 1D one
         // by fixing two rows r1 and r2 and 
         // computing 1D prefix sum for all matrices using [r1..r2] rows
         for (int r1 = 1; r1 <= row; r1++) {
             for (int r2 = r1; r2 <= row; r2++) {
-                Map<Integer, Integer> map = new HashMap();
+                map.clear();
                 map.put(0, 1);
                 for (int c = 1; c <= col; c++) {
                     // current 1D prefix sum
