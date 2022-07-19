@@ -7,41 +7,43 @@ class Solution {
         return longestPalindrome1Space(s);
     }
     private String longestPalindrome1Space(String s) {
-        int n = s.length();
-        if(n<=1){
-            return s;
-        }
-        int maxLen = 1, start = 0;
-        for(int i=1;i<n;i++){
+        int len = s.length();
+        int st = 0, maxLen = 1;
+        for(int i=1;i<len;i++){
+            int ptr1 = i-1, ptr2 = i;
+            while(ptr1>=0 && ptr2<len){
+                if(s.charAt(ptr1)==s.charAt(ptr2)){
+                    ptr1--;
+                    ptr2++;
+                }else{
+                    break;
+                }
+            }
+            ptr1++;
+            ptr2--;
+            if(s.charAt(ptr1)==s.charAt(ptr2) && maxLen<ptr2-ptr1+1){
+                maxLen = ptr2 - ptr1 + 1;
+                st = ptr1;
+            }
             
-            //find largest even palindromic substring with i-1 & i as centre.
-            int low = i-1, high = i;
-            while(low>=0 && high<n && s.charAt(low)==s.charAt(high)){
-                low--;
-                high++;
+            ptr1 = i-1;
+            ptr2 = i+1;
+            while(ptr1>=0 && ptr2<len){
+                if(s.charAt(ptr1)==s.charAt(ptr2)){
+                    ptr1--;
+                    ptr2++;
+                }else{
+                    break;
+                }
             }
-            low++;
-            high--;
-            if(s.charAt(low)==s.charAt(high) && (high-low+1)>maxLen){
-                start = low;
-                maxLen = high-low+1;
-            }
-            
-            //find largest odd palindromic substring with i as centre
-            low = i-1;
-            high = i+1;
-            while(low>=0 && high<n && s.charAt(low)==s.charAt(high)){
-                low--;
-                high++;
-            }
-            low++;
-            high--;
-            if(s.charAt(low)==s.charAt(high) && (high-low+1)>maxLen){
-                start = low;
-                maxLen = high-low+1;
+            ptr1++;
+            ptr2--;
+            if(s.charAt(ptr1)==s.charAt(ptr2) && maxLen<ptr2-ptr1+1){
+                maxLen = ptr2 - ptr1 + 1;
+                st = ptr1;
             }
         }
-        return s.substring(start, start+maxLen);
+        return s.substring(st, st+maxLen);
     }
     
     private String longestPalindromeN2Space(String s) {
