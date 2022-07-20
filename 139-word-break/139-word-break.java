@@ -1,5 +1,25 @@
 class Solution {
     public boolean wordBreak(String s, List<String> wordDict) {
+        int len = s.length();
+        boolean dp[] = new boolean[len+1];
+        dp[0] = true;
+        for(int i=1;i<=len;i++){
+            for(String word:wordDict){
+                int wLen = word.length();
+                if(i>=wLen && (i==wLen || dp[i-wLen])){
+                    if(s.substring(i-wLen, i).equals(word)){
+                        dp[i] = true;
+                        break;
+                    }
+                }
+            }
+        }
+        return dp[len];
+    }
+    
+    /*
+    //Using set index of prev substring start that are in wordDict
+    public boolean wordBreak(String s, List<String> wordDict) {
         Set<String> wordSet = new HashSet<>(wordDict);
         List<Integer> index = new ArrayList<>();
         int st = 0;
@@ -21,4 +41,5 @@ class Solution {
         }
         return st==len;
     }
+    */
 }
