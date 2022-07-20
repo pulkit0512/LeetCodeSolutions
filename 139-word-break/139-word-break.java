@@ -6,7 +6,7 @@ class Solution {
         for(int i=1;i<=len;i++){
             for(String word:wordDict){
                 int wLen = word.length();
-                if(i>=wLen && (i==wLen || dp[i-wLen])){
+                if(i>=wLen && dp[i-wLen]){
                     if(s.substring(i-wLen, i).equals(word)){
                         dp[i] = true;
                         break;
