@@ -1,38 +1,39 @@
 class Solution {
-    List<String> ans;
+    List<String> result;
     public List<String> wordBreak(String s, List<String> wordDict) {
-        Set<String> wordSet = new HashSet<>(wordDict);
         int len = s.length();
         List<String>[] dp = new ArrayList[len+1];
-        dp[0] = new ArrayList<>();
+        Set<String> wordSet = new HashSet<>(wordDict);
+        for(int i=0;i<=len;i++){
+            dp[i] = new ArrayList<>();
+        }
         for(int i=0;i<len;i++){
-            if(dp[i]!=null){
-                for(int j=i+1;j<=len;j++){
-                    String sub = s.substring(i,j);
-                    if(wordSet.contains(sub)){
-                        if(dp[j]==null){
-                            dp[j] = new ArrayList<>();
-                        }
-                        dp[j].add(sub);
-                    }
+            for(int j=i+1;j<=len;j++){
+                String subStr = s.substring(i, j);
+                if(wordSet.contains(subStr)){
+                    dp[j].add(subStr);
                 }
             }
         }
-        ans = new ArrayList<>();
-        if(dp[len]==null){
-            return ans;
+        result = new ArrayList<>();
+        if(dp[len].isEmpty()){
+            return result;
         }
+        
         wordBreakUtil(dp, len, "");
-        return ans;
+        return result;
     }
     
-    private void wordBreakUtil(List<String>[] dp, int idx, String psf) {
-        if(idx==0){
-            ans.add(psf.trim());
+    private void wordBreakUtil(List<String>[] dp, int len, String sentence) {
+        if(len==0){
+            result.add(sentence.trim());
             return;
         }
-        for(String x:dp[idx]){
-            wordBreakUtil(dp, idx-x.length(), x+" "+psf);
+        if(len<0){
+            return;
+        }
+        for(String word:dp[len]) {
+            wordBreakUtil(dp, len-word.length(), word +" "+sentence);
         }
     }
 }
