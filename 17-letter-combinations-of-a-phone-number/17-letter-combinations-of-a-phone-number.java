@@ -25,10 +25,10 @@ class Solution {
             ans.add(s.toString());
             return;
         }
-        String val = map[digits.charAt(idx)-'0'];
-        int len = val.length();
+        int len = map[digits.charAt(idx)-'0'].length();
         for(int i=0;i<len;i++){
-            helper(ans, digits, idx+1, s.append(val.charAt(i)), n);
+            s.append(map[digits.charAt(idx)-'0'].charAt(i));
+            helper(ans, digits, idx+1, s, n);
             s.deleteCharAt(s.length()-1);
         }
     }
