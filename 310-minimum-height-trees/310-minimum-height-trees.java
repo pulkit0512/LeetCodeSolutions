@@ -1,48 +1,44 @@
 class Solution {
     public List<Integer> findMinHeightTrees(int n, int[][] edges) {
-        int[] level = new int[n];
-        int color = 0;
-        List<Set<Integer>> graph = new ArrayList<>();
+        if(n==1){
+            List<Integer> result = new ArrayList<>();
+            result.add(0);
+            return result;
+        }
+        Set<Integer>[] graph = new HashSet[n];
         for(int i=0;i<n;i++){
-            graph.add(new HashSet<>());
+            graph[i] = new HashSet<>();
         }
         for(int[] edge:edges){
-            graph.get(edge[0]).add(edge[1]);
-            graph.get(edge[1]).add(edge[0]);
+            graph[edge[0]].add(edge[1]);
+            graph[edge[1]].add(edge[0]);
         }
         Queue<Integer> que = new LinkedList<>();
         for(int i=0;i<n;i++){
-            if(graph.get(i).size()==1){
+            if(graph[i].size()==1){
                 que.add(i);
             }
         }
-        //System.out.println(graph);
         que.add(null);
+        List<Integer> result = new ArrayList<>();
         while(!que.isEmpty()){
-            Integer temp = que.poll();
-            if(temp==null){
-                if(que.isEmpty()){
-                    break;
+            Integer node = que.poll();
+            if(node==null){
+                if(!que.isEmpty()){
+                    que.add(null);
+                    result = new ArrayList<>();
                 }
-                color++;
-                que.add(null);
                 continue;
             }
-            level[temp] = color;
-            for(int x:graph.get(temp)){
-                graph.get(x).remove(temp);
-                graph.get(temp).remove(x);
-                if(graph.get(x).size()==1){
+            result.add(node);
+            for(int x:graph[node]){
+                graph[node].remove(x);
+                graph[x].remove(node);
+                if(graph[x].size()==1){
                     que.add(x);
                 }
             }
         }
-        List<Integer> ans = new ArrayList<>();
-        for(int i=0;i<n;i++){
-            if(level[i]==color){
-                ans.add(i);
-            }
-        }
-        return ans;
+        return result;
     }
 }
