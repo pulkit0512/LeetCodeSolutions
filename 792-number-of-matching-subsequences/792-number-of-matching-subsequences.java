@@ -8,9 +8,7 @@ class Solution {
         for(int i=0;i<len;i++){
             charMap[s.charAt(i)-'a'].add(i);
         }
-        /*for(int i=0;i<5;i++){
-            System.out.println(charMap[i]);
-        }*/
+        
         int ans = 0;
         for(String word:words){
             int wLen = word.length();
