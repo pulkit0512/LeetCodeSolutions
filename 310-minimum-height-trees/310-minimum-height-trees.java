@@ -1,10 +1,7 @@
 class Solution {
     public List<Integer> findMinHeightTrees(int n, int[][] edges) {
-        if(n==1){
-            List<Integer> result = new ArrayList<>();
-            result.add(0);
-            return result;
-        }
+        int[] level = new int[n];
+        int lvl = 0;
         Set<Integer>[] graph = new HashSet[n];
         for(int i=0;i<n;i++){
             graph[i] = new HashSet<>();
@@ -26,17 +23,22 @@ class Solution {
             if(node==null){
                 if(!que.isEmpty()){
                     que.add(null);
-                    result = new ArrayList<>();
+                    lvl++;
                 }
                 continue;
             }
-            result.add(node);
+            level[node] = lvl;
             for(int x:graph[node]){
                 graph[node].remove(x);
                 graph[x].remove(node);
                 if(graph[x].size()==1){
                     que.add(x);
                 }
+            }
+        }
+        for(int i=0;i<n;i++){
+            if(level[i]==lvl){
+                result.add(i);
             }
         }
         return result;
