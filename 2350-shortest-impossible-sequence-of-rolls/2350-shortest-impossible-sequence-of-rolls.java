@@ -6,7 +6,7 @@ class Solution {
             set.add(roll);
             if(set.size()==k){
                 st.push(roll);
-                set.clear();
+                set = new HashSet<>();
             }
         }
         return st.size()+1;
