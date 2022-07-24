@@ -17,8 +17,11 @@ class Solution {
         return dfs(graph, vis, source, destination);
     }
     
+    // 0 -> white, 1 -> black, 2 -> gray
     private boolean dfs(Map<Integer, List<Integer>> graph, int[] vis, int src, int dest) {
         if(vis[src]!=0){
+            // If 2 then this is backward edge and cycle exist.
+            // If 1 we already processed this node.
             return vis[src]==1;
         }
         
