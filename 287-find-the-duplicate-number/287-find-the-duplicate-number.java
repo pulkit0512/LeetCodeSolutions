@@ -1,7 +1,18 @@
 class Solution {
     public int findDuplicate(int[] nums) {
         //return findDuplicateCyclicSort(nums);
-        return findDuplicateNegativeMarking(nums);
+        //return findDuplicateNegativeMarking(nums);
+        return findDuplicateCyclicSortIndex0(nums);
+    }
+    
+    private int findDuplicateCyclicSortIndex0(int[] nums) {
+        int n = nums.length;
+        while(nums[0]!=nums[nums[0]]){
+            int temp = nums[0];
+            nums[0] = nums[temp];
+            nums[temp] = temp;
+        }
+        return nums[0];
     }
     
     private int findDuplicateNegativeMarking(int[] nums) {
