@@ -1,7 +1,7 @@
 class Solution {
     public boolean searchMatrix(int[][] matrix, int target) {
-        //return searchMatrixMPlusLogN(matrix, target);
-        return searchMatrixMPlusN(matrix, target);
+        return searchMatrixMPlusLogN(matrix, target);
+        //return searchMatrixMPlusN(matrix, target);
     }
     
     private boolean searchMatrixMPlusN(int[][] matrix, int target) {
