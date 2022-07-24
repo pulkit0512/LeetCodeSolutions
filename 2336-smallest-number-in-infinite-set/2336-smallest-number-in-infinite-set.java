@@ -1,21 +1,21 @@
 class SmallestInfiniteSet {
 
-    Set<Integer> set;
+    int[] nums;
     public SmallestInfiniteSet() {
-        set = new HashSet<>();
+        nums = new int[1001];
     }
     
     public int popSmallest() {
         int cnt = 1;
-        while(set.contains(cnt)){
+        while(nums[cnt]!=0){
             cnt++;
         }
-        set.add(cnt);
+        nums[cnt] = 1;
         return cnt;
     }
     
     public void addBack(int num) {
-        set.remove(num);
+        nums[num] = 0;
     }
 }
 
