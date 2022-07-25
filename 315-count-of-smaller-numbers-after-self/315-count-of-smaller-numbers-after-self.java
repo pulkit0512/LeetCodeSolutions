@@ -1,59 +1,51 @@
 class Solution {
-    class pair{
-        int val, idx;
-        pair(int a, int b){
-            val = a;
-            idx = b;
-        }
-    }
-    pair[] temp;
     int[] count;
+    Pair<Integer, Integer>[] temp;
     public List<Integer> countSmaller(int[] nums) {
         int n = nums.length;
-        temp = new pair[n];
+        Pair<Integer, Integer>[] pair = new Pair[n];
+        temp = new Pair[n];
         count = new int[n];
-        pair[] arr = new pair[n];
         for(int i=0;i<n;i++){
-            arr[i] = new pair(nums[i], i);
+            pair[i] = new Pair<>(nums[i], i);
         }
-        sort(arr, 0, n-1);
-        List<Integer> ans = new ArrayList<>();
-        for(int num:count){
-            ans.add(num);
+        sort(pair, 0, n-1);
+        List<Integer> result = new ArrayList<>();
+        for(int cnt:count){
+            result.add(cnt);
         }
-        /*for(int i=0;i<n;i++){
-            System.out.println(arr[i].val);
-        }*/
-        return ans;
+        return result;
     }
-    private void sort(pair arr[], int st, int ed){
+    
+    private void sort(Pair<Integer, Integer>[] pair, int st, int ed) {
         if(st>=ed){
             return;
         }
         int mid = (st+ed)/2;
-        sort(arr, st, mid);
-        sort(arr, mid+1, ed);
-        merge(arr, st, mid, ed);
+        sort(pair, st, mid);
+        sort(pair, mid+1, ed);
+        merge(pair, st, mid, ed);
     }
-    private void merge(pair arr[], int left, int middle, int right){
-        int i = left, j = middle+1, k = left;
-        while(i<=middle && j<=right){
-            if(arr[i].val>arr[j].val){
-                count[arr[i].idx] += (right-j+1);
-                temp[k] = arr[i++];
+    
+    private void merge(Pair<Integer, Integer>[] pair, int left, int mid, int right) {
+        int i = left, j=mid+1;
+        int k = left;
+        while(i<=mid && j<=right){
+            if((int)pair[i].getKey()>(int)pair[j].getKey()){
+                count[pair[i].getValue()] += (right-j+1);
+                temp[k++] = pair[i++];
             }else{
-                temp[k] = arr[j++];
+                temp[k++] = pair[j++];
             }
-            k++;
         }
-        while(i<=middle){
-            temp[k++] = arr[i++];
+        while(i<=mid){
+            temp[k++] = pair[i++];
         }
         while(j<=right){
-            temp[k++] = arr[j++];
+            temp[k++] = pair[j++];
         }
         for(i=left;i<=right;i++){
-            arr[i] = temp[i];
+            pair[i] =temp[i];
         }
     }
 }
