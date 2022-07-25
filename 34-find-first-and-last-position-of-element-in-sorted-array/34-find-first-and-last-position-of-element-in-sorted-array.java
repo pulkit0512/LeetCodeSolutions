@@ -1,47 +1,34 @@
 class Solution {
     public int[] searchRange(int[] nums, int target) {
-        int[] range = new int[2];
-        range[0] = -1;
-        range[1] = -1;
-        if(nums.length==0){
-            return range;
+        int[] ans = new int[2];
+        int idx = Arrays.binarySearch(nums, target);
+        if(idx<0){
+            ans[0] = -1;
+            ans[1] = -1;
+            return ans;
         }
-        int idx = binarySearch(nums, 0, nums.length-1, target);
-        if(idx==-1){
-            return range;
-        }
-        range[0] = idx;
-        range[1] = idx;
-        int x1 = idx, x2 = idx;
-        while(x1!=-1 || x2!=-1){
-            if(x1!=-1){
-                x1 = binarySearch(nums, 0, x1-1, target);
-                if(x1!=-1){
-                    range[0] = x1;
-                }
-            }
-            if(x2!=-1){
-                x2 = binarySearch(nums, x2+1, nums.length-1, target);
-                if(x2!=-1){
-                    range[1] = x2;
-                }
+        ans[0] = idx;
+        ans[1] = idx;
+        
+        while(true) {
+            idx = Arrays.binarySearch(nums, 0, idx, target);
+            if(idx<0){
+                break;
+            }else{
+                ans[0] = idx;
             }
         }
         
-        return range;
-    }
-    
-    private int binarySearch(int nums[], int st, int ed, int target) {
-        while(st<=ed){
-            int mid = (st+ed)/2;
-            if(nums[mid] == target){
-                return mid;
-            }else if(nums[mid]>target){
-                ed = mid-1;
+        idx = ans[1];
+        while(true) {
+            idx = Arrays.binarySearch(nums, idx+1, nums.length, target);
+            if(idx<0){
+                break;
             }else{
-                st = mid+1;
+                ans[1] = idx;
             }
         }
-        return -1;
+        
+        return ans;
     }
 }
