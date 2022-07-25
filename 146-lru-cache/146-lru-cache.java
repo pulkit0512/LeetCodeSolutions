@@ -1,114 +1,76 @@
 class LRUCache {
-    class DLLNode{
+    class DLLNode {
         int key, val;
-        DLLNode next, prev;
-        DLLNode(int key, int val){
-            this.key = key;
-            this.val = val;
-            this.next = null;
-            this.prev = null;
+        DLLNode prev, next;
+        
+        public DLLNode(int a, int b) {
+            key = a;
+            val = b;
+            prev = next = null;
         }
     }
     
-    private void addNode(DLLNode node){
-        node.prev = head;
+    public void addNode(DLLNode node) {
         node.next = head.next;
+        head.next.prev = node;
         head.next = node;
-        node.next.prev = node;
+        node.prev = head;
     }
     
-    private void removeNode(DLLNode node){
-        DLLNode prev = node.prev;
-        DLLNode next = node.next;
-        prev.next = next;
-        next.prev = prev;
+    public void removeNode(DLLNode node) {
+        node.prev.next = node.next;
+        node.next.prev = node.prev;
     }
     
-    private void moveNodeToTop(DLLNode node){
+    public void moveToTop(DLLNode node) {
         removeNode(node);
         addNode(node);
     }
     
-    private int removeLast(){
-        DLLNode prev = tail.prev;
-        removeNode(prev);
-        return prev.key;
+    public DLLNode removeLast() {
+        DLLNode node = tail.prev;
+        removeNode(node);
+        return node;
     }
     
+    DLLNode head, tail;
     Map<Integer, DLLNode> cache;
     int capacity;
-    DLLNode head, tail;
 
     public LRUCache(int capacity) {
-        this.cache = new HashMap<>();
-        this.capacity = capacity;
         head = new DLLNode(-1, -1);
         tail = new DLLNode(-1, -1);
         head.next = tail;
         tail.prev = head;
+        cache = new HashMap<>();
+        this.capacity = capacity;
     }
     
     public int get(int key) {
-        DLLNode node = cache.get(key);
-        if(node==null){
+        if(!cache.containsKey(key)) {
             return -1;
         }
-        moveNodeToTop(node);
+        DLLNode node = cache.get(key);
+        moveToTop(node);
         return node.val;
     }
     
     public void put(int key, int value) {
-        DLLNode node = cache.get(key);
-        if(node == null){
-            DLLNode newNode = new DLLNode(key, value);
-            addNode(newNode);
-            cache.put(key, newNode);
-            if(cache.size()>capacity){
-                int lastKey = removeLast();
-                cache.remove(lastKey);
-            }
-        }else{
-            node.val = value;
-            moveNodeToTop(node);
-        }
-    }
-}
-
-
-/*
-// Using LinkedHasMap
-class LRUCache {
-
-    Map<Integer, Integer> cache;
-    int capacity;
-    
-    public LRUCache(int capacity) {
-        this.capacity = capacity;
-        cache = new LinkedHashMap<>(capacity);
-    }
-    
-    public int get(int key) {
-        if(!cache.containsKey(key)){
-            return -1;
-        }
-        int val = cache.get(key);
-        cache.remove(key);
-        cache.put(key, val);
-        return val;
-    }
-    
-    public void put(int key, int value) {
         if(cache.containsKey(key)){
-            cache.remove(key);
-        } else if(cache.size()==capacity){
-            int firstKey = cache.entrySet().iterator().next().getKey();
-            cache.remove(firstKey);
+            DLLNode node = cache.get(key);
+            node.val = value;
+            moveToTop(node);
+        }else{
+            if(cache.size()==capacity){
+                DLLNode node = removeLast();
+                cache.remove(node.key);
+            }
+            DLLNode node = new DLLNode(key, value);
+            addNode(node);
+            cache.put(key, node);
         }
-        cache.put(key,value);
     }
 }
-
-*/
 
 /**
  * Your LRUCache object will be instantiated and called as such:
