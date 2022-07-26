@@ -9,41 +9,42 @@
  */
 class Solution {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        return LcaUsingRecursion(root, p, q);
-        //return LcaIteratively(root, p, q);
+        //return LcaUsingRecursion(root, p, q);
+        return LcaIteratively(root, p, q);
     }
     private TreeNode LcaIteratively(TreeNode root, TreeNode p, TreeNode q){
-        int both_done = 0, left_done = 1, both_pending = 2;
         Stack<Pair<TreeNode, Integer>> st = new Stack<>();
+        int bothPending = 0, leftDone = 1, bothDone = 2;
+        TreeNode LCA = null;
         boolean oneNodeFound = false;
-        TreeNode LCA = null, childNode = null;
-        st.push(new Pair<>(root, both_pending));
+        st.push(new Pair<>(root, bothPending));
         while(!st.isEmpty()){
-            Pair<TreeNode, Integer> pair = st.peek();
-            TreeNode parent = pair.getKey();
-            int parentState = pair.getValue();
-            if(parentState == both_done){
-                if(LCA==st.pop().getKey() && oneNodeFound){
+            Pair<TreeNode, Integer> peekNode = st.peek();
+            TreeNode parent = peekNode.getKey();
+            int state = peekNode.getValue();
+            if(state==bothDone){
+                if(LCA == st.pop().getKey() && oneNodeFound){
                     LCA = st.peek().getKey();
                 }
             }else{
-                if(parentState == both_pending) {
-                    if(parent == p || parent == q){
-                        if(oneNodeFound){
-                            return LCA;
+                TreeNode child = null;
+                if(state==bothPending){
+                    if(parent==p || parent==q){
+                        if(oneNodeFound) {
+                             return LCA;
                         }else{
                             oneNodeFound = true;
                             LCA = st.peek().getKey();
                         }
                     }
-                    childNode = parent.left;
+                    child = parent.left;
                 }else{
-                    childNode = parent.right;
+                    child = parent.right;
                 }
                 st.pop();
-                st.push(new Pair<>(parent, parentState-1));
-                if(childNode!=null){
-                    st.push(new Pair<>(childNode, both_pending));
+                st.push(new Pair<>(parent, state+1));
+                if(child!=null){
+                    st.push(new Pair<>(child, bothPending));
                 }
             }
         }
