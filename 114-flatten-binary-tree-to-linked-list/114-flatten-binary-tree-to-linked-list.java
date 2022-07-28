@@ -15,7 +15,23 @@
  */
 class Solution {
     public void flatten(TreeNode root) {
-        flattenUtil(root);
+        //flattenUtil(root);
+        flattenUtilConstantSpace(root);
+    }
+    
+    private void flattenUtilConstantSpace(TreeNode root) {
+        while(root!=null){
+            if(root.left!=null){
+                TreeNode left = root.left;
+                while(left.right!=null){
+                    left = left.right;
+                }
+                left.right = root.right;
+                root.right = root.left;
+                root.left = null;
+            }
+            root = root.right;
+        }
     }
     
     private TreeNode flattenUtil(TreeNode root) {
