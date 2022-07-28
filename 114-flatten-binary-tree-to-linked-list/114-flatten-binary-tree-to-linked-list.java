@@ -23,19 +23,24 @@ class Solution {
             return null;
         }
         
+        // leaf node return as it is.
         if(root.left==null && root.right==null){
             return root;
         }
         
+        // Get tail from both subtrees
         TreeNode leftTail = flattenUtil(root.left);
         TreeNode rightTail = flattenUtil(root.right);
         
+        //Left tail not null, leftTail right will become root.right.
+        //root.left will become root.right and set root.left to null
         if(leftTail!=null){
             leftTail.right = root.right;
             root.right = root.left;
             root.left = null;
         }
         
+        //Return the rightmost node as tail.
         return rightTail==null ? leftTail : rightTail;
     }
 }
