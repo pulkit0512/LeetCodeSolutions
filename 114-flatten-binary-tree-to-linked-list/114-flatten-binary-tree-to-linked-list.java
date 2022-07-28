@@ -21,6 +21,10 @@ class Solution {
     
     private void flattenUtilConstantSpace(TreeNode root) {
         while(root!=null){
+            //If root has left child, find the rightmost node of left child
+            //rightmost node of left child's right will become root's right
+            //root left child will become root right child
+            //root left will become null.
             if(root.left!=null){
                 TreeNode left = root.left;
                 while(left.right!=null){
