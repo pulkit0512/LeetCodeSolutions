@@ -9,19 +9,20 @@ class Vector2D {
     }
     
     public int next() {
-        while(i<vec.length && j==vec[i].length){
-            i++;
-            j=0;
-        }
+        nextStep();
         return vec[i][j++];
     }
     
     public boolean hasNext() {
+        nextStep();
+        return i<vec.length;
+    }
+    
+    private void nextStep() {
         while(i<vec.length && j==vec[i].length){
             i++;
             j=0;
         }
-        return i<vec.length;
     }
 }
 
