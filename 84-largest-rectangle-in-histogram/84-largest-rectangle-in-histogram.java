@@ -31,9 +31,7 @@ class Solution {
         while(!st.isEmpty()){
             nsLeft[st.pop()] = -1;
         }
-        /*for(int i=0;i<n;i++){
-            System.out.println(nsLeft[i] + " " + nsRight[i]);
-        }*/
+        
         int ans = 0;
         for(int i=0;i<n;i++){
             ans = Math.max(ans, (nsRight[i] - nsLeft[i] - 1)*heights[i]);
