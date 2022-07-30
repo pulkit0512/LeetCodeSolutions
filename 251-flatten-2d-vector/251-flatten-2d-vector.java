@@ -9,7 +9,7 @@ class Vector2D {
     }
     
     public int next() {
-        while(i<vec.length-1 && j==vec[i].length){
+        while(i<vec.length && j==vec[i].length){
             i++;
             j=0;
         }
@@ -21,7 +21,7 @@ class Vector2D {
             i++;
             j=0;
         }
-        return (i<vec.length)?true:false;
+        return i<vec.length;
     }
 }
 
