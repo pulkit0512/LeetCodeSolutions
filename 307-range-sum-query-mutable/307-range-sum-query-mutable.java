@@ -4,7 +4,7 @@ class NumArray {
     int n;
     public NumArray(int[] nums) {
         int n = nums.length;
-        this.tree = new int[4*n + 1];
+        this.tree = new int[4*n];
         this.n = n;
         buildTree(tree, nums, 0, n-1, 0);
     }
