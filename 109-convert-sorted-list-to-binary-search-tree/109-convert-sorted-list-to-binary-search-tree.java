@@ -25,7 +25,44 @@
  */
 class Solution {
     public TreeNode sortedListToBST(ListNode head) {
-        return sortedListToBstByFindingMiddle(head);
+        //return sortedListToBstByFindingMiddle(head);
+        return sortedListToBstUsingInorderProperty(head);
+    }
+    
+    ListNode head;
+    private TreeNode sortedListToBstUsingInorderProperty(ListNode head) {
+        if(head == null){
+            return null;
+        }
+        this.head = head;
+        int size = getSize(head);
+        
+        return sortedListUtil(0, size-1);
+    }
+    
+    private TreeNode sortedListUtil(int st, int ed) {
+        if(ed<st){
+            return null;
+        }
+        int mid = (st+ed)/2;
+        
+        TreeNode left = sortedListUtil(st, mid-1);
+        TreeNode node = new TreeNode(head.val);
+        node.left = left;
+        head = head.next;
+        node.right = sortedListUtil(mid+1, ed);
+        
+        return node;
+    }
+    
+    private int getSize(ListNode head) {
+        int size = 0;
+        ListNode ptr = head;
+        while(ptr!=null){
+            ptr = ptr.next;
+            size++;
+        }
+        return size;
     }
     
     private TreeNode sortedListToBstByFindingMiddle(ListNode head) {
