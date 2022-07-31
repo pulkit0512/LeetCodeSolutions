@@ -4,6 +4,7 @@ class Solution {
         int[] nsLeft = new int[n];
         int[] nsRight = new int[n];
         Stack<Integer> st = new Stack<>();
+        Stack<Integer> st1 = new Stack<>();
         for(int i=0;i<n;i++){
             if(st.isEmpty() || heights[i]>=heights[st.peek()]){
                 st.push(i);
@@ -13,23 +14,22 @@ class Solution {
                 }
                 st.push(i);
             }
+            
+            if(st1.isEmpty() || heights[n-1-i]>=heights[st1.peek()]){
+                st1.push(n-1-i);
+            }else{
+                while(!st1.isEmpty() && heights[n-1-i]<heights[st1.peek()]){
+                    nsLeft[st1.pop()] = n-1-i;
+                }
+                st1.push(n-1-i);
+            }
         }
         while(!st.isEmpty()){
             nsRight[st.pop()] = n;
         }
         
-        for(int i=n-1;i>=0;i--){
-            if(st.isEmpty() || heights[i]>=heights[st.peek()]){
-                st.push(i);
-            }else{
-                while(!st.isEmpty() && heights[i]<heights[st.peek()]){
-                    nsLeft[st.pop()] = i;
-                }
-                st.push(i);
-            }
-        }
-        while(!st.isEmpty()){
-            nsLeft[st.pop()] = -1;
+        while(!st1.isEmpty()){
+            nsLeft[st1.pop()] = -1;
         }
         
         int ans = 0;
