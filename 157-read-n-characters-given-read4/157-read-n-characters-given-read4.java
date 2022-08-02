@@ -13,7 +13,7 @@ public class Solution extends Reader4 {
         int ans = 0;
         char[] buf4 = new char[4];
         int idx = 0;
-        while(true) {
+        while(ans<n) {
             int cnt = read4(buf4);
             if(cnt==0){
                 break;
@@ -22,12 +22,8 @@ public class Solution extends Reader4 {
                     buf[idx++] = buf4[i];
                 }
                 ans += cnt;
-                if(ans>=n){
-                    ans = n;
-                    break;
-                }
             }
         }
-        return ans;
+        return Math.min(ans, n);
     }
 }
