@@ -9,7 +9,8 @@ class Solution {
     }
     public int kthSmallest(int[][] matrix, int k) {
         PriorityQueue<Data> pq = new PriorityQueue<>((a,b) -> (a.val-b.val));
-        for(int i=0;i<matrix.length;i++){
+        int minRows = Math.min(k, matrix.length);
+        for(int i=0;i<minRows;i++){
             pq.add(new Data(i, 0, matrix[i][0]));
         }
         while(k>0){
