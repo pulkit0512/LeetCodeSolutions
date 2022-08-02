@@ -14,24 +14,24 @@
  * }
  */
 class Solution {
-    List<List<Integer>> ans;
     public List<List<Integer>> findLeaves(TreeNode root) {
-        ans = new ArrayList<>();
-        findLeavesUtil(root, 0);
-        return ans;
+        List<List<Integer>> leaves = new ArrayList<>();
+        findLeavesUtil(root, leaves);
+        return leaves;
     }
     
-    private int findLeavesUtil(TreeNode root, int leafLevel) {
+    private int findLeavesUtil(TreeNode root, List<List<Integer>> leaves) {
         if(root==null){
             return 0;
         }
-        int left = findLeavesUtil(root.left, leafLevel);
-        int right = findLeavesUtil(root.right, leafLevel);
-        int level = Math.max(left, right) + 1;
-        if(ans.size()<level){
-            ans.add(new ArrayList<>());
+        int left = findLeavesUtil(root.left, leaves);
+        int right = findLeavesUtil(root.right, leaves);
+        
+        int cur = Math.max(left, right);
+        if(leaves.size()<=cur){
+            leaves.add(new ArrayList<>());
         }
-        ans.get(level-1).add(root.val);
-        return level;
+        leaves.get(cur).add(root.val);
+        return cur + 1;
     }
 }
