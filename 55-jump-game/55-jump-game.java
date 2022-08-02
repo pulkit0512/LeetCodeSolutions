@@ -7,7 +7,7 @@ class Solution {
         int reach = nums[0];
         for(int i=0;i<=reach;i++){
             reach = Math.max(reach, nums[i]+i);
-            if(i==n-1 || reach>=n-1){
+            if(reach>=n-1){
                 return true;
             }
         }
