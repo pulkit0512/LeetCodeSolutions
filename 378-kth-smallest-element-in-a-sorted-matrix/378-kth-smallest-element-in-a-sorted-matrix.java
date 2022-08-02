@@ -21,12 +21,7 @@ class Solution {
         int max = matrix[n-1][n-1];
         while(min<max){
             // get lower value of mid.
-            int mid = max+min;
-            if(mid<0){
-                mid = (mid-1)/2;
-            }else{
-                mid = mid/2;
-            }
+            int mid = min + (max-min)/2;
             int[] midData = getMidData(matrix, mid);
             if(midData[0] == k){
                 return midData[1];
