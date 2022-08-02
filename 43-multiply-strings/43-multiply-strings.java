@@ -1,5 +1,45 @@
 class Solution {
     public String multiply(String num1, String num2) {
+        //return multiplyUsingMathsImplementation(num1, num2);
+        return multiplyUsingProductFromDigitPairs(num1, num2);
+    }
+    
+    private String multiplyUsingProductFromDigitPairs(String num1, String num2) {
+        if(num1.equals("0") || num2.equals("0")){
+            return "0";
+        }
+        
+        StringBuilder first = new StringBuilder(num1);
+        StringBuilder second = new StringBuilder(num2);
+        first = first.reverse();
+        second = second.reverse();
+        
+        StringBuilder ans = new StringBuilder();
+        for(int i=0;i<first.length() + second.length();i++){
+            ans.append('0');
+        }
+        
+        for(int i=0;i<second.length();i++){
+            int d2 = second.charAt(i)-'0';
+            for(int j=0;j<first.length();j++){
+                int curPos = i+j;
+                int d1 = first.charAt(j)-'0';
+                int carry = ans.charAt(curPos)-'0';
+                int mul = d1*d2 + carry;
+                ans.setCharAt(curPos, (char)(mul%10+'0'));
+                int next = (ans.charAt(curPos+1) - '0') + mul/10;
+                ans.setCharAt(curPos+1, (char)(next+'0'));
+            }
+        }
+        
+        if(ans.charAt(ans.length()-1)=='0'){
+            ans.deleteCharAt(ans.length()-1);
+        }
+        
+        return ans.reverse().toString();
+    }
+    
+    private String multiplyUsingMathsImplementation(String num1, String num2) {
         String ans = "";
         int len1 = num1.length();
         int len2 = num2.length();
