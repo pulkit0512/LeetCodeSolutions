@@ -6,10 +6,22 @@
 ​
 * Return the top of stack as answer.
 ​
-​
 * **Complexity Analysis**
 * Assume, n is the length of the string s.
 ​
 * **Time Complexity: O(maxK⋅n)**, where maxK is the maximum value of k and n is the length of a given string s. We traverse a string of size n and iterate k times to decode each pattern of form k[string]. This gives us worst case time complexity as O(maxK⋅n).
 *
 * **Space Complexity: O(n)**
+​
+## Approach2: Using 2 stacks
+* In this used to two stacks one to keep track of numeric data and other to keep track of string data.
+* Also used to variable val, curStr to keep track of current string and value of digits.
+* If we encounter a digit, val = val x 10 + ch
+* If we encounter open bracket then a new string will be started to append value in count in stack and string so far in string stack.
+* if we encounter a closing bracket, get the count of time curstr will be repeated also fetch decoded string to which current string will be append count number of times.
+* decoded stirng will now become the curStr.
+* Else just append the char in curStr.
+* Return curStr as answer.
+​
+### Time Complexity: maxK x N
+### Space Complexity: O(M+N), M = number of letters and N = number of digits.
