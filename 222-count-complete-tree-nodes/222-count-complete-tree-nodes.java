@@ -16,13 +16,67 @@
 class Solution {
     public int countNodes(TreeNode root) {
         // Using BFS time complexity O(N) on average
-        // return countNodesBFS(root);
+        //return countNodesBFS(root);
         
         // Using DFS time complexity less than O(N) on average checks if a subtree is complete or not
         // If a subtree is complete we don't need to traverse all the nodes
         // so time complexity is less than O(N)
-        return countNodesDFS(root);
+        //return countNodesDFS(root);
+        
+        // Using Binary Search, complexity will be (logN)^2
+        return countNodesBinarySearch(root);
     }
+    
+    private int countNodesBinarySearch(TreeNode root) {
+        if(root==null){
+            return 0;
+        }
+        
+        int d = getDepth(root);
+        if(d==0){
+            return 1;
+        }
+        int nodes = (int)Math.pow(2, d) - 1;
+        
+        int left = 1, right = nodes;
+        while(left<=right){
+            int mid = (left+right)/2;
+            
+            if(exists(mid, d, root)){
+                left = mid+1;
+            }else{
+                right = mid-1;
+            }
+        }
+        
+        return nodes + left;
+    }
+    
+    private int getDepth(TreeNode root) {
+        int depth = 0;
+        while(root.left!=null){
+            depth++;
+            root=root.left;
+        }
+        return depth;
+    }
+    
+    private boolean exists(int idx, int d, TreeNode root) {
+        int left = 0, right = (int)Math.pow(2, d)-1;
+        for(int i=0;i<d;i++){
+            int mid = (left+right)/2;
+            if(idx<=mid){
+                root = root.left;
+                right = mid;
+            }else{
+                root = root.right;
+                left = mid+1;
+            }
+        }
+        
+        return root!=null;
+    }
+    
     private int countNodesDFS(TreeNode root){
         if(root==null){
             return 0;
