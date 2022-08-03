@@ -45,19 +45,19 @@ class Solution {
     }
     
     private double dfs(Map<String, Map<String, Double>> graph, String src, String tar, double prd, Set<String> visited) {
-        if(src.equals(tar)){
-            return prd;
-        }
-        
         visited.add(src);
         double ret = -1;
         
-        Map<String, Double> neigh = graph.get(src);
-        for(Map.Entry<String, Double> entry:neigh.entrySet()){
-            if(!visited.contains(entry.getKey())){
-                ret = dfs(graph, entry.getKey(), tar, prd * entry.getValue(), visited);
-                if(ret != -1){
-                    break;
+        if(graph.get(src).containsKey(tar)){
+            ret = prd * graph.get(src).get(tar);
+        }else{
+            Map<String, Double> neigh = graph.get(src);
+            for(Map.Entry<String, Double> entry:neigh.entrySet()){
+                if(!visited.contains(entry.getKey())){
+                    ret = dfs(graph, entry.getKey(), tar, prd * entry.getValue(), visited);
+                    if(ret != -1){
+                        break;
+                    }
                 }
             }
         }
