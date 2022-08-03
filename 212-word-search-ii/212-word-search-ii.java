@@ -38,8 +38,10 @@ class Solution {
     private void backtrack(int row, int col, TrieNode root) {
         char ch = board[row][col];
         TrieNode curNode = root.children[ch-'a'];
+        
         if(curNode.word!=null){
             ans.add(curNode.word);
+            // Remove the word, to avoid duplicate results.
             curNode.word = null;
         }
         
@@ -54,8 +56,10 @@ class Solution {
             }
         }
         
+        // backtrack
         board[row][col] = ch;
         
+        // if curNode is leaf, remove it reduce search space for future.
         boolean hasChildren = false;
         for(int i=0;i<26;i++){
             if(curNode.children[i]!=null){
