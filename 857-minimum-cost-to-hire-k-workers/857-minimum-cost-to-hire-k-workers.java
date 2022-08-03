@@ -19,30 +19,29 @@ class Solution {
     }
     private double minCostToHireWorkersNLogN(int[] quality, int[] wage, int k) {
         int n = wage.length;
-        worker[] workers = new worker[n];
+        worker[] w = new worker[n];
         for(int i=0;i<n;i++){
-            workers[i] = new worker(wage[i], quality[i]);
+            w[i] = new worker(wage[i], quality[i]);
         }
-        Arrays.sort(workers, (a,b) -> (Double.compare(a.ratio, b.ratio)));
+        Arrays.sort(w, (a,b) -> (Double.compare(a.ratio, b.ratio)));
         PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
-        int sumq = 0;
+        int qualitySum = 0;
         double ans = Double.MAX_VALUE;
-        for(worker w:workers){
-            //System.out.println(w.wage+" "+w.quality+" "+w.ratio);
-            sumq += w.quality;
-            pq.add(w.quality);
+        for(worker x:w){
+            qualitySum += x.quality;
+            pq.add(x.quality);
             if(pq.size()>k){
-                sumq -= pq.poll();
+                qualitySum -= pq.poll();
             }
             if(pq.size()==k){
-                ans = Math.min(ans, sumq * w.ratio);
+                ans = Math.min(ans, qualitySum * x.ratio);
             }
         }
         return ans;
     }
     
     private double minCostToHireWorkersN2LogN(int[] quality, int[] wage, int k) {
-        // O(N*NLog(N))
+        // O(N*NLog(N)) TLE
         double ans = Double.MAX_VALUE;
         for(int i=0;i<wage.length;i++){
             double temp = 0.0;
