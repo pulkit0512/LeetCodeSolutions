@@ -34,14 +34,18 @@ class Solution {
         visitedSet.add(new Pair(row, col));
         robot.clean();
         
+        // Check all 4 directions by moving clockwise on current direction represented via D.
         for(int i=0;i<4;i++){
             int newD = (D+i)%4;
             int newRow = row + dir[newD][0];
             int newCol = col + dir[newD][1];
+            // Cell not visited yet and we can move ahead, make dfs call and clean every thing.
+            // Once done go back to original state.
             if(!visitedSet.contains(new Pair(newRow, newCol)) && robot.move()) {
                 dfs(newRow, newCol, newD);
                 goBack();
             }
+            // always turnRight if any obstacle to mantain clockwise flow.
             robot.turnRight();
         }
     }
