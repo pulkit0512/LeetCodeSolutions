@@ -17,7 +17,7 @@ class Solution {
                     st.push(sb.toString());
                     sb = new StringBuilder();
                 }
-            }else if(ch=='['){
+            }else if(ch==open){
                 st.push(val);
                 st.push(open);
                 val = 0;
@@ -26,7 +26,7 @@ class Solution {
                 if(!sb.isEmpty()){
                     sb = new StringBuilder();
                 }
-                if(!(st.peek() instanceof Character)){
+                if(st.peek() instanceof String){
                     temp = st.pop() + temp;
                 }
                 st.pop();
@@ -35,7 +35,7 @@ class Solution {
                     sb.append(temp);
                 }
                 temp = sb.toString();
-                while(!st.isEmpty() && !(st.peek() instanceof Character)){
+                while(!st.isEmpty() && st.peek() instanceof String){
                     temp = st.pop()+temp;
                 }
                 st.push(temp);
