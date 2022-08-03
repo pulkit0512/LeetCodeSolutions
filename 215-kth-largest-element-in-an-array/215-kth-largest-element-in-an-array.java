@@ -24,14 +24,16 @@ class Solution {
         return quickSelect(nums, 0, nums.length-1, nums.length-k);
     }
     
+    Random rand = new Random();
     private int quickSelect(int[] nums, int st, int ed, int kSmall) {
         if(st==ed){
             return nums[st];
         }
-        Random rand = new Random();
+        
         int pivot = st + rand.nextInt(ed-st);
-        pivot = partition(nums, pivot, st, ed);
-        if(pivot == kSmall){
+        pivot = partition(nums, st, ed, pivot);
+        
+        if(pivot==kSmall){
             return nums[pivot];
         }else if(pivot>kSmall){
             return quickSelect(nums, st, pivot-1, kSmall);
@@ -40,12 +42,12 @@ class Solution {
         }
     }
     
-    private int partition(int[] nums, int pivot, int left, int right) {
+    private int partition(int[] nums, int left, int right, int pivot) {
         int idx = left;
         swap(nums, pivot, right);
-        for(int i=left;i<right;i++){
+        for(int i=left;i<=right;i++){
             if(nums[i]<nums[right]){
-                swap(nums, i, idx);
+                swap(nums, idx, i);
                 idx++;
             }
         }
@@ -53,7 +55,7 @@ class Solution {
         return idx;
     }
     
-    private void swap(int[] nums, int i, int j){
+    private void swap(int[] nums, int i, int j) {
         int temp = nums[i];
         nums[i] = nums[j];
         nums[j] = temp;
