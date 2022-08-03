@@ -5,3 +5,6 @@ What we can do to generate the next permuation is we can use the last n-1 charac
 append a new character. This will create a permutation and to make sure that this permutation already doesn't exist in the answer string. We keep a set of already existing permutations.
 We stop the DFS once visited set size becomes equal to the k^n. At this point we have smallest string that has all k^n permutations in it. Else backtrack remove the permutation inserted in set and also remove the last character from answer string.
 We start with all 0 string of length n.
+​
+### Time Complexity: O(K^N)
+### Space Complexity: O(K^N)
