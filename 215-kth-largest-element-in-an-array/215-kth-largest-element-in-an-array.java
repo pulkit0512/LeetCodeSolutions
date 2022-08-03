@@ -24,11 +24,12 @@ class Solution {
         return quickSelect(nums, 0, nums.length-1, nums.length-k);
     }
     
+    Random rand = new Random();
     private int quickSelect(int[] nums, int st, int ed, int kSmall) {
         if(st==ed){
             return nums[st];
         }
-        Random rand = new Random();
+        
         int pivot = st + rand.nextInt(ed-st);
         pivot = partition(nums, st, ed, pivot);
         
