@@ -22,8 +22,9 @@ class LFUCache {
             return -1;
         }
         Pair cur = cache.get(key);
-        freqMap.get(cur.keyCount).remove(key);
-        if(cur.keyCount==min && freqMap.get(cur.keyCount).isEmpty()){
+        Set<Integer> curSet = freqMap.get(cur.keyCount);
+        curSet.remove(key);
+        if(cur.keyCount==min && curSet.isEmpty()){
             min++;
             freqMap.remove(cur.keyCount);
         }
