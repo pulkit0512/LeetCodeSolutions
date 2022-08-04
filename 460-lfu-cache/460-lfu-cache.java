@@ -21,18 +21,18 @@ class LFUCache {
         if(!cache.containsKey(key)){
             return -1;
         }
-        int count = cache.get(key).keyCount;
-        cache.get(key).keyCount++;
-        freqMap.get(count).remove(key);
-        if(count==min && freqMap.get(count).isEmpty()){
+        Pair cur = cache.get(key);
+        freqMap.get(cur.keyCount).remove(key);
+        if(cur.keyCount==min && freqMap.get(cur.keyCount).isEmpty()){
             min++;
-            freqMap.remove(count);
+            freqMap.remove(cur.keyCount);
         }
-        if(!freqMap.containsKey(count+1)){
-            freqMap.put(count+1, new LinkedHashSet<>());
+        if(!freqMap.containsKey(cur.keyCount+1)){
+            freqMap.put(cur.keyCount+1, new LinkedHashSet<>());
         }
-        freqMap.get(count+1).add(key);
-        return cache.get(key).val;
+        freqMap.get(cur.keyCount+1).add(key);
+        cur.keyCount++;
+        return cur.val;
     }
     
     public void put(int key, int value) {
