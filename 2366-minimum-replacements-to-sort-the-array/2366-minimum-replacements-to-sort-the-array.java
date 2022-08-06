@@ -6,7 +6,7 @@ class Solution {
         for(int i=n-1;i>=0;i--){
             int val = (int)Math.ceil(nums[i]/(1.0*min));
             ans = ans + val - 1;
-            if(min>(nums[i]/val)){
+            if(min>nums[i]/val){
                 min = nums[i]/val;
             }
         }
