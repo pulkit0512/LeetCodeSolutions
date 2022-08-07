@@ -1,8 +1,8 @@
 class Solution {
     public int countVowelPermutation(int n) {
         int[] vowels = new int[5];
+        vowels[0] = vowels[1] = vowels[2] = vowels[3] = vowels[4] = 1;
         int mod = 1000000007;
-        Arrays.fill(vowels, 1);
         for(int i=2;i<=n;i++){
             int[] cur = new int[5];
             cur[0] = vowels[1];
