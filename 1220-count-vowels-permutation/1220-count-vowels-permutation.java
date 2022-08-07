@@ -5,11 +5,11 @@ class Solution {
         int mod = 1000000007;
         for(int i=2;i<=n;i++){
             int[] cur = new int[5];
-            cur[0] = vowels[1];
-            cur[1] = (vowels[0] + vowels[2])%mod;
-            cur[2] = ((vowels[0] + vowels[1])%mod + (vowels[3] + vowels[4])%mod)%mod;
-            cur[3] = (vowels[2] + vowels[4])%mod;
-            cur[4] = vowels[0];
+            cur[0] = vowels[1]; // a
+            cur[1] = (vowels[0] + vowels[2])%mod; // e
+            cur[2] = ((vowels[0] + vowels[1])%mod + (vowels[3] + vowels[4])%mod)%mod; // i
+            cur[3] = (vowels[2] + vowels[4])%mod; // o
+            cur[4] = vowels[0]; // u
             vowels = cur;
         }
         int ans = 0;
