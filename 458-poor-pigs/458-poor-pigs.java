@@ -1,5 +1,6 @@
 class Solution {
     public int poorPigs(int buckets, int minutesToDie, int minutesToTest) {
+        // If there is no time to test, i.e. minutesToTest / minutesToDie = 0, the pig has only one state - alive.
         // For one test pig can have two states dead or alive after test completion
         // For two tests pig can have three states dead after first test or dead after second test or alive.
         // So pig states for n tests is n+1.
