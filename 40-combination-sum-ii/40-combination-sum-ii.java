@@ -13,11 +13,11 @@ class Solution {
         }
         
         for(int i=start;i<candidates.length;i++){
-            cur.add(candidates[i]);
             if(target-candidates[i]>=0){
+                cur.add(candidates[i]);
                 backtrack(candidates, target-candidates[i], result, cur, i+1);
+                cur.remove(cur.size()-1);
             }
-            cur.remove(cur.size()-1);
             while(i<candidates.length-1 && candidates[i+1]==candidates[i]){
                 i++;
             }
