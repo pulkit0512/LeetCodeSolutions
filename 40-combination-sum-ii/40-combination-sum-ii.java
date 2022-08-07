@@ -18,6 +18,8 @@ class Solution {
                 backtrack(candidates, target-candidates[i], result, cur, i+1);
                 cur.remove(cur.size()-1);
             }
+            
+            // To avoid duplicate combination ignore same elements.
             while(i<candidates.length-1 && candidates[i+1]==candidates[i]){
                 i++;
             }
