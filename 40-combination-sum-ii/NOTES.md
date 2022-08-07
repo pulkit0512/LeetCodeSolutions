@@ -4,6 +4,6 @@
 * So in backtracking we add a candidate, reduce target by that number and backtrack for remaining list in right of that candidate.
 * Once done backtrack and remove the last element and also if while right of current candidate is same as current candidate move ahead to ignore duplicate combinations.
 ​
-### Time Complexity: O(N x 2^N), Since each number has two choices.
+### Time Complexity: O(N x 2^N), Since each number has two choices. And N time to copy a list to result.
 ### Space Complexity: O(N), recursion stack.
 ​
