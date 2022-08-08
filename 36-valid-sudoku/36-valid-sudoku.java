@@ -1,11 +1,44 @@
 class Solution {
     public boolean isValidSudoku(char[][] board) {
         //return isValidSudokuN3(board);
-        return isValidSudokuN2(board);
+        //return isValidSudokuN2TimeN2Space(board);
+        return isValidSudokuN2TimeNSpace(board);
+    }
+    
+    private boolean isValidSudokuN2TimeNSpace(char[][] board) {
+        int rows[] = new int[9];
+        int cols[] = new int[9];
+        int squares[] = new int[9];
+        for(int i=0;i<9;i++){
+            for(int j=0;j<9;j++){
+                if(board[i][j]=='.'){
+                    continue;
+                }
+                
+                int val = board[i][j]-'0';
+                int arrPos = 1<<(val-1);
+                if((rows[i]&arrPos)>0){
+                    return false;
+                }
+                rows[i] |= arrPos;
+                
+                if((cols[j]&arrPos)>0){
+                    return false;
+                }
+                cols[j] |= arrPos;
+                
+                int idx = 3*(i/3) + j/3;
+                if((squares[idx]&arrPos)>0){
+                    return false;
+                }
+                squares[idx] |= arrPos;
+            }
+        }
+        return true;
     }
     
     // TC: O(N^2) and SC: O(N^2)
-    private boolean isValidSudokuN2(char[][] board) {
+    private boolean isValidSudokuN2TimeN2Space(char[][] board) {
         int rows[][] = new int[9][9];
         int cols[][] = new int[9][9];
         int squares[][] = new int[9][9];
