@@ -1,24 +1,24 @@
 class Solution {
     public int lengthOfLIS(int[] nums) {
-        return lengthOfLisN2(nums);
-        //return lengthOfLisNLogN(nums);
+        //return lengthOfLisN2(nums);
+        return lengthOfLisNLogN(nums);
     }
     
     private int lengthOfLisNLogN(int[] nums) {
         int n = nums.length;
-        int lis[] = new int[n];
-        lis[0] = nums[0];
+        int dp[] = new int[n];
+        dp[0] = nums[0];
         int len = 1;
         for(int i=1;i<n;i++){
-            if(nums[i]>lis[len-1]){
-                lis[len] = nums[i];
+            if(nums[i]>dp[len-1]){
+                dp[len] = nums[i];
                 len++;
             }else{
-                int idx = Arrays.binarySearch(lis, 0, len-1, nums[i]);
+                int idx = Arrays.binarySearch(dp, 0, len-1, nums[i]);
                 if(idx<0){
                     idx = -(idx+1);
                 }
-                lis[idx] = nums[i];
+                dp[idx] = nums[i];
             }
         }
         return len;
