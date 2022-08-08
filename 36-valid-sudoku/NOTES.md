@@ -12,3 +12,9 @@
 ​
 ### Time Complexity: O(N x N) here N=9 so O(1)
 ### Space Complexity: O(N x N) here N=9 so O(1)
+​
+## Approach3:
+* This is extension of approach2, instead of using 2D arrays since we only have 9 positions to fill so we can 1D arrays with bitmasking to identify whether partitular value already filled in a row, col & square or not.
+​
+### Time Complexity: O(NxN), here N=9 so O(1)
+### Space Complexity: O(N), here N=9 so O(1)
