@@ -15,34 +15,33 @@
  */
 class Solution {
     public List<List<Integer>> verticalOrder(TreeNode root) {
-        List<List<Integer>> ans = new ArrayList<>();
+        List<List<Integer>> result = new ArrayList<>();
         if(root==null){
-            return ans;
+            return result;
         }
-        Map<Integer, List<Integer>> tempAns = new HashMap<>();
-        Queue<Pair<TreeNode, Integer>> que = new LinkedList<>();
-        int min = 0, max = 0;
-        que.add(new Pair(root, 0));
+        Map<Integer, List<Integer>> levelMap = new HashMap<>();
+        Queue<Pair<Integer, TreeNode>> que = new LinkedList<>();
+        int minLevel = 0, maxLevel = 0;
+        que.add(new Pair(0, root));
         while(!que.isEmpty()){
-            Pair<TreeNode, Integer> parent = que.poll();
-            TreeNode parentNode = parent.getKey();
-            int parentLevel = parent.getValue();
-            if(!tempAns.containsKey(parentLevel)){
-                tempAns.put(parentLevel, new ArrayList<>());
+            Pair<Integer, TreeNode> cur = que.poll();
+            minLevel = Math.min(minLevel, cur.getKey());
+            maxLevel = Math.max(maxLevel, cur.getKey());
+            
+            if(!levelMap.containsKey(cur.getKey())){
+                levelMap.put(cur.getKey(), new ArrayList<>());
             }
-            tempAns.get(parentLevel).add(parentNode.val);
-            if(parentNode.left!=null){
-                que.add(new Pair(parentNode.left, parentLevel-1));
-                min = Math.min(min, parentLevel-1);
+            levelMap.get(cur.getKey()).add(cur.getValue().val);
+            if(cur.getValue().left!=null){
+                que.add(new Pair(cur.getKey()-1, cur.getValue().left));
             }
-            if(parentNode.right!=null){
-                que.add(new Pair(parentNode.right, parentLevel+1));
-                max = Math.max(max, parentLevel+1);
+            if(cur.getValue().right!=null){
+                que.add(new Pair(cur.getKey()+1, cur.getValue().right));
             }
         }
-        for(int i=min;i<=max;i++){
-            ans.add(tempAns.get(i));
+        for(int i=minLevel;i<=maxLevel;i++){
+            result.add(levelMap.get(i));
         }
-        return ans;
+        return result;
     }
 }
