@@ -1,5 +1,42 @@
 class Solution {
     public boolean isValidSudoku(char[][] board) {
+        //return isValidSudokuN3(board);
+        return isValidSudokuN2(board);
+    }
+    
+    private boolean isValidSudokuN2(char[][] board) {
+        int rows[][] = new int[9][9];
+        int cols[][] = new int[9][9];
+        int squares[][] = new int[9][9];
+        for(int i=0;i<9;i++){
+            for(int j=0;j<9;j++){
+                if(board[i][j]=='.'){
+                    continue;
+                }
+                
+                int arrPos = board[i][j]-'1';
+                if(rows[i][arrPos]==1){
+                    return false;
+                }
+                rows[i][arrPos] = 1;
+                
+                if(cols[arrPos][j]==1){
+                    return false;
+                }
+                cols[arrPos][j]=1;
+                
+                int idx = 3*(i/3) + j/3;
+                if(squares[idx][arrPos]==1){
+                    return false;
+                }
+                squares[idx][arrPos] = 1;
+            }
+        }
+        return true;
+    }
+    
+    // TC: O(N^3) and SC: O(1)
+    private boolean isValidSudokuN3(char[][] board) {
         for(int i=0;i<9;i++){
             for(int j=0;j<9;j++){
                 if(board[i][j]!='.' && !validate(board, i, j)){
