@@ -2,10 +2,8 @@ class Solution {
     public boolean isValidSudoku(char[][] board) {
         for(int i=0;i<9;i++){
             for(int j=0;j<9;j++){
-                if(board[i][j]!='.'){
-                    if(!validate(board, i, j)){
-                        return false;
-                    }
+                if(board[i][j]!='.' && !validate(board, i, j)){
+                    return false;
                 }
             }
         }
@@ -21,15 +19,19 @@ class Solution {
             if(i!=col && board[row][i]==board[row][col]){
                 return false;
             }
+            
+            /*int rowSmallSquare = 3*(row/3) + i/3;
+            int colSmallSquare = 3*(col/3) + i%3;
+            if(board[rowSmallSquare][colSmallSquare]==board[row][col] 
+               && row!=rowSmallSquare && col!=colSmallSquare){
+                return false;
+            }*/
         }
         int rowVal = 3*(row/3);
         int colVal = 3*(col/3);
         for(int i=rowVal;i<3+rowVal;i++){
             for(int j=colVal;j<3+colVal;j++){
-                if(i==row && j==col){
-                    continue;
-                }
-                if(board[i][j]==board[row][col]){
+                if(i!=row && j!=col && board[i][j]==board[row][col]){
                     return false;
                 }
             }
