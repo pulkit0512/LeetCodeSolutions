@@ -1,16 +1,15 @@
 class Solution {
     public int canCompleteCircuit(int[] gas, int[] cost) {
-        int n = gas.length;
-        int total = 0, cur = 0;
-        int st = 0;
-        for(int i=0;i<n;i++){
-            total += gas[i]-cost[i];
-            cur += gas[i]-cost[i];
-            if(cur<0){
-                st = (i+1)%n;
-                cur = 0;
+        int station = 0;
+        int totalGas = 0, curGas = 0;
+        for(int i=0;i<gas.length;i++){
+            totalGas += gas[i] - cost[i];
+            curGas += gas[i] - cost[i];
+            if(curGas<0){
+                curGas = 0;
+                station = (i+1)%gas.length;
             }
         }
-        return total>=0?st:-1;
+        return totalGas>=0?station:-1;
     }
 }
