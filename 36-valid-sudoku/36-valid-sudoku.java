@@ -4,6 +4,7 @@ class Solution {
         return isValidSudokuN2(board);
     }
     
+    // TC: O(N^2) and SC: O(N^2)
     private boolean isValidSudokuN2(char[][] board) {
         int rows[][] = new int[9][9];
         int cols[][] = new int[9][9];
