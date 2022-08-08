@@ -7,15 +7,15 @@ class Solution {
             for(int i=0;i<len;i++){
                 freqMap[str.charAt(i)-'a']++;
             }
-            StringBuilder sb = new StringBuilder(52);
+            StringBuilder sb = new StringBuilder();
             for(int i=0;i<26;i++){
-                sb.append(freqMap[i]).append('#');
+                sb.append(freqMap[i]).append("#");
             }
-            String key = sb.toString();
-            if(!groups.containsKey(key)){
-                groups.put(key, new ArrayList<>());
+            String s = sb.toString();
+            if(!groups.containsKey(s)){
+                groups.put(s, new ArrayList<>());
             }
-            groups.get(key).add(str);
+            groups.get(s).add(str);
         }
         return new ArrayList<>(groups.values());
     }
