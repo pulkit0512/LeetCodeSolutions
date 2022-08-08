@@ -20,14 +20,15 @@ class Solution {
                 return false;
             }
             
-            /*int rowSmallSquare = 3*(row/3) + i/3;
+            int rowSmallSquare = 3*(row/3) + i/3;
             int colSmallSquare = 3*(col/3) + i%3;
             if(board[rowSmallSquare][colSmallSquare]==board[row][col] 
                && row!=rowSmallSquare && col!=colSmallSquare){
                 return false;
-            }*/
+            }
         }
-        int rowVal = 3*(row/3);
+        
+        /*int rowVal = 3*(row/3);
         int colVal = 3*(col/3);
         for(int i=rowVal;i<3+rowVal;i++){
             for(int j=colVal;j<3+colVal;j++){
@@ -35,7 +36,8 @@ class Solution {
                     return false;
                 }
             }
-        }
+        }*/
+        
         return true;
     }
 }
