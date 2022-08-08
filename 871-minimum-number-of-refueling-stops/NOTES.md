@@ -1,5 +1,1 @@
-## Approach: Using Priority Queue as Max Heap
-In this approach, used a priority queue as max heap to store fuel capacities of previous stations. At each station get the updated fuel by subtracting distance between current station and previos station i.e. (position[i]-position[i-1]). If fuel becomes negative and we have capacities stored in priority queue add capacities from priority queue to fuel indicating we should have refueled in the past. If still fuel remains negative return -1. Else add current station capacity to priority queue and update last location with current location. Once traversal is finish substract the amount of fuel needed to reach target from last station. And if fuel becomes negative fetch the capacity from priority queue untill it becomes positive. If still fuel remains negative return -1 else return minimum stops.
 ​
-### Time Complexity: O(NLogN), Priority queue insertion and removal are logN and at most done for N stations so NLogN
-### Space Complexity: O(N) at most all stations can be added to priority queue.
