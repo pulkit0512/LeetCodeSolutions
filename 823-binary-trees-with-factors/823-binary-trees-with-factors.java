@@ -10,17 +10,19 @@ class Solution {
         Arrays.sort(arr);
         int n = arr.length;
         long[] ans = new long[n];
-        dp = new HashMap<>();
+        Map<Integer, Integer> index = new HashMap<>();
         for(int i=0;i<n;i++){
             ans[i] = 1;
-            dp.put(arr[i], i);
+            index.put(arr[i], i);
         }
+        
         int totalTrees = 0;
+        
         for(int i=0;i<n;i++){
             for(int j=0;j<i;j++){
-                if(arr[i]%arr[j]==0 && dp.containsKey(arr[i]/arr[j])){
+                if(arr[i]%arr[j]==0 && index.containsKey(arr[i]/arr[j])){
                     int next = arr[i]/arr[j];
-                    ans[i] = (ans[i] + (ans[j]*ans[dp.get(next)])%mod)%mod;
+                    ans[i] = (ans[i] + (ans[j]*ans[index.get(next)])%mod)%mod;
                 }
             }
             totalTrees = (totalTrees + (int)ans[i])%mod;
