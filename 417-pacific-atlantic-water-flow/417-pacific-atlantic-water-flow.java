@@ -16,6 +16,7 @@ class Solution {
         }
         bfs(heights, pacificReachable, que);
         
+        
         for(int i=0;i<heights.length;i++){
             que.add(new int[]{i, n-1});
         }
@@ -23,6 +24,7 @@ class Solution {
             que.add(new int[]{m-1, i});
         }
         bfs(heights, atlanticReachable, que);
+        
         
         for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){
