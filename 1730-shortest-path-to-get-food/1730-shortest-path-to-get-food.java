@@ -28,16 +28,17 @@ class Solution {
                 continue;
             }
             //System.out.println(cur.row+" "+cur.col+" "+cur.steps);
-            if(grid[cur.row][cur.col]=='#'){
-                return cur.steps;
-            }
+            
             grid[cur.row][cur.col] = 'X';
             for(int[] d:dir){
                 int newRow = cur.row + d[0];
                 int newCol = cur.col + d[1];
-                if(newRow>=0 && newCol>=0 && newRow<grid.length && newCol<grid[0].length
-                  && (grid[newRow][newCol]=='O' || grid[newRow][newCol]=='#')){
-                    que.add(new CellData(newRow, newCol, cur.steps+1));
+                if(newRow>=0 && newCol>=0 && newRow<grid.length && newCol<grid[0].length){
+                    if(grid[newRow][newCol]=='O'){
+                        que.add(new CellData(newRow, newCol, cur.steps+1));
+                    }else if(grid[newRow][newCol]=='#') {
+                        return cur.steps+1;
+                    }
                 }
             }
         }
