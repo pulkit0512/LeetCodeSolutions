@@ -16,15 +16,15 @@ class Solution {
     
     private TreeNode lowestCommonAncestorBST(TreeNode root, TreeNode p, TreeNode q) {
         while(root!=null){
-            if(root.val>p.val && root.val>q.val){
-                root = root.left;
-            }else if(root.val<p.val && root.val<q.val){
+            if(root.val<p.val && root.val<q.val) {
                 root = root.right;
+            }else if(root.val>p.val && root.val>q.val){
+                root = root.left;
             }else{
-                return root;
+                break;
             }
         }
-        return null;
+        return root;
     }
     
     private TreeNode lowestCommonAncestorBT(TreeNode root, TreeNode p, TreeNode q) {
