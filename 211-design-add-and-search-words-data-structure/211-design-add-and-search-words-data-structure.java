@@ -1,9 +1,10 @@
 class WordDictionary {
     class TrieNode {
         TrieNode[] children;
-        
+        boolean isWord;
         public TrieNode() {
-            children = new TrieNode[27];
+            children = new TrieNode[26];
+            isWord = false;
         }
     }
     
@@ -21,7 +22,7 @@ class WordDictionary {
             }
             node = node.children[word.charAt(i)-'a'];
         }
-        node.children[26] = new TrieNode();
+        node.isWord = true;
     }
     
     public boolean search(String word) {
@@ -32,7 +33,7 @@ class WordDictionary {
     
     private boolean dfs(String word, int idx, int len, TrieNode node) {
         if(idx==len){
-            return node.children[26]!=null;
+            return node.isWord;
         }
         if(word.charAt(idx)=='.'){
             for(int i=0;i<26;i++){
