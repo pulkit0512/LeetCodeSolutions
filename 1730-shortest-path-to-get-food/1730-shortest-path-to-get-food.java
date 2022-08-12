@@ -19,8 +19,6 @@ class Solution {
                 }
             }
         }
-        //System.out.println(srcX + " " + srcY);
-        //System.out.println(destX + " " + destY);
         que.add(new CellData(srcX, srcY, 0));
         while(!que.isEmpty()){
             CellData cur = que.poll();
