@@ -36,9 +36,9 @@ class WordDictionary {
             return node.isWord;
         }
         if(word.charAt(idx)=='.'){
+            TrieNode temp = node;
             for(int i=0;i<26;i++){
                 if(node.children[i]!=null){
-                    TrieNode temp = node;
                     node = node.children[i];
                     if(dfs(word, idx+1, len, node)){
                         return true;
