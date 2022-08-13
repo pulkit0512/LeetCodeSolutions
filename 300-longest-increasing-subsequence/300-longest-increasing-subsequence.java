@@ -11,8 +11,7 @@ class Solution {
         int len = 1;
         for(int i=1;i<n;i++){
             if(nums[i]>dp[len-1]){
-                dp[len] = nums[i];
-                len++;
+                dp[len++] = nums[i];
             }else{
                 int idx = Arrays.binarySearch(dp, 0, len-1, nums[i]);
                 if(idx<0){
