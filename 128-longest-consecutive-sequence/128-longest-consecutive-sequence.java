@@ -7,20 +7,28 @@ class Solution {
         int ans = 0;
         for(int i=0;i<nums.length;i++){
             if(set.contains(nums[i])){
-                int cnt = 1;
-                int val = nums[i]+1;
-                while(set.contains(val)){
-                    cnt++;
-                    set.remove(val);
-                    val++;
+                int cur = 1;
+                int x = nums[i] - 1;
+                while(true){
+                    if(set.contains(x)){
+                        set.remove(x);
+                        cur++;
+                        x--;
+                    }else{
+                        break;
+                    }
                 }
-                val = nums[i]-1;
-                while(set.contains(val)){
-                    cnt++;
-                    set.remove(val);
-                    val--;
+                x = nums[i]+1;
+                while(true){
+                    if(set.contains(x)){
+                        set.remove(x);
+                        cur++;
+                        x++;
+                    }else{
+                        break;
+                    }
                 }
-                ans = Math.max(ans, cnt);
+                ans = Math.max(ans, cur);
             }
         }
         return ans;
