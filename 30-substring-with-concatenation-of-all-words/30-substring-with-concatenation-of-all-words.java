@@ -1,6 +1,7 @@
 class Solution {
+    int wordLen;
     public List<Integer> findSubstring(String s, String[] words) {
-        int wordLen = words[0].length();
+        wordLen = words[0].length();
         int totalLen = words.length * wordLen;
         int len = s.length();
         List<Integer> result = new ArrayList<>();
@@ -18,28 +19,18 @@ class Solution {
             subStrMap.put(i, s.substring(i, i+wordLen));
         }
         
-        //System.out.println(subStrMap);
-        
         for(int i=0;i<wordLen;i++){
             int st = -1;
             int mc = 0;
             Map<String, Integer> freqMap = new HashMap<>();
             for(int j=i;j<=len-wordLen;j+=wordLen){
                 String subStr = subStrMap.get(j);
-                //System.out.println(subStr+" "+j+" "+freqMap);
                 if(wordMap.containsKey(subStr)) {
                     int k = freqMap.getOrDefault(subStr, 0);
                     if(k==wordMap.get(subStr)){
                         while(!subStrMap.get(st).equals(subStr)){
-                            String curSubStr = subStrMap.get(st);
-                            int curFreq = freqMap.get(curSubStr);
-                            if(curFreq==1){
-                                freqMap.remove(curSubStr);
-                            }else{
-                                freqMap.put(curSubStr, curFreq-1);
-                            }
+                            st = removeExtraWordFromFreqMap(subStrMap, freqMap, st);
                             mc--;
-                            st = st + wordLen;
                         }
                         freqMap.put(subStr, k-1);
                         st = st + wordLen;
@@ -58,20 +49,23 @@ class Solution {
                 }
                 
                 if(mc==words.length){
-                    //System.out.println(freqMap +" "+j);
                     result.add(st);
-                    String curSubStr = subStrMap.get(st);
-                    int k = freqMap.get(curSubStr);
-                    if(k==1){
-                        freqMap.remove(curSubStr);
-                    }else{
-                        freqMap.put(curSubStr, k-1);
-                    }
-                    st = st+wordLen;
+                    st = removeExtraWordFromFreqMap(subStrMap, freqMap, st);
                     mc--;
                 }
             }
         }
         return result;
+    }
+    
+    private int removeExtraWordFromFreqMap(Map<Integer, String> subStrMap, Map<String, Integer> freqMap, int st) {
+        String curSubStr = subStrMap.get(st);
+        int k = freqMap.get(curSubStr);
+        if(k==1){
+            freqMap.remove(curSubStr);
+        }else{
+            freqMap.put(curSubStr, k-1);
+        }
+        return st+wordLen;
     }
 }
