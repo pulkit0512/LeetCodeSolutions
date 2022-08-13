@@ -23,6 +23,7 @@ class FreqStack {
         int val = mfStack.pop();
         freqMap.put(val, freqMap.get(val)-1);
         if(mfStack.isEmpty()){
+            freqStack.remove(mf);
             mf--;
         }
         return val;
