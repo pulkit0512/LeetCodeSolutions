@@ -13,6 +13,10 @@ class Solution {
         // Create a DAG using BFS
         bfs(beginWord, endWord, wordSet);
         
+        // All accepted ladders will have end word in them.
+        // Start from endWord to startWord
+        ladder.add(endWord);
+        
         // Backtrack the graph created in above step to get all the ladders
         backtrack(endWord, beginWord);
         
@@ -20,22 +24,20 @@ class Solution {
     }
     
     private void backtrack(String start, String end) {
-        ladder.add(start);
         if(start.equals(end)){
             List<String> curLadder = new ArrayList<>(ladder);
             Collections.reverse(curLadder);
             ladders.add(curLadder);
-            ladder.remove(ladder.size()-1);
             return;
         }
         if(!graph.containsKey(start)){
-            ladder.remove(ladder.size()-1);
             return;
         }
         for(String word:graph.get(start)){
+            ladder.add(word);
             backtrack(word, end);
+            ladder.remove(ladder.size()-1);
         }
-        ladder.remove(ladder.size()-1);
     }
     
     private void bfs(String start, String end, Set<String> wordSet) {
