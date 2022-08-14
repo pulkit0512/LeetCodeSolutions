@@ -29,6 +29,7 @@ class Solution {
             return;
         }
         if(!graph.containsKey(start)){
+            ladder.remove(ladder.size()-1);
             return;
         }
         for(String word:graph.get(start)){
