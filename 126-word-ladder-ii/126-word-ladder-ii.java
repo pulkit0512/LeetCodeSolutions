@@ -7,17 +7,17 @@ class Solution {
         ladders = new ArrayList<>();
         ladder = new ArrayList<>();
         
-        // Create set of words from input wordList
+        // Create copy of wordList into a set for fast operations.
         Set<String> wordSet = new HashSet<>(wordList);
         
-        // Create a DAG using BFS
+        // BFS to create a DAG: Neighbour -> CurWord
         bfs(beginWord, endWord, wordSet);
         
-        // All accepted ladders will have end word in them.
-        // Start from endWord to startWord
+        // Move from endWord to beginWord, since we created a DAG from neighbour -> curWord
+        // Add endWord to the list since all accepted ladders will have endWord in them
         ladder.add(endWord);
         
-        // Backtrack the graph created in above step to get all the ladders
+        // backtrack on the DAG to get all the ladders
         backtrack(endWord, beginWord);
         
         return ladders;
@@ -43,24 +43,22 @@ class Solution {
     private void bfs(String start, String end, Set<String> wordSet) {
         Queue<String> que = new LinkedList<>();
         Set<String> visited = new HashSet<>();
+        
         que.add(start);
+        wordSet.remove(start);
         
-        if(wordSet.contains(start)){
-            wordSet.remove(start);
-        }
-        
-        while(!que.isEmpty()) {
-            List<String> curSet = new ArrayList<>();
+        while(!que.isEmpty()){
+            List<String> curLayer = new ArrayList<>();
             for(int i=que.size()-1;i>=0;i--){
                 String curWord = que.poll();
                 List<String> nbours = getNeighbours(curWord, wordSet);
-                for(String nbour:nbours) {
-                    curSet.add(nbour);
+                for(String nbour:nbours){
+                    curLayer.add(nbour);
                     if(!graph.containsKey(nbour)){
                         graph.put(nbour, new ArrayList<>());
                     }
                     
-                    // add the edge from word to curWord
+                    // Add edge from nbour to curWord
                     graph.get(nbour).add(curWord);
                     
                     if(!visited.contains(nbour)){
@@ -69,9 +67,8 @@ class Solution {
                     }
                 }
             }
-            
-            for(String word:curSet) {
-                wordSet.remove(word);
+            for(String cur:curLayer){
+                wordSet.remove(cur);
             }
         }
     }
@@ -84,7 +81,7 @@ class Solution {
             for(char ch='a';ch<='z';ch++){
                 arr[i] = ch;
                 String newWord = String.valueOf(arr);
-                if(ch==cur || !wordSet.contains(newWord)){
+                if(arr[i]==cur || !wordSet.contains(newWord)){
                     continue;
                 }
                 nbours.add(newWord);
