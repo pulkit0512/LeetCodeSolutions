@@ -26,15 +26,15 @@ class Solution {
                     prevTail = prevHead;
                 }
             }
+            
             if(newHead==null){
                 newHead = prevHead;
                 newTail = prevTail;
-                prevTail.next = cur;
             }else{
                 newTail.next = prevHead;
                 newTail = prevTail;
-                prevTail.next = cur;
             }
+            prevTail.next = cur;
         }
         
         return newHead;
