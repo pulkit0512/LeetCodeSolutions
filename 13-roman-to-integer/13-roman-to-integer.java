@@ -11,14 +11,18 @@ class Solution {
 		int ans = 0;
 		int n = s.length();
 		for (int i = 0; i < n; i++) {
-			ans = ans + map.get(s.charAt(i));
-			if (i != 0 && (s.charAt(i) == 'X' || s.charAt(i) == 'V') && s.charAt(i - 1) == 'I') {
-				ans = ans - 2;
-			} else if (i != 0 && (s.charAt(i) == 'L' || s.charAt(i) == 'C') && s.charAt(i - 1) == 'X') {
-				ans = ans - 20;
-			} else if (i != 0 && (s.charAt(i) == 'D' || s.charAt(i) == 'M') && s.charAt(i - 1) == 'C') {
-				ans = ans - 200;
-			}
+            char ch = s.charAt(i);
+			ans = ans + map.get(ch);
+            if(i==0){
+                continue;
+            }
+            if(s.charAt(i-1)=='I' && (ch=='V' || ch=='X')){
+                ans = ans - 2;
+            }else if(s.charAt(i-1)=='X' && (ch=='L' || ch=='C')){
+                ans = ans - 20;
+            }else if(s.charAt(i-1)=='C' && (ch=='D' || ch=='M')){
+                ans = ans - 200;
+            }
 		}
 		return ans;
     }
