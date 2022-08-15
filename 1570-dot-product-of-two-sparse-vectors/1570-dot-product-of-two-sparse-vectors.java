@@ -14,16 +14,17 @@ class SparseVector {
     public int dotProduct(SparseVector vec) {
         int i = 0, j = 0;
         int ans = 0;
-        while(i<this.list.size() && j<vec.list.size()){
-            int key1 = this.list.get(i).getKey();
-            int value1 = this.list.get(i).getValue();
-            int key2 = vec.list.get(j).getKey();
-            int value2 = vec.list.get(j).getValue();
-            if(key1 == key2){
-                ans += value1*value2;
+        while(i<this.list.size() && j<vec.list.size()) {
+            int idx1 = this.list.get(i).getKey();
+            int val1 = this.list.get(i).getValue();
+            int idx2 = vec.list.get(j).getKey();
+            int val2 = vec.list.get(j).getValue();
+            
+            if(idx1==idx2){
+                ans = ans + val1*val2;
                 i++;
                 j++;
-            }else if(key1<key2){
+            }else if(idx1<idx2){
                 i++;
             }else{
                 j++;
