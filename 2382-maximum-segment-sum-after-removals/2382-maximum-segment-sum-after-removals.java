@@ -1,4 +1,17 @@
 class Solution {
+    /*
+    Union Find
+    In the end, we remove all elements from the array (nums.length == removeQueries.length).
+    So, we can start from no segments, add elements in the reverse (of the removal) order, and create/merge
+    segments.
+    As we add an element, it can either:
+    
+    create a new segment (e.g. __, [7], __)
+    join an existing segment on the left (e.g. 5, 6, [7], __)
+    join an existing segment on the right (e.g. __, [7], 8, 9)
+    merge existing segments on the left and right into one (e.g. 5, 6, [7], 8, 9)
+    */
+    
     int[] rank;
     long[] root;
     public long[] maximumSegmentSum(int[] nums, int[] removeQueries) {
@@ -49,7 +62,7 @@ class Solution {
         }else{
             root[rootX] = rootY;
             root[rootY] = valX + valY;
-            rank[rootY] += rank[rootX];
+            rank[rootY] += 1;
         }
     }
     
