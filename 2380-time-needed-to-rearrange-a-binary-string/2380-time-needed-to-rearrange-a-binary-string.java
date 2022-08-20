@@ -1,11 +1,13 @@
 class Solution {
     public int secondsToRemoveOccurrences(String s) {
-        /*int ans = 0;
+        /*
+        int ans = 0;
         while(s.contains("01")){
             s = s.replace("01", "10");
             ans++;
         }
-        return ans;*/
+        return ans;
+        */
         
         // We need to move all the one's to the right.
         int len = s.length();
