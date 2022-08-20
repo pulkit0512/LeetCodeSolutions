@@ -43,7 +43,9 @@ class Solution {
         if(rank[rootX]>rank[rootY]){
             root[rootY] = rootX;
             root[rootX] = valX + valY;
-            rank[rootX] += rank[rootY];
+        }else if(rank[rootY]>rank[rootX]){
+            root[rootX] = rootY;
+            root[rootY] = valX + valY;
         }else{
             root[rootX] = rootY;
             root[rootY] = valX + valY;
