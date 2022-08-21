@@ -1,12 +1,4 @@
 class Solution {
-    class Data {
-        Set<Integer> match, todo;
-        public Data() {
-            match = new HashSet<>();
-            todo = new HashSet<>();
-        }
-    }
-    
     public int[] movesToStamp(String stamp, String target) {
         int n = target.length();
         int m = stamp.length();
