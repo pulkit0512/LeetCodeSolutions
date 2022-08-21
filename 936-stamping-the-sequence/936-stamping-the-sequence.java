@@ -13,18 +13,18 @@ class Solution {
         boolean[] done = new boolean[n];
         Queue<Integer> que = new LinkedList<>();
         Stack<Integer> opr = new Stack<>();
-        List<Data> window = new ArrayList<>();
+        List<Pair<Set<Integer>, Set<Integer>>> window = new ArrayList<>();
         
         for(int i=0;i<=n-m;i++){
-            window.add(new Data());
+            window.add(new Pair(new HashSet<>(), new HashSet<>()));
             for(int j=0;j<m;j++){
                 if(target.charAt(i+j)==stamp.charAt(j)){
-                    window.get(window.size()-1).match.add(i+j);
+                    window.get(window.size()-1).getKey().add(i+j);
                 }else{
-                    window.get(window.size()-1).todo.add(i+j);
+                    window.get(window.size()-1).getValue().add(i+j);
                 }
             }
-            if(window.get(window.size()-1).todo.isEmpty()) {
+            if(window.get(window.size()-1).getValue().isEmpty()) {
                 opr.add(i);
                 enque(window.get(window.size()-1), done, que);
             }
@@ -33,9 +33,9 @@ class Solution {
         while(!que.isEmpty()) {
             int i = que.poll();
             for(int j=Math.max(0, i-m+1);j<=Math.min(n-m, i);j++){
-                if(window.get(j).todo.contains(i)){
-                    window.get(j).todo.remove(i);
-                    if(window.get(j).todo.isEmpty()) {
+                if(window.get(j).getValue().contains(i)){
+                    window.get(j).getValue().remove(i);
+                    if(window.get(j).getValue().isEmpty()) {
                         opr.add(j);
                         enque(window.get(j), done, que);
                     }
@@ -59,8 +59,8 @@ class Solution {
         return ans;
     }
     
-    private void enque(Data d, boolean[] done, Queue<Integer> que) {
-        for(int matched:d.match) {
+    private void enque(Pair<Set<Integer>, Set<Integer>> d, boolean[] done, Queue<Integer> que) {
+        for(int matched:d.getKey()) {
             if(!done[matched]){
                 done[matched] = true;
                 que.add(matched);
