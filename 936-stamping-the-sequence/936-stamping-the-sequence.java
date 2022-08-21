@@ -1,10 +1,63 @@
 class Solution {
     public int[] movesToStamp(String stamp, String target) {
+        //return movesToStamp1(stamp, target);
+        return movesToStamp2(stamp, target);
+    }
+    
+    private int[] movesToStamp2(String stamp, String target) {
+        char[] t = target.toCharArray();
+        int n = t.length;
+        int m = stamp.length();
+        Stack<Integer> res = new Stack<>();
+        boolean change = true;
+        while(change) {
+            change = false;
+            for(int i=0;i<=n-m;i++){
+                change = change|check(t, stamp, i, res, m);
+            }
+        }
+        
+        for(char ch:t){
+            if(ch!='?'){
+                return new int[0];
+            }
+        }
+        int size = res.size();
+        int ans[] = new int[size];
+        for(int i=0;i<size;i++){
+            ans[i] = res.pop();
+        }
+        return ans;
+    }
+    
+    private boolean check(char[] t, String s, int idx, Stack<Integer> res, int m) {
+        boolean change = false;
+        for(int j=0;j<m;j++){
+            if(t[idx+j]=='?'){
+                continue;
+            }else if(t[idx+j]!=s.charAt(j)){
+                return false;
+            }else{
+                change = true;
+            }
+        }
+        if(change){
+            res.add(idx);
+            for(int j=0;j<m;j++){
+                t[idx+j] = '?';
+            }
+        }
+        return change;
+    }
+    
+    // TC: O(N*(N-M)) SC: O(N*(N-M)), N = target length and M = stamp length
+    private int[] movesToStamp1(String stamp, String target) {
         int n = target.length();
         int m = stamp.length();
         boolean[] done = new boolean[n];
         Queue<Integer> que = new LinkedList<>();
         Stack<Integer> opr = new Stack<>();
+        // Pair contains two hashsets, one for matching chars in the window and other for non matching chars.
         List<Pair<Set<Integer>, Set<Integer>>> window = new ArrayList<>();
         
         for(int i=0;i<=n-m;i++){
