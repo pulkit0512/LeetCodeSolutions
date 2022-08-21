@@ -4,6 +4,7 @@ class Solution {
         return movesToStamp2(stamp, target);
     }
     
+    // TC: O(NumberOfSteps*(N-M)*M) SC: O(N + NumberOfStepsForOutput), N = target length and M = stamp.length
     private int[] movesToStamp2(String stamp, String target) {
         char[] t = target.toCharArray();
         int n = t.length;
