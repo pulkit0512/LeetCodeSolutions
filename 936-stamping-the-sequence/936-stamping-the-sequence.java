@@ -6,17 +6,14 @@ class Solution {
             todo = new HashSet<>();
         }
     }
-    boolean[] done;
-    Queue<Integer> que;
-    Stack<Integer> opr;
-    List<Data> window;
+    
     public int[] movesToStamp(String stamp, String target) {
         int n = target.length();
         int m = stamp.length();
-        done = new boolean[n];
-        que = new LinkedList<>();
-        opr = new Stack<>();
-        window = new ArrayList<>();
+        boolean[] done = new boolean[n];
+        Queue<Integer> que = new LinkedList<>();
+        Stack<Integer> opr = new Stack<>();
+        List<Data> window = new ArrayList<>();
         
         for(int i=0;i<=n-m;i++){
             window.add(new Data());
@@ -29,7 +26,7 @@ class Solution {
             }
             if(window.get(window.size()-1).todo.isEmpty()) {
                 opr.add(i);
-                enque(window.get(window.size()-1));
+                enque(window.get(window.size()-1), done, que);
             }
         }
         
@@ -40,7 +37,7 @@ class Solution {
                     window.get(j).todo.remove(i);
                     if(window.get(j).todo.isEmpty()) {
                         opr.add(j);
-                        enque(window.get(j));
+                        enque(window.get(j), done, que);
                     }
                 }
             }
@@ -62,7 +59,7 @@ class Solution {
         return ans;
     }
     
-    private void enque(Data d) {
+    private void enque(Data d, boolean[] done, Queue<Integer> que) {
         for(int matched:d.match) {
             if(!done[matched]){
                 done[matched] = true;
