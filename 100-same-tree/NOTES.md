@@ -5,4 +5,4 @@
 * Else check for both left subtrees and both right subtrees.
 ​
 ### Time Complexity: O(N)
-### Space Complexity: O(N)
+### Space Complexity: O(N), recursion Stack
