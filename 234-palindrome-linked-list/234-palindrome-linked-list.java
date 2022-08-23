@@ -10,15 +10,10 @@
  */
 class Solution {
     public boolean isPalindrome(ListNode head) {
-        if(head.next==null){
-            return true;
-        }
-        
         ListNode firstHalf = head;
         
-        int len = getLength(head);
-        ListNode secondHalf = getMiddle(head, len);
-        firstHalf = reverse(firstHalf);
+        ListNode middle = getMiddle(head);
+        ListNode secondHalf = reverse(middle.next);
         
         while(firstHalf!=null && secondHalf!=null){
             if(firstHalf.val!=secondHalf.val){
@@ -31,24 +26,15 @@ class Solution {
         return true;
     }
     
-    private int getLength(ListNode head) {
-        ListNode temp = head;
-        int len = 0;
-        while(temp!=null){
-            len++;
-            temp = temp.next;
+    private ListNode getMiddle(ListNode head) {
+        ListNode slowPtr = head, fastPtr = head;
+        
+        while(fastPtr.next!=null && fastPtr.next.next!=null){
+            fastPtr = fastPtr.next.next;
+            slowPtr = slowPtr.next;
         }
-        return len;
-    }
-    
-    private ListNode getMiddle(ListNode head, int len) {
-        ListNode secondHalf = head, prev = null;
-        for(int i=0;i<len/2;i++){
-            prev = secondHalf;
-            secondHalf = secondHalf.next;
-        }
-        prev.next = null;
-        return (len%2==0)?secondHalf:secondHalf.next;
+        
+        return slowPtr;
     }
     
     private ListNode reverse(ListNode firstHalf) {
