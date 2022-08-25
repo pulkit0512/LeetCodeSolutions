@@ -2,6 +2,9 @@ class Solution {
     public boolean canConstruct(String ransomNote, String magazine) {
         int mLen = magazine.length();
         int rLen = ransomNote.length();
+        if(mLen<rLen){
+            return false;
+        }
         int[] chars = new int[26];
         for(int i=0;i<mLen;i++){
             char ch = magazine.charAt(i);
