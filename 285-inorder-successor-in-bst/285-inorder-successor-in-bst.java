@@ -17,7 +17,7 @@ class Solution {
     private TreeNode inorderSuccessorUsingBSTProperties(TreeNode root, TreeNode p) {
         TreeNode ans = null;
         while(root!=null){
-            if(p.val>=root.val){
+            if(root.val<=p.val){
                 root = root.right;
             }else{
                 ans = root;
@@ -47,6 +47,6 @@ class Solution {
         inOrder.add(root);
         
         TreeNode right = helper(root.right, p, inOrder);
-        return right!=null?right:null;
+        return right;
     }
 }
