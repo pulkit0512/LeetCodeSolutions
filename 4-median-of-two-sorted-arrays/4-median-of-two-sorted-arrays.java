@@ -11,20 +11,18 @@ class Solution {
             int mid = (st+ed)/2;
             int leftASize = mid;
             int leftBSize = realMid - mid;
-            int leftA = (leftASize>0 ? nums1[leftASize-1] : Integer.MIN_VALUE);
-            int leftB = (leftBSize>0 ? nums2[leftBSize-1] : Integer.MIN_VALUE);
-            int rightA = (leftASize<n ? nums1[leftASize] : Integer.MAX_VALUE);
-            int rightB = (leftBSize<m ? nums2[leftBSize] : Integer.MAX_VALUE);
-            
+            int leftA = (leftASize>0)?nums1[leftASize-1]:Integer.MIN_VALUE;
+            int leftB = (leftBSize>0)?nums2[leftBSize-1]:Integer.MIN_VALUE;
+            int rightA = (leftASize<n)?nums1[leftASize]:Integer.MAX_VALUE;
+            int rightB = (leftBSize<m)?nums2[leftBSize]:Integer.MAX_VALUE;
             
             if(leftA<=rightB && leftB<=rightA){
-                if((m+n)%2==0){
+                if((n+m)%2==0){
                     return (Math.max(leftA, leftB) + Math.min(rightA, rightB))/2.0;
                 }else{
                     return Math.max(leftA, leftB);
                 }
-            }
-            if(leftA>rightB){
+            }else if(leftA>rightB){
                 ed = mid-1;
             }else{
                 st = mid+1;
