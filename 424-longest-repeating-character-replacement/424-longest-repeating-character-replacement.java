@@ -7,9 +7,12 @@ class Solution {
             int st = 0;
             k = org_k;
             for(int i=0;i<len;i++){
-                if(s.charAt(i)!=ch && k>0){
+                if(s.charAt(i)==ch){
+                    continue;
+                }
+                if(k>0){
                     k--;
-                }else if(s.charAt(i)!=ch && k==0){
+                }else{
                     ans = Math.max(ans, i-st);
                     while(k==0){
                         if(s.charAt(st)!=ch){
@@ -21,7 +24,6 @@ class Solution {
                 }
             }
             ans = Math.max(ans, len-st);
-            //System.out.println(ch+" "+ans);
         }
         return ans;
     }
