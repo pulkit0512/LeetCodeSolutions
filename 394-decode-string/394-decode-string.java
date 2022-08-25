@@ -7,9 +7,9 @@ class Solution {
     private String decodeStringTwoStacks(String s) {
         Stack<Integer> countStack = new Stack<>();
         Stack<StringBuilder> stringStack = new Stack<>();
-        int len = s.length();
         int val = 0;
         StringBuilder curStr = new StringBuilder();
+        int len = s.length();
         for(int i=0;i<len;i++){
             char ch = s.charAt(i);
             if(Character.isDigit(ch)){
@@ -20,12 +20,12 @@ class Solution {
                 val = 0;
                 curStr = new StringBuilder();
             }else if(ch==']'){
+                StringBuilder decoded = stringStack.pop();
                 int count = countStack.pop();
-                StringBuilder decodedString = stringStack.pop();
-                for(int j=count;j>0;j--){
-                    decodedString.append(curStr);
+                for(int j=0;j<count;j++){
+                    decoded.append(curStr);
                 }
-                curStr = decodedString;
+                curStr = decoded;
             }else{
                 curStr.append(ch);
             }
