@@ -9,10 +9,10 @@ class Solution {
             }else {
                 boolean destroyed = false;
                 while(!st.isEmpty() && st.peek()>0){
-                    if(st.peek()<Math.abs(asteroid)){
+                    if(st.peek()<(-asteroid)){
                         st.pop();
                     }else{
-                        if(st.peek()==Math.abs(asteroid)){
+                        if(st.peek()==(-asteroid)){
                             st.pop();
                         }
                         destroyed = true;
