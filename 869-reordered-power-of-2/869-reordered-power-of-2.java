@@ -1,20 +1,28 @@
 class Solution {
     public boolean reorderedPowerOf2(int n) {
-        Map<Integer, Integer> orgMap = new HashMap<>(10);
+        int[] orgMap = new int[10];
         while(n>0){
-            orgMap.put(n%10, orgMap.getOrDefault(n%10, 0) + 1);
+            orgMap[n%10]++;
             n = n/10;
         }
         
         for(int i=0;i<30;i++){
             int val = (1<<i);
-            Map<Integer, Integer> map = new HashMap<>(10);
+            int[] map = new int[10];
             while(val>0){
-                map.put(val%10, map.getOrDefault(val%10, 0) + 1);
+                map[val%10]++;
                 val = val/10;
             }
             
-            if(orgMap.equals(map)){
+            boolean equal = true;
+            for(int j=0;j<10;j++){
+                if(map[j]!=orgMap[j]){
+                    equal = false;
+                    break;
+                }
+            }
+            
+            if(equal){
                 return true;
             }
         }
