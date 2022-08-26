@@ -10,8 +10,8 @@ class Solution {
         }
     }
     public int minKnightMoves(int x, int y) {
-        return minKnightMovesBFS(x, y);
-        //return minKnightMovesDFS(x, y);
+        //return minKnightMovesBFS(x, y);
+        return minKnightMovesDFS(x, y);
     }
     
     private int minKnightMovesDFS(int x, int y){
@@ -20,17 +20,19 @@ class Solution {
     }
     
     private int dfs(int x, int y) {
-        String key = x+","+y;
+        String key = x+" "+y;
         if(map.containsKey(key)){
             return map.get(key);
         }
+        
         if(x+y==0){
             return 0;
         }
         if(x+y==2){
             return 2;
         }
-        int steps = Math.min(dfs(Math.abs(x-2), Math.abs(y-1)), dfs(Math.abs(x-1), Math.abs(y-2))) + 1;
+        
+        int steps = Math.min(dfs(Math.abs(x-1), Math.abs(y-2)), dfs(Math.abs(x-2), Math.abs(y-1))) + 1;
         map.put(key, steps);
         return steps;
     }
