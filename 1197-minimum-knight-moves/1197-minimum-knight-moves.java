@@ -10,8 +10,8 @@ class Solution {
         }
     }
     public int minKnightMoves(int x, int y) {
-        //return minKnightMovesBFS(x, y);
-        return minKnightMovesDFS(x, y);
+        return minKnightMovesBFS(x, y);
+        //return minKnightMovesDFS(x, y);
     }
     
     private int minKnightMovesDFS(int x, int y){
@@ -37,25 +37,27 @@ class Solution {
     
     private int minKnightMovesBFS(int x, int y) {
         Queue<MoveData> que = new LinkedList<>();
-        boolean[][] visited = new boolean[601][601];
-        que.add(new MoveData(0,0,0));
+        boolean visited[][] = new boolean[601][601];
         visited[300][300] = true;
+        que.add(new MoveData(0, 0, 0));
         while(!que.isEmpty()){
             MoveData prev = que.poll();
             if(prev.x==x && prev.y==y){
                 return prev.moves;
             }
+            
             for(int i=0;i<8;i++){
-                int newRow = dir[i][0] + prev.x;
-                int newCol = dir[i][1] + prev.y;
-                if(Math.abs(newRow)<=300 && Math.abs(newCol)<=300) {
-                    if(!visited[newRow+300][newCol+300]) {
-                        visited[newRow+300][newCol+300] = true;
-                        que.add(new MoveData(newRow, newCol, prev.moves+1));
-                    }
+                int newX = prev.x + dir[i][0];
+                int newY = prev.y + dir[i][1];
+                
+                if(newX<-300 || newY<-300 || newX>300 || newY>300 || visited[newX+300][newY+300]){
+                    continue;
                 }
+                
+                que.add(new MoveData(newX, newY, prev.moves+1));
+                visited[newX+300][newY+300] = true;
             }
         }
-        return -1;
+        return 0;
     }
 }
