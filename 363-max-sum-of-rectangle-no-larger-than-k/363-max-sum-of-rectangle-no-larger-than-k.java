@@ -29,11 +29,11 @@ class Solution {
         }
     }
     public int maxSumSubmatrix(int[][] matrix, int k) {
-        // Stores the 1D representation of the matrix.
-        int[] rowSum = new int[matrix[0].length];
+        
         for (int i = 0; i < matrix.length; i++) {
-            // Initialize the 1D representation with 0s.
-            Arrays.fill(rowSum, 0);
+            // Stores the 1D representation of the matrix.
+            int[] rowSum = new int[matrix[0].length];
+            
             // We convert the matrix between rows i..row inclusive to 1D array
             for (int row = i; row < matrix.length; row++) {
                 // Add the current row to the previous row.
