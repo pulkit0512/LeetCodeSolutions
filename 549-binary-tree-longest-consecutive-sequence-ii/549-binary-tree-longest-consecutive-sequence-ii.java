@@ -21,6 +21,7 @@ class Solution {
         return longestPath;
     }
     
+    // Returns an array containing largest increasing and decreasing lengths upto current node.
     private int[] longestConsecutiveUtil(TreeNode root) {
         if(root==null){
             return new int[]{0, 0};
