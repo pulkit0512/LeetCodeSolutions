@@ -1,54 +1,47 @@
 class Solution {
-    int result = Integer.MIN_VALUE;
-    void updateResult(int[] nums, int k) {
-        int sum = 0;
-
-        // Container to store sorted prefix sums.
+    int result;
+    public int maxSumSubmatrix(int[][] matrix, int k) {
+        result = Integer.MIN_VALUE;
+        for(int i=0;i<matrix.length;i++){
+            // Initialize row sum
+            int[] rowSum = new int[matrix[0].length];
+            
+            // Get prefix sum for all rectangles starting with row i.
+            for(int row=i;row<matrix.length;row++){
+                for(int col=0;col<matrix[0].length;col++){
+                    rowSum[col] += matrix[row][col];
+                }
+                
+                updateResult(rowSum, k);
+                
+                if(result == k){
+                    return result;
+                }
+            }
+        }
+        return result;
+    }
+    
+    private void updateResult(int[] rowSum, int k) {
         TreeSet<Integer> sortedSum = new TreeSet<>();
-
-        // Add 0 as the prefix sum for an empty sub-array.
-        sortedSum.add(0);
-        for (int num : nums) {
-            // Running Sum.
+        
+        int sum = 0;
+        sortedSum.add(sum);
+        
+        for(int num:rowSum) {
             sum += num;
-
-            // Get X where Running sum - X <= k such that sum - X is closest to k.
-            Integer x = sortedSum.ceiling(sum - k);
-
-            // If such X is found in the prefix sums.
-            // Get the sum of that sub array and update the global maximum result.
-            if (x != null)
-                result = Math.max(result, sum - x);
+            
+            Integer x = sortedSum.ceiling(sum-k);
+            
+            if(x!=null){
+                result = Math.max(result, sum-x);
+            }
             
             if(result == k){
                 return;
             }
-
-            // Insert the current running sum to the prefix sums container.
+            
             sortedSum.add(sum);
         }
-    }
-    public int maxSumSubmatrix(int[][] matrix, int k) {
-        
-        for (int i = 0; i < matrix.length; i++) {
-            // Stores the 1D representation of the matrix.
-            int[] rowSum = new int[matrix[0].length];
-            
-            // We convert the matrix between rows i..row inclusive to 1D array
-            for (int row = i; row < matrix.length; row++) {
-                // Add the current row to the previous row.
-                // This converts the matrix between i..row to 1D array
-                for (int col = 0; col < matrix[0].length; col++)
-                    rowSum[col] += matrix[row][col];
-
-                // Run the 1D algorithm for `rowSum`
-                updateResult(rowSum, k);
-
-                // If result is k, this is the best possible answer, so return.
-                if (result == k)
-                    return result;
-            }
-        }
-        return result;
     }
 }
