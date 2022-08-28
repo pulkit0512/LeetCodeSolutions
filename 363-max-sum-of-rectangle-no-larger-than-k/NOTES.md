@@ -16,5 +16,5 @@
 * Run the algorithm to find the maximum possible sum of sub-array with sum <= k for this row.
 * We repeat the above 5 steps for all combinations of i and j where i≤j.
 ​
-### Time Complexity: O(M x M x N LogN), M = Number of rows, N = Number of cols
-### Space Complexity: O(N)
+### Time Complexity: O(min(m,n)^2 max(m,n) logmax(m,n)), M = Number of rows, N = Number of cols
+### Space Complexity: O(max(M,N))
