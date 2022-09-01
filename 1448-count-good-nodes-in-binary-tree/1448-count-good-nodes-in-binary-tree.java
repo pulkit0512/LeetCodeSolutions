@@ -16,12 +16,41 @@
 class Solution {
     int nodes;
     public int goodNodes(TreeNode root) {
-        nodes = 0;
-        goodNodesUtil(root, Integer.MIN_VALUE);
+        //nodes = 0;
+        //goodNodesDFSUtil(root, Integer.MIN_VALUE);
+        //return nodes;
+        
+        return goodNodesBFSUtil(root);
+    }
+    
+    private int goodNodesBFSUtil(TreeNode root) {
+        Queue<Pair<TreeNode, Integer>> que = new LinkedList<>();
+        que.add(new Pair(root, Integer.MIN_VALUE));
+        int nodes = 0;
+        
+        while(!que.isEmpty()) {
+            Pair<TreeNode, Integer> cur = que.poll();
+            int max = cur.getValue();
+            TreeNode node = cur.getKey();
+            
+            if(node.val>=max){
+                nodes++;
+                max = node.val;
+            }
+            
+            if(node.left!=null){
+                que.add(new Pair(node.left, max));
+            }
+            
+            if(node.right!=null){
+                que.add(new Pair(node.right, max));
+            }
+        }
+        
         return nodes;
     }
     
-    private void goodNodesUtil(TreeNode root, int max) {
+    private void goodNodesDFSUtil(TreeNode root, int max) {
         if(root==null){
             return;
         }
@@ -30,7 +59,7 @@ class Solution {
         }
         max = Math.max(max, root.val);
         
-        goodNodesUtil(root.left, max);
-        goodNodesUtil(root.right, max);
+        goodNodesDFSUtil(root.left, max);
+        goodNodesDFSUtil(root.right, max);
     }
 }
