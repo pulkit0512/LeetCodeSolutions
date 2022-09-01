@@ -14,6 +14,16 @@
  * }
  */
 class Solution {
+    class Pair {
+        TreeNode node;
+        int max;
+        
+        public Pair(TreeNode node, int max) {
+            this.node = node;
+            this.max = max;
+        }
+    }
+    
     int nodes;
     public int goodNodes(TreeNode root) {
         //nodes = 0;
@@ -24,14 +34,14 @@ class Solution {
     }
     
     private int goodNodesBFSUtil(TreeNode root) {
-        Queue<Pair<TreeNode, Integer>> que = new LinkedList<>();
+        Queue<Pair> que = new LinkedList<>();
         que.add(new Pair(root, Integer.MIN_VALUE));
-        int nodes = 0;
+        nodes = 0;
         
         while(!que.isEmpty()) {
-            Pair<TreeNode, Integer> cur = que.poll();
-            int max = cur.getValue();
-            TreeNode node = cur.getKey();
+            Pair cur = que.poll();
+            int max = cur.max;
+            TreeNode node = cur.node;
             
             if(node.val>=max){
                 nodes++;
