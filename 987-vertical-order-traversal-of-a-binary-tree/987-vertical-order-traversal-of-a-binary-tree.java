@@ -32,24 +32,24 @@ class Solution {
                 }
                 continue;
             }
-            int level = cur.getValue();
+            int verLevel = cur.getValue();
             TreeNode node = cur.getKey();
-            if(!map.containsKey(level)){
-                map.put(level, new LinkedHashMap<>());
+            if(!map.containsKey(verLevel)){
+                map.put(verLevel, new LinkedHashMap<>());
             }
-            if(!map.get(level).containsKey(horLevel)){
-                map.get(level).put(horLevel, new ArrayList<>());
+            if(!map.get(verLevel).containsKey(horLevel)){
+                map.get(verLevel).put(horLevel, new ArrayList<>());
             }
-            map.get(level).get(horLevel).add(node.val);
-            min = Math.min(min, level);
-            max = Math.max(max, level);
+            map.get(verLevel).get(horLevel).add(node.val);
+            min = Math.min(min, verLevel);
+            max = Math.max(max, verLevel);
             
             if(node.left!=null){
-                que.add(new Pair(node.left, level-1));
+                que.add(new Pair(node.left, verLevel-1));
             }
             
             if(node.right!=null){
-                que.add(new Pair(node.right, level+1));
+                que.add(new Pair(node.right, verLevel+1));
             }
         }
         
