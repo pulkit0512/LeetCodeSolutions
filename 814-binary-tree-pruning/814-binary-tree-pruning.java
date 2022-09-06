@@ -15,32 +15,17 @@
  */
 class Solution {
     public TreeNode pruneTree(TreeNode root) {
-        boolean child = pruneTreeUtil(root);
-        if(!child && root.val==0){
-            root = null;
-        }
+ 	 	if(root.left!=null){
+ 	 	    root.left=pruneTree(root.left);
+ 	 	}
         
-        return root;
-    }
-    
-    private boolean pruneTreeUtil(TreeNode root) {
-        if(root == null){
-            return false;
-        }
+ 	 	if(root.right!=null){
+ 	 	    root.right=pruneTree(root.right);
+ 	 	}
         
-        boolean left = pruneTreeUtil(root.left);
-        boolean right = pruneTreeUtil(root.right);
-        
-        if(!left){
-            root.left = null;
-        }
-        if(!right){
-            root.right = null;
-        }
-        
-        if(!left && !right && root.val==0){
-            return false;
-        }
-        return true;
+ 	 	if(root.val==0 && root.left==null && root.right==null){
+ 	 	    return null;
+ 	 	}
+ 	 	return root;
     }
 }
