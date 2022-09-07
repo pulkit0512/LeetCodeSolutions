@@ -32,11 +32,12 @@ class Solution {
             sb.append('(');
             tree2strUtil(root.left, sb);
             sb.append(')');
-        }else if(root.left==null && root.right!=null){
-            sb.append("()");
         }
         
         if(root.right!=null){
+            if(root.left==null){
+                sb.append("()");
+            }
             sb.append('(');
             tree2strUtil(root.right, sb);
             sb.append(')');
