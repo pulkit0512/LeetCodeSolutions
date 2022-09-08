@@ -14,32 +14,54 @@
  * }
  */
 class Solution {
+    
+    //Morris Traversal
+    //For pre order just add root value in list when right of right most is null.
+    //i.e for the first time when we visit particular node.
     public List<Integer> inorderTraversal(TreeNode root) {
-        List<Integer> result = new ArrayList<>();
+        List<Integer> ans = new ArrayList<>();
         while(root!=null){
             if(root.left==null){
-                result.add(root.val);
+                ans.add(root.val);
                 root = root.right;
             }else{
-                TreeNode rootLeftRightmost = getLeftRightmost(root);
-                if(rootLeftRightmost.right==null){
-                    rootLeftRightmost.right = root;
+                TreeNode leftRightMost = getLeftRightMost(root);
+                if(leftRightMost.right==null){
+                    leftRightMost.right = root;
                     root = root.left;
-                }else if(rootLeftRightmost.right==root){
-                    rootLeftRightmost.right = null;
-                    result.add(root.val);
+                }else if(leftRightMost.right==root){
+                    leftRightMost.right = null;
+                    ans.add(root.val);
                     root = root.right;
                 }
             }
         }
-        return result;
+        return ans;
     }
     
-    private TreeNode getLeftRightmost(TreeNode root) {
-        TreeNode node = root.left;
-        while(node.right!=null && node.right!=root){
-            node = node.right;
+    private TreeNode getLeftRightMost(TreeNode node) {
+        TreeNode leftRightMost = node.left;
+        while(leftRightMost.right!=null && leftRightMost.right!=node){
+            leftRightMost = leftRightMost.right;
         }
-        return node;
+        return leftRightMost;
     }
+    
+    // Recursive Solution
+    /*public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> ans = new ArrayList<>();
+        if(root == null){
+            return ans;
+        }
+        helper(root, ans);
+        return ans;
+    }
+    public void helper(TreeNode root, List<Integer> ans) {
+        if(root==null){
+            return;
+        }
+        helper(root.left, ans);
+        ans.add(root.val);
+        helper(root.right, ans);
+    }*/
 }
