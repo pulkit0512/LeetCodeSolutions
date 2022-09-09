@@ -7,20 +7,28 @@ class Solution {
     private int UtilUsingGreedy(int[][] properties) {
         int n = properties.length;
         int maxAttack = 0;
+        
+        // Find the max attack
         for(int i=0;i<n;i++){
             maxAttack = Math.max(maxAttack, properties[i][0]);
         }
         
+        // Find maxDefence for each from the given input
         int maxDefence[] = new int[maxAttack + 2];
         for(int i=0;i<n;i++){
             maxDefence[properties[i][0]] = Math.max(maxDefence[properties[i][0]], properties[i][1]);
         }
         
+        // Spread the maxDefence over the complete array
+        // maxDefence seen so far will be the value of maxDefence[i]
         for(int i=maxAttack;i>=0;i--){
             maxDefence[i] = Math.max(maxDefence[i], maxDefence[i+1]);
         }
         
         int weak = 0;
+        // defence of a property is less then maxDefence of property attack + 1
+        // then current property is weak.
+        // attack + 1 because current property attack should be less as well.
         for(int i=0;i<n;i++){
             if(properties[i][1]<maxDefence[properties[i][0] + 1]){
                 weak++;
