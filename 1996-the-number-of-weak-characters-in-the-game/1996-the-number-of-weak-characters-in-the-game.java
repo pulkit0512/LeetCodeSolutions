@@ -24,15 +24,18 @@ class Solution {
         
         return n-st.size();*/
         
-        int maxDefense = 0;
+        int maxDefence = 0;
         int weak = 0;
-        
+        // Sort on atack in ascending order and in case of tie sort on defence in descending order.
+        // Sorting defence in descending order will help in case of tie from right to left we will
+        // get lower defence first for same attacks.
+        // so for lower attacks we will get max defence for higher attacks and will get all weak properties.
         for(int i=n-1;i>=0;i--){
-            if(properties[i][1]<maxDefense){
+            if(properties[i][1]<maxDefence){
                 weak++;
             }
             
-            maxDefense = Math.max(maxDefense, properties[i][1]);
+            maxDefence = Math.max(maxDefence, properties[i][1]);
         }
         
         return weak;
