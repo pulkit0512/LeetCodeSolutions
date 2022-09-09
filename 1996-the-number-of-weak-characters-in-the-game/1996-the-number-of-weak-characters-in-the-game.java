@@ -10,7 +10,8 @@ class Solution {
         
         int n = properties.length;
         
-        Stack<int[]> st = new Stack<>();
+        // Using Stack
+        /*Stack<int[]> st = new Stack<>();
         for(int i=0;i<n;i++){
             if(!st.isEmpty() && st.peek()[0]<properties[i][0] && st.peek()[1]<properties[i][1]){
                 while(!st.isEmpty() && st.peek()[0]<properties[i][0] && st.peek()[1]<properties[i][1]){
@@ -21,6 +22,19 @@ class Solution {
             st.push(properties[i]);
         }
         
-        return n-st.size();
+        return n-st.size();*/
+        
+        int maxDefense = 0;
+        int weak = 0;
+        
+        for(int i=n-1;i>=0;i--){
+            if(properties[i][1]<maxDefense){
+                weak++;
+            }
+            
+            maxDefense = Math.max(maxDefense, properties[i][1]);
+        }
+        
+        return weak;
     }
 }
