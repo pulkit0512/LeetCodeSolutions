@@ -16,10 +16,9 @@ class Solution {
                 while(!st.isEmpty() && st.peek()[0]<properties[i][0] && st.peek()[1]<properties[i][1]){
                     st.pop();
                 }
-                st.push(properties[i]);
-            }else{
-                st.push(properties[i]);
             }
+            
+            st.push(properties[i]);
         }
         
         return n-st.size();
