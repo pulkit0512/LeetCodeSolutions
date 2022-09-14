@@ -17,35 +17,39 @@ class Solution {
     int count;
     public int pseudoPalindromicPaths (TreeNode root) {
         count = 0;
-        int[] arr = new int[10];
-        pseudoPalindromicPathsUtil(root, arr);
+        pseudoPalindromicPathsUtil(root, 0);
         return count;
     }
     
-    private void pseudoPalindromicPathsUtil(TreeNode node, int[] arr) {
+    private void pseudoPalindromicPathsUtil(TreeNode node, int bits) {
         if(node==null){
             return;
         }
         
         // If node is a leaf
         if(node.left==null && node.right==null){
-            arr[node.val]++;
-            int odd = 0;
-            for(int i=1;i<10;i++){
-                if(arr[i]%2==1){
-                    odd++;
-                }
-            }
-            if(odd<=1){
+            bits = bits ^ (1<<node.val);
+            
+            if(getSetBits(bits)<=1){
                 count++;
             }
-            arr[node.val]--;
+            
+            bits = bits ^ (1<<node.val);
             return;
         }
         
-        arr[node.val]++;
-        pseudoPalindromicPathsUtil(node.left, arr);
-        pseudoPalindromicPathsUtil(node.right, arr);
-        arr[node.val]--;
+        bits = bits ^ (1<<node.val);
+        pseudoPalindromicPathsUtil(node.left, bits);
+        pseudoPalindromicPathsUtil(node.right, bits);
+        bits = bits ^ (1<<node.val);
+    }
+    
+    private int getSetBits(int n) {
+        int cnt = 0;
+        while(n>0){
+            n = n&(n-1);
+            cnt++;
+        }
+        return cnt;
     }
 }
