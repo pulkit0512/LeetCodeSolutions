@@ -26,21 +26,18 @@ class Solution {
             return;
         }
         
+        bits = bits ^ (1<<node.val);
+        
         // If node is a leaf
         if(node.left==null && node.right==null){
-            bits = bits ^ (1<<node.val);
-            
             if(getSetBits(bits)<=1){
                 count++;
             }
-            
-            bits = bits ^ (1<<node.val);
-            return;
+        }else{
+            pseudoPalindromicPathsUtil(node.left, bits);
+            pseudoPalindromicPathsUtil(node.right, bits);
         }
         
-        bits = bits ^ (1<<node.val);
-        pseudoPalindromicPathsUtil(node.left, bits);
-        pseudoPalindromicPathsUtil(node.right, bits);
         bits = bits ^ (1<<node.val);
     }
     
