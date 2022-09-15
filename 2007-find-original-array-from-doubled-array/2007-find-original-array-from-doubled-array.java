@@ -25,9 +25,9 @@ class Solution {
                 int val = cnt[i];
                 
                 if(i==0){
-                    if(cnt[i]%2==1){
+                    /*if(cnt[i]%2==1){
                         return new int[0];
-                    }
+                    }*/
                     
                     for(int j=0;j<val;j+=2){
                         ans[idx++] = i;
