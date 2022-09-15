@@ -1,11 +1,15 @@
 class Solution {
     public int[] findOriginalArray(int[] changed) {
         int n = changed.length;
-        int max = 200000;
-        
         if(n%2==1){
             return new int[0];
         }
+        
+        int max = 0;
+        for(int num:changed){
+            max = Math.max(max, num);
+        }
+        max = 2*max;
         
         int[] cnt = new int[max+1];
         for(int num:changed){
@@ -27,7 +31,6 @@ class Solution {
                 }
                 
                 int doubleVal = cnt[2*i];
-                
                 int minValue = Math.min(val, doubleVal);
                 
                 if(val-minValue!=0){
