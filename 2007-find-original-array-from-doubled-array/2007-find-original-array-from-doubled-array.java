@@ -1,16 +1,11 @@
 class Solution {
     public int[] findOriginalArray(int[] changed) {
         int n = changed.length;
+        int max = 200000;
         
         if(n%2==1){
             return new int[0];
         }
-        
-        int max = 0;
-        for(int num:changed){
-            max = Math.max(max, num);
-        }
-        max = 2*max;
         
         int[] cnt = new int[max+1];
         for(int num:changed){
@@ -25,10 +20,6 @@ class Solution {
                 int val = cnt[i];
                 
                 if(i==0){
-                    /*if(cnt[i]%2==1){
-                        return new int[0];
-                    }*/
-                    
                     for(int j=0;j<val;j+=2){
                         ans[idx++] = i;
                     }
