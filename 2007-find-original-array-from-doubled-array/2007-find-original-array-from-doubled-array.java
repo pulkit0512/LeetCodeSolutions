@@ -6,42 +6,50 @@ class Solution {
             return new int[0];
         }
         
-        Map<Integer, Integer> map = new TreeMap<>();
+        int max = 0;
         for(int num:changed){
-            map.put(num, map.getOrDefault(num, 0) + 1);
+            max = Math.max(max, num);
+        }
+        max = 2*max;
+        
+        int[] cnt = new int[max+1];
+        for(int num:changed){
+            cnt[num]++;
         }
         
         int[] ans = new int[n/2];
         int idx = 0;
         
-        for(Map.Entry<Integer,Integer> entry:map.entrySet()){
-            int key = entry.getKey();
-            int value = entry.getValue();
-            if(value==0){
-                continue;
-            }
-            
-            if(key==0){
-                for(int i=0;i<value/2;i++){
-                    ans[idx++] = key;
+        for(int i=0;i<=max;i++){
+            if(cnt[i]!=0){
+                int val = cnt[i];
+                
+                if(i==0){
+                    if(cnt[i]%2==1){
+                        return new int[0];
+                    }
+                    
+                    for(int j=0;j<val;j+=2){
+                        ans[idx++] = i;
+                    }
+                    continue;
                 }
-                continue;
-            }
-            
-            int doubleKeyValue = map.getOrDefault(2*key, 0);
-            
-            int minValue = Math.min(value, doubleKeyValue);
-            
-            if(value-minValue!=0){
-                return new int[0];
-            }else{
-                for(int i=0;i<value;i++){
-                    ans[idx++] = key;
+                
+                int doubleVal = cnt[2*i];
+                
+                int minValue = Math.min(val, doubleVal);
+                
+                if(val-minValue!=0){
+                    return new int[0];
+                }else{
+                    for(int j=0;j<val;j++){
+                        ans[idx++] = i;
+                    }
                 }
+                
+                cnt[i] = val - minValue;
+                cnt[2*i] = doubleVal - minValue;
             }
-            
-            map.put(key, value-minValue);
-            map.put(2*key, doubleKeyValue-minValue);
         }
         
         return ans;
