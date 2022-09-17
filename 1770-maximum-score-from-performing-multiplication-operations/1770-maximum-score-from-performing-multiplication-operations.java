@@ -2,14 +2,17 @@ class Solution {
     public int maximumScore(int[] nums, int[] multipliers) {
         int m = multipliers.length;
         int n = nums.length;
-        int[][] dp = new int[m+1][m+1];
-        for(int i=m-1;i>=0;i--){
-            for(int left=0;left<=i;left++){
-                int right = n - 1 - (i-left);
-                dp[i][left] = Math.max(multipliers[i]*nums[left] + dp[i+1][left+1], 
-                                       multipliers[i]*nums[right] + dp[i+1][left]);
+        
+        int dp[][] = new int[m+1][m+1];
+        for(int opr=m-1;opr>=0;opr--){
+            for(int left=0; left<=opr; left++) {
+                int right = n-1 - (opr-left);
+                
+                dp[opr][left] = Math.max(nums[left]*multipliers[opr] + dp[opr+1][left+1],
+                                        nums[right]*multipliers[opr] + dp[opr+1][left]);
             }
         }
+        
         return dp[0][0];
     }
     
