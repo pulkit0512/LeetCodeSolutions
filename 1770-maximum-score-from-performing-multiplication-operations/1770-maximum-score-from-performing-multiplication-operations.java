@@ -3,17 +3,22 @@ class Solution {
         int m = multipliers.length;
         int n = nums.length;
         
-        int dp[][] = new int[m+1][m+1];
+        int dp[] = new int[m+1];
         for(int opr=m-1;opr>=0;opr--){
+            int cur[] = new int[m+1];
             for(int left=0; left<=opr; left++) {
                 int right = n-1 - (opr-left);
                 
-                dp[opr][left] = Math.max(nums[left]*multipliers[opr] + dp[opr+1][left+1],
-                                        nums[right]*multipliers[opr] + dp[opr+1][left]);
+                // dp[op][left] stores the maximum possible score after we have done op total operations
+                // and used left numbers from the left/start side.
+                cur[left] = Math.max(nums[left]*multipliers[opr] + dp[left+1],
+                                        nums[right]*multipliers[opr] + dp[left]);
             }
+            
+            dp = cur;
         }
         
-        return dp[0][0];
+        return dp[0];
     }
     
     // DP with memoization
