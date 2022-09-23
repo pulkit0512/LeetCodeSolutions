@@ -7,7 +7,7 @@ class Solution {
             int x = i;
             while(x>0){
                 x = x/2;
-                ans = (2*ans)%mod;
+                ans = (ans<<1)%mod;
             }
             
             ans = (ans + i)%mod;
