@@ -20,7 +20,7 @@ class Solution {
             ans = (ans + i)%mod;
             
         }
-        return (int)ans;
+        return ans;
     }
     
     private int concatenatedBinaryN(int n) {
