@@ -5,13 +5,12 @@ class Solution {
         long ans = 0;
         for(int i=1;i<=n;i++){
             int x = i;
-            int msb = 0;
             while(x>0){
                 x = x/2;
-                msb++;
+                ans = (2*ans)%mod;
             }
             
-            ans = ((ans*(1<<msb))%mod + i)%mod;
+            ans = (ans + i)%mod;
         }
         return (int)ans;
     }
