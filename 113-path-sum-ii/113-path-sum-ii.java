@@ -14,30 +14,27 @@
  * }
  */
 class Solution {
-    List<List<Integer>> result;
+    List<List<Integer>> res;
     public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
-        result = new ArrayList<>();
-        if(root==null){
-            return result;
-        }
+        res = new ArrayList<>();
         pathSumUtil(root, targetSum, new ArrayList<>());
-        return result;
+        return res;
     }
     
     private void pathSumUtil(TreeNode root, int targetSum, List<Integer> cur) {
+        if(root==null){
+            return;
+        }
+        
         cur.add(root.val);
-        targetSum -= root.val;
-        //System.out.println(cur + " " + targetSum);
-        if(root.left==null && root.right==null && targetSum==0){
-            result.add(new ArrayList<>(cur));
+        if(root.left==null && root.right==null){
+            if(targetSum==root.val){
+                res.add(new ArrayList<>(cur));
+            }
+        }else{
+            pathSumUtil(root.left, targetSum - root.val, cur);
+            pathSumUtil(root.right, targetSum - root.val, cur);
         }
-        if(root.left!=null){
-            pathSumUtil(root.left, targetSum, cur);
-        }
-        if(root.right!=null){
-            pathSumUtil(root.right, targetSum, cur);
-        }
-        targetSum += cur.get(cur.size()-1);
         cur.remove(cur.size()-1);
     }
 }
