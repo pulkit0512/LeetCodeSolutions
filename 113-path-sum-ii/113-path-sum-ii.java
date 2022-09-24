@@ -27,14 +27,16 @@ class Solution {
         }
         
         cur.add(root.val);
+        targetSum -= root.val;
         if(root.left==null && root.right==null){
-            if(targetSum==root.val){
+            if(targetSum==0){
                 res.add(new ArrayList<>(cur));
             }
         }else{
-            pathSumUtil(root.left, targetSum - root.val, cur);
-            pathSumUtil(root.right, targetSum - root.val, cur);
+            pathSumUtil(root.left, targetSum, cur);
+            pathSumUtil(root.right, targetSum, cur);
         }
         cur.remove(cur.size()-1);
+        targetSum += root.val;
     }
 }
