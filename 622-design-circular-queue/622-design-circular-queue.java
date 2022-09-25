@@ -38,10 +38,7 @@ class MyCircularQueue {
     }
     
     public int Rear() {
-        if(ed==-1){
-            return -1;
-        }
-        return que[ed];
+        return (ed==-1)?-1:que[ed];
     }
     
     public boolean isEmpty() {
