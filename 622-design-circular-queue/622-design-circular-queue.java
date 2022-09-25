@@ -5,9 +5,9 @@ class MyCircularQueue {
     public MyCircularQueue(int k) {
         que = new int[k];
         Arrays.fill(que, -1);
-        st = 0;
-        ed = -1;
-        cnt = 0;
+        st = 0; // Indicates start of the circular queue.
+        ed = -1;// Indicates next element will be inserted in ed+1 position
+        cnt = 0;// Keeps track of elements in circular queue.
         this.k = k;
     }
     
