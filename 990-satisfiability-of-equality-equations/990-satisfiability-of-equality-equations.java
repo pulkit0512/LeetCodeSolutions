@@ -9,21 +9,23 @@ class Solution {
             rank[i] = 1;
         }
         
-        for(int i=0;i<2;i++){
-            for(String equation:equations) {
-                char left = equation.charAt(0);
-                char right = equation.charAt(3);
-                
-                if(i==0 && equation.charAt(1)=='='){
-                    union(left-'a', right-'a');
-                }else if(i==1 && equation.charAt(1)=='!'){
-                    int leftRoot = find(left-'a');
-                    int rightRoot = find(right-'a');
-                    
-                    if(leftRoot==rightRoot) {
-                        return false;
-                    }
-                }
+        // First traversal on equalities, to UNION the left and right chars.
+        for(String equation:equations) {
+            char left = equation.charAt(0);
+            char right = equation.charAt(3);
+            
+            if(equation.charAt(1)=='='){
+                union(left-'a', right-'a');
+            }
+        }
+        
+        // Second traversal on inequalities, to FIND whether left and right are connected or not.
+        for(String equation:equations) {
+            char left = equation.charAt(0);
+            char right = equation.charAt(3);
+            
+            if(equation.charAt(1)=='!' && find(left-'a') == find(right-'a')){
+                return false;
             }
         }
         
