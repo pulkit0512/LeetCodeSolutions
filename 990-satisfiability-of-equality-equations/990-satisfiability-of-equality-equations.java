@@ -9,25 +9,20 @@ class Solution {
             rank[i] = 1;
         }
         
-        for(String equation:equations) {
-            char left = equation.charAt(0);
-            char right = equation.charAt(3);
-            
-            if(equation.charAt(1)=='='){
-                union(left-'a', right-'a');
-            }
-        }
-        
-        for(String equation:equations) {
-            char left = equation.charAt(0);
-            char right = equation.charAt(3);
-            
-            if(equation.charAt(1)=='!'){
-                int leftRoot = find(left-'a');
-                int rightRoot = find(right-'a');
+        for(int i=0;i<2;i++){
+            for(String equation:equations) {
+                char left = equation.charAt(0);
+                char right = equation.charAt(3);
                 
-                if(leftRoot==rightRoot) {
-                    return false;
+                if(i==0 && equation.charAt(1)=='='){
+                    union(left-'a', right-'a');
+                }else if(i==1 && equation.charAt(1)=='!'){
+                    int leftRoot = find(left-'a');
+                    int rightRoot = find(right-'a');
+                    
+                    if(leftRoot==rightRoot) {
+                        return false;
+                    }
                 }
             }
         }
