@@ -10,38 +10,28 @@ class Solution {
             curChar = dominoes.charAt(i);
             if(curChar!='.'){
                 ans[i] = curChar;
-                if(prevChar=='L' && curChar=='R'){
-                    
-                }else if(prevChar=='L' && curChar=='L'){
-                    fillAns(ans, prevIdx+1, i, prevChar);
-                }else if(prevChar=='R' && curChar=='R'){
-                    fillAns(ans, prevIdx+1, i, prevChar);
-                }else{
-                    int cnt = i-prevIdx-1;
-                    int half = cnt/2;
-                    fillAns(ans, prevIdx+1, prevIdx+1+half, prevChar);
-                    fillAns(ans, i-half, i, curChar);
-                }
+                handleLRCases(prevChar, curChar, prevIdx, i, ans);
                 prevChar = curChar;
                 prevIdx = i;
             }
         }
         
-        curChar = 'R';
-        if(prevChar=='L' && curChar=='R'){
-            
-        }else if(prevChar=='L' && curChar=='L'){
-            fillAns(ans, prevIdx+1, len, prevChar);
-        }else if(prevChar=='R' && curChar=='R'){
-            fillAns(ans, prevIdx+1, len, prevChar);
-        }else{
-            int cnt = len-prevIdx-1;
-            int half = cnt/2;
-            fillAns(ans, prevIdx+1, prevIdx+1+half, prevChar);
-            fillAns(ans, len-half, len, curChar);
-        }
+        handleLRCases(prevChar, 'R', prevIdx, len, ans);
         
         return String.valueOf(ans);
+    }
+    
+    private void handleLRCases(char prevChar, char curChar, int prevIdx, int curIdx, char[] ans) {
+        if(prevChar=='L' && curChar=='L'){
+            fillAns(ans, prevIdx+1, curIdx, prevChar);
+        }else if(prevChar=='R' && curChar=='R'){
+            fillAns(ans, prevIdx+1, curIdx, prevChar);
+        }else if(prevChar=='R' && curChar=='L'){
+            int cnt = curIdx-prevIdx-1;
+            int half = cnt/2;
+            fillAns(ans, prevIdx+1, prevIdx+1+half, prevChar);
+            fillAns(ans, curIdx-half, curIdx, curChar);
+        }
     }
     
     private void fillAns(char[] ans, int l, int r, char ch) {
