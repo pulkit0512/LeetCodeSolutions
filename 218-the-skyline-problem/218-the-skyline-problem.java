@@ -63,8 +63,10 @@ class Solution {
         
         for(BuildingPoint point:points) {
             if(point.isStart) {
+                // If start point insert the point height in tree map
                 map.put(point.ht, map.getOrDefault(point.ht, 0) + 1);
             }else {
+                // else remove the point height from tree map.
                 int val = map.get(point.ht);
                 if(val==1){
                     map.remove(point.ht);
@@ -73,6 +75,9 @@ class Solution {
                 }
             }
             
+            // Get current max height from tree map as last key
+            // If current max height and previous max height are not same. Then there is change in height
+            // due to this point. Add current point x coordinate with max height in the result.
             int curMaxHeight = map.lastKey();
             if(curMaxHeight!=maxHeight) {
                 skyline.add(Arrays.asList(point.x, curMaxHeight));
