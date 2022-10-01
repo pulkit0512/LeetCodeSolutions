@@ -13,25 +13,16 @@ class Solution {
                 .sorted(new Sort())
                 .collect(Collectors.toList());
         
+        // If, after being sorted, the largest number is `0`, the entire number is zero.
+        if(numStrings.get(0).equals("0")){
+            return "0";
+        }
+        
         StringBuilder res = new StringBuilder();
         for(String num:numStrings){
             res.append(num);
         }
         
-        if(allZero(res)){
-            return "0";
-        }else{
-            return res.toString();
-        }
-    }
-    
-    private boolean allZero(StringBuilder sb) {
-        for(int i=0;i<sb.length();i++){
-            if(sb.charAt(i)!='0'){
-                return false;
-            }
-        }
-        
-        return true;
+        return res.toString();
     }
 }
