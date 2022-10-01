@@ -7,7 +7,7 @@
 ### Time Complexity: O(M x N), M rows and N columns
 ### Space Complexity: O(M + N)
 ​
-## Approach: Constant Space
+## Approach: Constant Space, Modifies original input
 Find the lonely cells in the first row and column:
 ​
 Iterate over the cells in the first row. For each cell (x, y), call the check() function to find the number of black cells in the first row and column. check() returns true if the cell (x, y) is the only black cell in the first row and column. If it returns a true increment the value at answer
