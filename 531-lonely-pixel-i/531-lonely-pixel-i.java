@@ -73,7 +73,7 @@ class Solution {
             // avoid double count (x, y)
             if (j != y) cnt += (picture[x][j] == 'B' ? 1 : 0);
         }
-        return picture[x][y] == 'B' && cnt == 1;
+        return cnt == 1;
     }
     
     private int findLonelyPixelLinearSpace(char[][] picture) {
