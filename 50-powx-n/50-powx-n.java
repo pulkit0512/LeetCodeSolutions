@@ -3,33 +3,36 @@ class Solution {
         if(n==0){
             return 1.0;
         }
-        if(n==1 || x==1){
+        if(x==1 || n==1){
             return x;
         }
+        
         long val = n;
         int sign = 1;
-        if(val<0) {
-            val = -val;
+        if(val<0){
             sign = -1;
+            val = -val;
         }
         
-        double power = calPow(x, val);
+        double pow = calPow(x, val);
+        
         if(sign==-1){
-            return 1/power;
+            return 1/pow;
+        }else{
+            return pow;
         }
-        return power;
     }
     
     private double calPow(double x, long n) {
-        double pow = 1.0;
+        double res = 1.0;
         while(n>0){
             if(n%2==1){
-                pow = pow*x;
+                res = res*x;
                 n--;
             }
             x = x*x;
             n = n/2;
         }
-        return pow;
+        return res;
     }
 }
