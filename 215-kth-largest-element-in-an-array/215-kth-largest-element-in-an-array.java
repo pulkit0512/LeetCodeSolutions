@@ -6,22 +6,19 @@ class Solution {
         
         
         // Method 2: O(NLogK) using heap of size k
-        // PriorityQueue<Integer> pq = new PriorityQueue<>();
-        // for(int i=0;i<k;i++){
-        //     pq.add(nums[i]);
-        // }
-        // for(int i=k;i<nums.length;i++){
-        //     if(pq.peek()<nums[i]){
-        //         pq.poll();
-        //         pq.add(nums[i]);
-        //     }
-        // }
-        // return pq.peek();
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        for(int i=0;i<nums.length;i++){
+            pq.add(nums[i]);
+            if(pq.size()>k){
+                pq.poll();
+            }
+        }
+        return pq.peek();
         
         
         // Method 3: O(N) on average using QuickSelect
         // using QuickSelect to find Kth largest element i.e. (N-K)th index element
-        return quickSelect(nums, 0, nums.length-1, nums.length-k);
+        //return quickSelect(nums, 0, nums.length-1, nums.length-k);
     }
     
     Random rand = new Random();
