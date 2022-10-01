@@ -1,26 +1,16 @@
 class Solution {
     public double myPow(double x, int n) {
-        if(n==0){
-            return 1.0;
-        }
         if(x==1 || n==1){
             return x;
         }
         
         long val = n;
-        int sign = 1;
         if(val<0){
-            sign = -1;
+            x = 1/x;
             val = -val;
         }
         
-        double pow = calPow(x, val);
-        
-        if(sign==-1){
-            return 1/pow;
-        }else{
-            return pow;
-        }
+        return calPow(x, val);
     }
     
     private double calPow(double x, long n) {
