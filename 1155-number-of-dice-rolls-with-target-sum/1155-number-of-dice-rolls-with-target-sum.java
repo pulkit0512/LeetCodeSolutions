@@ -3,6 +3,9 @@ class Solution {
     int n, k, target;
     int mod = 1000000007;
     public int numRollsToTarget(int n, int k, int target) {
+        if(target<n || target>n*k){
+            return 0;
+        }
         //return numRollsToTargetMemo(n, k, target);
         
         return numRollsToTargetTabulation(n, k, target);
