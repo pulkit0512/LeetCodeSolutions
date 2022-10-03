@@ -6,6 +6,7 @@ class Solution {
         if(target<n || target>n*k){
             return 0;
         }
+        
         //return numRollsToTargetMemo(n, k, target);
         
         return numRollsToTargetTabulation(n, k, target);
