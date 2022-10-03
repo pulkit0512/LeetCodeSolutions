@@ -1,29 +1,30 @@
 class Solution {
+    Integer[][] memo;
+    int n, k, target;
+    int mod = 1000000007;
     public int numRollsToTarget(int n, int k, int target) {
-        int max = n*k;
-        if(target<n || target>max){
-            return 0;
+        memo = new Integer[n+1][target+1];
+        this.k = k;
+        this.n = n;
+        this.target = target;
+        
+        return numRollsToTargetMemo(0, 0);
+    }
+    
+    private int numRollsToTargetMemo(int diceIndex, int curSum) {
+        if(diceIndex==n){
+            return curSum==target?1:0;
         }
-        int mod = 1000000007;
-        int dpPrev[] = new int[target+1];
-        for(int i=1;i<=Math.min(k,target);i++){
-            dpPrev[i] = 1;
+        
+        if(memo[diceIndex][curSum]!=null){
+            return memo[diceIndex][curSum];
         }
-        for(int i=2;i<=n;i++){
-            int dpCurr[] = new int[target+1];
-            for(int j=i;j<=target;j++){
-                if(j<=k){
-                    dpCurr[j] = (dpCurr[j-1] + dpPrev[j-1])%mod;
-                }else{
-                    dpCurr[j] = ((dpCurr[j-1] + dpPrev[j-1])%mod - dpPrev[j-(k+1)])%mod;
-                    if(dpCurr[j]<0){
-                        dpCurr[j] = (dpCurr[j] + mod)%mod;
-                    }
-                }
-            }
-            
-            dpPrev = dpCurr;
+        
+        int ways = 0;
+        for(int i=1;i<=Math.min(k, target-curSum);i++){
+            ways = (ways + numRollsToTargetMemo(diceIndex+1, curSum+i))%mod;
         }
-        return dpPrev[target];
+        
+        return memo[diceIndex][curSum] = ways;
     }
 }
