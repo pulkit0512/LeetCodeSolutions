@@ -26,17 +26,4 @@ class Solution {
         return hasPathSum(root.left, targetSum-root.val) 
             || hasPathSum(root.right, targetSum-root.val);
     }
-    
-    private boolean hasPathSumUtil(TreeNode root, int targetSum) {
-        if(root==null){
-            return false;
-        }
-        if(root.left==null && root.right==null){
-            return targetSum==root.val;
-        }
-        
-        return hasPathSumUtil(root.left, targetSum-root.val) 
-            || hasPathSumUtil(root.right, targetSum-root.val);
-
-    }
 }
