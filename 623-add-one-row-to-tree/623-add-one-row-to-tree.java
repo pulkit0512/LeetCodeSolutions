@@ -34,10 +34,13 @@ class Solution {
                     que.add(null);
                 }
                 curDepth++;
+                
+                if(curDepth==depth){
+                    break;
+                }
+                
                 continue;
             }
-            
-            //System.out.println(curDepth +" "+ node.val);
             
             if(node.left!=null){
                 que.add(node.left);
@@ -55,6 +58,7 @@ class Solution {
                 newNodeRight.right = node.right;
                 node.right = newNodeRight;
             }
+            
         }
         
         return root;
