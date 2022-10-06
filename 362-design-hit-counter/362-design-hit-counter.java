@@ -8,18 +8,16 @@ class HitCounter {
     }
     
     public void hit(int timestamp) {
-        if(!que.isEmpty() && (int)que.peek().getKey() == timestamp){
-            Pair<Integer, Integer> pair = que.poll();
-            que.add(new Pair(timestamp, pair.getValue() + 1));
-        }else{
-            que.add(new Pair(timestamp, 1));
-        }
-        
         counter++;
+        if(que.isEmpty() || que.peek().getKey()<timestamp) {
+            que.add(new Pair(timestamp, 1));
+        }else{
+            que.add(new Pair(timestamp, que.poll().getValue() + 1));
+        }
     }
     
     public int getHits(int timestamp) {
-        while(!que.isEmpty() && timestamp - que.peek().getKey()>=300){
+        while(!que.isEmpty() && que.peek().getKey()<=timestamp-300){
             counter -= que.poll().getValue();
         }
         return counter;
