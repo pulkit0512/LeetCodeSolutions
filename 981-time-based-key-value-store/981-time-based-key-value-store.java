@@ -1,37 +1,44 @@
 class TimeMap {
 
-    Map<String, List<Pair<Integer, String>>> timeMap;
+    Map<String, List<Pair<Integer, String>>> kvStore;
     public TimeMap() {
-        timeMap = new HashMap<>();
+        kvStore = new HashMap<>();
     }
     
     public void set(String key, String value, int timestamp) {
-        if(!timeMap.containsKey(key)){
-            timeMap.put(key, new ArrayList<>());
+        if(!kvStore.containsKey(key)){
+            kvStore.put(key, new ArrayList<>());
         }
-        timeMap.get(key).add(new Pair<>(timestamp, value));
+        
+        kvStore.get(key).add(new Pair(timestamp, value));
     }
     
     public String get(String key, int timestamp) {
-        if(!timeMap.containsKey(key)){
+        List<Pair<Integer, String>> pairList = kvStore.get(key);
+        if(pairList==null) {
             return "";
         }
-        List<Pair<Integer, String>> values = timeMap.get(key);
-        int st = 0, ed = values.size()-1;
-        Pair<Integer, String> pair = null;
+        
+        return binarySearch(pairList, timestamp);
+    }
+    
+    private String binarySearch(List<Pair<Integer, String>> pairList, int timestamp) {
+        int st = 0, ed = pairList.size()-1;
+        int idx = -1;
         while(st<=ed){
             int mid = (st+ed)/2;
-            if((int)values.get(mid).getKey()<=timestamp){
-                pair = values.get(mid);
-                if((int)values.get(mid).getKey()==timestamp){
+            if(pairList.get(mid).getKey()<=timestamp){
+                idx = mid;
+                if(pairList.get(mid).getKey()==timestamp){
                     break;
                 }
-                st = mid + 1;
+                st = mid+1;
             }else{
-                ed = mid - 1;
+                ed = mid-1;
             }
         }
-        return pair == null ? "" : pair.getValue();
+        
+        return idx==-1 ? "" : pairList.get(idx).getValue();
     }
 }
 
