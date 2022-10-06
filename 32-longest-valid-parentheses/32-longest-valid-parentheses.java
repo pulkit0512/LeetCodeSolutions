@@ -1,12 +1,12 @@
 class Solution {
     public int longestValidParentheses(String s) {
-        Stack<Integer> st = new Stack<>();
-        int len = s.length();
-        st.push(-1);
         int ans = 0;
+        Stack<Integer> st = new Stack<>();
+        st.push(-1);
+        int len = s.length();
+        
         for(int i=0;i<len;i++){
-            char ch = s.charAt(i);
-            if(ch=='('){
+            if(s.charAt(i)=='('){
                 st.push(i);
             }else{
                 if(st.peek()==-1 || s.charAt(st.peek())==')'){
@@ -17,6 +17,7 @@ class Solution {
                 }
             }
         }
+        
         return ans;
     }
 }
