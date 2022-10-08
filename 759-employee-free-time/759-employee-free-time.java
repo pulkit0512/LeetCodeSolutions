@@ -36,9 +36,15 @@ class Solution {
         int free = 0;
         for(Map.Entry<Integer, Integer> entry:map.entrySet()) {
             free += entry.getValue();
+            
+            // This indicates all employees are free, starting from this time.
+            // Since we can include infinite in our answer so included 2nd condition.
             if(free == schedule.size() && entry.getKey()!=Integer.MIN_VALUE) {
                 st = entry.getKey();
             }else if(st!= -1 && free != schedule.size() && entry.getKey() != Integer.MAX_VALUE) {
+                // If we found the start of an interval indicating all employees were free and then
+                // at this time one or more employees gets busy. So interval ends here.
+                // reset the start.
                 result.add(new Interval(st, entry.getKey()));
                 st = -1;
             }
