@@ -17,16 +17,10 @@ class Solution {
     public List<Interval> employeeFreeTime(List<List<Interval>> schedule) {
         TreeMap<Integer, Integer> map = new TreeMap<>();
         for(List<Interval> emp:schedule) {
-            int prev = Integer.MIN_VALUE;
             for(Interval in:emp) {
-                map.put(prev, map.getOrDefault(prev, 0) + 1);
-                map.put(in.start, map.getOrDefault(in.start, 0) - 1);
-                
-                prev = in.end;
+                map.put(in.start, map.getOrDefault(in.start, 0) + 1);
+                map.put(in.end, map.getOrDefault(in.end, 0) - 1);
             }
-            
-            map.put(prev, map.getOrDefault(prev, 0) + 1);
-            map.put(Integer.MAX_VALUE, map.getOrDefault(Integer.MAX_VALUE, 0) - 1);
         }
         
         //System.out.println(map);
@@ -39,9 +33,9 @@ class Solution {
             
             // This indicates all employees are free, starting from this time.
             // Since we can include infinite in our answer so included 2nd condition.
-            if(free == schedule.size() && entry.getKey()!=Integer.MIN_VALUE) {
+            if(free == 0) {
                 st = entry.getKey();
-            }else if(st!= -1 && free != schedule.size() && entry.getKey() != Integer.MAX_VALUE) {
+            }else if(st!= -1 && free != 0) {
                 // If we found the start of an interval indicating all employees were free and then
                 // at this time one or more employees gets busy. So interval ends here.
                 // reset the start.
