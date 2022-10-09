@@ -7,28 +7,32 @@ class Solution {
     
     private int minMeetingRoomsUsingChronologicalOrdering(int[][] intervals) {
         int n = intervals.length;
-        int[] startTime = new int[n];
-        int[] endTime = new int[n];
+        int[] start = new int[n];
+        int[] end = new int[n];
+        
         for(int i=0;i<n;i++){
-            startTime[i] = intervals[i][0];
-            endTime[i] = intervals[i][1];
+            start[i] = intervals[i][0];
+            end[i] = intervals[i][1];
         }
-        Arrays.sort(startTime);
-        Arrays.sort(endTime);
         
-        int rooms = 0;
-        int sPtr = 0, ePtr = 0;
-        while(sPtr<n){
-            if(startTime[sPtr]>=endTime[ePtr]){
+        Arrays.sort(start);
+        Arrays.sort(end);
+        
+        int stPtr = 0, edPtr = 0;
+        int rooms = 0, ans = 0;
+        
+        while(stPtr<n && edPtr<n) {
+            if(start[stPtr]<end[edPtr]){
+                rooms++;
+                stPtr++;
+            }else{
                 rooms--;
-                ePtr++;
+                edPtr++;
             }
-            
-            rooms++;
-            sPtr++;
+            ans = Math.max(ans, rooms);
         }
         
-        return rooms;
+        return ans;
     }
     
     private int minMeetingRoomsUsingPriorityQueue(int[][] intervals) {
