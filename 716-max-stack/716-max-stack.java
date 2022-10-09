@@ -2,10 +2,12 @@ class MaxStack {
     
     class Node {
         int val;
-        Node next, prev;
+        Node prev, next;
         
         public Node(int val) {
             this.val = val;
+            prev = null;
+            next = null;
         }
     }
     
@@ -13,30 +15,32 @@ class MaxStack {
         Node head, tail;
         
         public DLL() {
-            head = new Node(0);
-            tail = new Node(0);
+            head = new Node(Integer.MIN_VALUE);
+            tail = new Node(Integer.MAX_VALUE);
             
             head.next = tail;
             tail.prev = head;
         }
         
-        public Node add(int x) {
+        public Node addNode(int x) {
             Node node = new Node(x);
+            
             node.next = tail;
-            node.prev = tail.prev;
             tail.prev.next = node;
+            node.prev = tail.prev;
             tail.prev = node;
+            
             return node;
-        }
-        
-        public int peek() {
-            return tail.prev.val;
         }
         
         public int pop() {
             int val = tail.prev.val;
             delete(tail.prev);
             return val;
+        }
+        
+        public int peek() {
+            return tail.prev.val;
         }
         
         public void delete(Node node) {
@@ -53,7 +57,7 @@ class MaxStack {
     }
     
     public void push(int x) {
-        Node node = dll.add(x);
+        Node node = dll.addNode(x);
         if(!map.containsKey(x)){
             map.put(x, new ArrayList<>());
         }
@@ -62,6 +66,7 @@ class MaxStack {
     
     public int pop() {
         int val = dll.pop();
+        
         List<Node> list = map.get(val);
         list.remove(list.size()-1);
         if(list.isEmpty()){
@@ -81,14 +86,15 @@ class MaxStack {
     public int popMax() {
         int val = peekMax();
         List<Node> list = map.get(val);
-        Node node = list.remove(list.size() - 1);
+        Node node = list.remove(list.size()-1);
         dll.delete(node);
         if(list.isEmpty()){
             map.remove(val);
         }
         return val;
     }
-
+    
+    
     /*Stack<Integer> normal, max;
     public MaxStack() {
         normal = new Stack<>();
