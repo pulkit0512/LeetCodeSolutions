@@ -48,9 +48,8 @@ class CustomHashSet<K> {
         if(node==null){
             buckets[bucketIndex].add(new HSNode(key));
             size++;
-        }else{
-            node.key = key;
         }
+        
         if((size*1.0)/buckets.length>2.0) {
             rehash();
         }
