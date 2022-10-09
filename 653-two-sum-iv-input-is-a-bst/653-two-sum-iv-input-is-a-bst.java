@@ -24,27 +24,29 @@ class Solution {
     
     private boolean findTargetUsingInorder(TreeNode root, int k) {
         List<Integer> sortedList = new ArrayList<>();
-        bstInorder(root, sortedList);
+        inorder(root, sortedList);
         int st = 0, ed = sortedList.size()-1;
         while(st<ed){
-            if(sortedList.get(st) + sortedList.get(ed) == k){
+            int sum = sortedList.get(st) + sortedList.get(ed);
+            if(sum==k){
                 return true;
-            }else if(sortedList.get(st) + sortedList.get(ed)<k){
-                st++;
-            }else{
+            }else if(sum>k){
                 ed--;
+            }else{
+                st++;
             }
         }
         return false;
     }
     
-    private void bstInorder(TreeNode root, List<Integer> sortedList){
-        if(root==null){
+    private void inorder(TreeNode node, List<Integer> sortedList) {
+        if(node==null){
             return;
         }
-        bstInorder(root.left, sortedList);
-        sortedList.add(root.val);
-        bstInorder(root.right, sortedList);
+        
+        inorder(node.left, sortedList);
+        sortedList.add(node.val);
+        inorder(node.right, sortedList);
     }
     
     private boolean helperUsingInOrderDFS(TreeNode root, int k) {
