@@ -6,19 +6,8 @@ class Solution {
         for(int i=n-1;i>=2;i--){
             int sum = nums[i] + nums[i-1] + nums[i-2];
             
-            /*if(nums[i] == nums[i-1] && nums[i-1] == nums[i-2]){
-                // Equilateral triangle.
-                return sum;
-            }else if((nums[i] == nums[i-1]) || ((nums[i-1] == nums[i-2]) && (nums[i-1] + nums[i-2] > nums[i]))) {
-                // isosceles triangle
-                return sum;
-            }else if(nums[i] + nums[i-1] > nums[i-2] 
-                     && nums[i] + nums[i-2] > nums[i-1] 
-                     && nums[i-1] + nums[i-2] > nums[i]) {
-                // scalene triangle
-                return sum;
-            }*/
-            
+            // a<=b<=c if a+b>c then all three combinations will be satisfied. Since of two smaller side is greater then
+            // then third side.
             if(nums[i-1] + nums[i-2] > nums[i]) {
                 return sum;
             }
