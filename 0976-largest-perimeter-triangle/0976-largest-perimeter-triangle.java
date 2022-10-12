@@ -6,7 +6,7 @@ class Solution {
         for(int i=n-1;i>=2;i--){
             int sum = nums[i] + nums[i-1] + nums[i-2];
             
-            if(nums[i] == nums[i-1] && nums[i-1] == nums[i-2]){
+            /*if(nums[i] == nums[i-1] && nums[i-1] == nums[i-2]){
                 // Equilateral triangle.
                 return sum;
             }else if((nums[i] == nums[i-1]) || ((nums[i-1] == nums[i-2]) && (nums[i-1] + nums[i-2] > nums[i]))) {
@@ -16,6 +16,10 @@ class Solution {
                      && nums[i] + nums[i-2] > nums[i-1] 
                      && nums[i-1] + nums[i-2] > nums[i]) {
                 // scalene triangle
+                return sum;
+            }*/
+            
+            if(nums[i-1] + nums[i-2] > nums[i]) {
                 return sum;
             }
         }
