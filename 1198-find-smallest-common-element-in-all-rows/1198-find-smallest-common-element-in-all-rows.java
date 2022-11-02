@@ -1,5 +1,46 @@
 class Solution {
     public int smallestCommonElement(int[][] mat) {
+        //return smallestCommonElementUsingSet(mat);
+        
+        return smallestCommonElementUsingRowPointers(mat);
+    }
+    
+    // TC: O(MN), SC: O(M) M rows and N cols
+    private int smallestCommonElementUsingRowPointers(int[][] mat) {
+        int m = mat.length;
+        int n = mat[0].length;
+        int row[] = new int[m];
+        
+        int col = 0;
+        while(col<n) {
+            int min = Integer.MAX_VALUE;
+            
+            for(int i=0;i<m;i++){
+                min = Math.min(min, mat[i][row[i]]);
+            }
+            
+            int cnt = 0;
+            for(int i=0;i<m;i++){
+                if(mat[i][row[i]] == min){
+                    row[i]++;
+                    cnt++;
+                    
+                    col = Math.max(col, row[i]);
+                }
+            }
+            
+            //System.out.println(min +" "+ cnt);
+            
+            if(cnt==m){
+                return min;
+            }
+        }
+        
+        return -1;
+    }
+    
+    // TC: O(MN), SC: O(MN)
+    private int smallestCommonElementUsingSet(int[][] mat) {
         LinkedHashSet<Integer> prev = new LinkedHashSet<>();
         
         for(int i=0;i<mat[0].length;i++){
