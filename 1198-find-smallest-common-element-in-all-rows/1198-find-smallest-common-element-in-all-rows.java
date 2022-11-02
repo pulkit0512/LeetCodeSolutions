@@ -29,8 +29,6 @@ class Solution {
                 }
             }
             
-            //System.out.println(min +" "+ cnt);
-            
             if(cnt==m){
                 return min;
             }
