@@ -24,12 +24,11 @@ class Solution {
                 }
             }else{
                 String rev = word.charAt(1)+""+word.charAt(0);
-                if(map.containsKey(rev)) {
-                    int freqRev = map.get(rev);
-                    len += 4*Math.min(freq, freqRev);
-                }
+                int freqRev = map.getOrDefault(rev, 0);
+                len += 4*Math.min(freq, freqRev);
             }
             
+            // Can't use this word in future now.
             map.put(word, 0);
         }
         
